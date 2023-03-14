@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.muara_mbaduk.view.activity"
+
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -15,12 +15,18 @@
         android:theme="@style/Theme.MUARAMBADUK"
         tools:targetApi="31">
         <activity
-            android:name=".MuaraMbadugActivity"
-            android:exported="false">
+            android:name=".view.activity.MuaraMbadugActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="androi    d.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
     </application>
 
 </manifest>

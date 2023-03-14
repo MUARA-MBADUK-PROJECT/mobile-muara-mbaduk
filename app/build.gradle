@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.example.muara_mbaduk'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.muara_mbaduk"
@@ -36,5 +36,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+
 }
