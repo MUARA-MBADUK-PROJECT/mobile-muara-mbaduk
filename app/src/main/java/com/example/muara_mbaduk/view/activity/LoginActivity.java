@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.muara_mbaduk.R;
 
-public class MuaraMbadugActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_muara_mbadug);
+        setContentView(R.layout.activity_login);
     }
 }

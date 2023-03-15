@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/splash_background" /> <!-- warna yang akan ditampilkan saat button ditekan -->
+            <corners android:radius="8dp" /> <!-- radius sudut button -->
+            <stroke android:width="1dp" android:color="@color/color_text_black" /> <!-- warna border button -->
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white" /> <!-- warna default dari button -->
+            <corners android:radius="8dp" /> <!-- radius sudut button -->
+            <stroke android:width="1dp" android:color="@color/color_text_black" /> <!-- warna border button -->
+        </shape>
+    </item>
+</selector>
