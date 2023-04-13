@@ -184,17 +184,18 @@
             </LinearLayout>
         </TableRow>
     </TableLayout>
+
     <TextView
-        android:layout_marginTop="40dp"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
         android:text="Berita Terbaru"
         android:textColor="@color/color_text_black"
         android:textSize="15dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="10dp"
-        ></TextView>
+        android:textStyle="bold"
+        tools:ignore="TextSizeCheck"></TextView>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -211,9 +212,9 @@
             >
 
             <LinearLayout
-                android:gravity="center_vertical"
+                android:gravity="top"
                 android:layout_width="186dp"
-                android:layout_height="206dp"
+                android:layout_height="240dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/cardnews_homepage"
                 android:elevation="10dp"
@@ -232,6 +233,7 @@
                     android:textSize="10dp"
                     android:textColor="@color/grey"></TextView>
                 <TextView
+                    android:layout_margin="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Camping dengan Pemandangan Menwawan di Muara Maduk Banyuwangi"
@@ -241,9 +243,9 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:gravity="center_vertical"
+                android:gravity="top"
                 android:layout_width="186dp"
-                android:layout_height="206dp"
+                android:layout_height="240dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/cardnews_homepage"
                 android:elevation="10dp">
@@ -259,12 +261,38 @@
                     android:textSize="10dp"
                     android:textColor="@color/grey"></TextView>
                 <TextView
+                    android:layout_margin="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Muara Baduk, Tempat wisata kekinian di Banyuwangi"
                     android:textColor="@color/black"></TextView>
             </LinearLayout>
-
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="top"
+                android:layout_width="186dp"
+                android:layout_height="240dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/cardnews_homepage"
+                android:elevation="10dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="116dp"
+                    android:src="@drawable/foto_cardnews"></ImageView>
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11 april 2023"
+                    android:textSize="10dp"
+                    android:textColor="@color/grey"></TextView>
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Muara Baduk, Tempat wisata kekinian di Banyuwangi"
+                    android:textColor="@color/black"></TextView>
+            </LinearLayout>
 
         </LinearLayout>
 
