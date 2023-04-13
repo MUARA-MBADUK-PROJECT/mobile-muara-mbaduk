@@ -234,7 +234,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kemping dengan Pemandangan Menwawan di Muara Maduk Banyuwangi"
+                    android:text="Camping dengan Pemandangan Menwawan di Muara Maduk Banyuwangi"
                     android:textColor="@color/black"></TextView>
 
             </LinearLayout>
