@@ -74,6 +74,7 @@
                 android:gravity="center"
                 >
                 <ImageView
+                    android:id="@+id/pembeliantiket"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/cart_homepg"></ImageView>
@@ -136,6 +137,7 @@
                 android:orientation="vertical"
                 >
                 <ImageView
+                    android:id="@+id/hargatiket_id"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/hargatiket_homepg"></ImageView>
@@ -154,6 +156,7 @@
                 android:orientation="vertical"
                 >
                 <ImageView
+                    android:id="@+id/sk"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/sk_homepg"></ImageView>
