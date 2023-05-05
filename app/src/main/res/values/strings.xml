@@ -6,4 +6,10 @@
     <string name="login_atau_daftar">Login Atau Daftar</string>
     <string name="lanjutkan_dengan_google">Lanjutkan Dengan Google</string>
     <string name="kebijakan">Dengan melanjutkan tahap ini, Anda setuju dengan Syarat Penggunaan dan Kebijakan Privasi kami.</string>
+    <string name="logoblack">logoblack</string>
+    <string name="masukan_tanggal_kunjungan_anda">Masukan tanggal kunjungan anda</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="berikutnya">Berikutnya</string>
+    <string name="_0">0</string>
+    <string name="lihat_selengkapnya">Lihat Selengkapnya</string>
 </resources>

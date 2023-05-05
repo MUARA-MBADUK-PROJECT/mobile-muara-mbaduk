@@ -14,4 +14,15 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+
+
+    @Test
+    public void findIndexInWord(){
+        String kata = "dengan melanjutkan tahap ini, anda setuju dengan syarat penggunaan adn kebijakan privasi kami";
+        String word = "anda";
+        int index = kata.indexOf(word);
+        int endIndex = index + word.length();
+        assertEquals(word , kata.substring(index , endIndex));
+    }
 }

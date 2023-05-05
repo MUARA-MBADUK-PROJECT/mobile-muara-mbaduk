@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="start"
+    android:id="@+id/activity_view"
+    tools:context=".view.activity.TicketPurchaseActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/app_ticket_purchase_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/backgroundAppBar"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:popupTheme="@style/Theme.Design.Light"
+        app:title="Pembelian Tiket" />
+
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/logo_black"
+        android:contentDescription="@string/logoblack" />
+
+    <FrameLayout
+        android:layout_marginTop="0dp"
+        android:id="@+id/frame_fragment_ticket_purchase"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:id="@+id/ppn_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_text_black"
+        android:textSize="11sp"
+        android:visibility="visible"
+        android:text="Termasuk PPN (Pajak Pertambahan Nilai) Rp. 5.000"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_gravity="bottom"
+            android:elevation="1dp"
+             >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="end"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Pembayaran"
+                        android:textColor="@color/color_text_black"
+                        >
+                    </TextView>
+                    <TextView
+                        android:id="@+id/jumlah_bayar_textView"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp. 0"
+                        android:textStyle="bold"
+                        android:textColor="@color/backgroundAppBar"
+                        >
+                    </TextView>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_berikutnya"
+                    android:padding="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Berikutnya"
+                    android:background="@color/backgroundAppBar"
+                    />
+            </LinearLayout>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    </LinearLayout>
+
+</LinearLayout>
