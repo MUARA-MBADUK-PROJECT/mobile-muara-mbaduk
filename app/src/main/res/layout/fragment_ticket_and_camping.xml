@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="10dp"
+    tools:context=".view.fragment.TicketAndCampingFragment">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+           >
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:fontFamily="@font/poppins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Tiket"
+                android:textColor="@color/color_text_black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|fill"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="10dp"
+                            android:id="@+id/jumlah_wisatawan_text_view"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="30dp"
+                            android:src="@drawable/ic_baseline_person_24"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:fontFamily="@font/poppins"
+                            android:id="@+id/wisatawan_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFeatureSettings="18sp"
+                            android:text="Wisatawan"
+                            android:textColor="@color/color_text_black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end">
+
+                        <TextView
+                            android:fontFamily="@font/poppins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="20dp"
+                            android:text="Rp.5000"
+                            android:textColor="@color/color_text_black" />
+
+                        <Button
+                            android:id="@+id/btn_minWisatawan"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@color/abuabu"
+                            android:text="-"
+                            android:textColor="@color/white"
+                            android:textSize="30sp"
+                            android:translationY="-11dp" />
+
+                        <ImageButton
+                            android:id="@+id/btn_addWisatawan"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_rounded_blue"
+                            android:src="@drawable/ic_baseline_add_24" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="start|fill"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="10dp"
+                            android:id="@+id/jumlah_mobil_text_view"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="30dp"
+                            android:src="@drawable/ic_baseline_directions_car_24"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:fontFamily="@font/poppins"
+                            android:id="@+id/mobil_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFeatureSettings="18sp"
+
+                            android:text="Mobil"
+                            android:textColor="@color/color_text_black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end">
+
+                        <TextView
+                            android:fontFamily="@font/poppins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="20dp"
+                            android:text="Rp.15000"
+                            android:textColor="@color/color_text_black" />
+
+                        <Button
+                            android:id="@+id/btn_minMobil"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@color/abuabu"
+                            android:text="-"
+                            android:textColor="@color/white"
+                            android:textSize="30sp"
+                            android:translationY="-11dp" />
+
+                        <ImageButton
+                            android:id="@+id/btn_addMobil"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:background="@color/backgroundAppBar"
+                            android:src="@drawable/ic_baseline_add_24" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:gravity="start|fill"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="10dp"
+                           android:id="@+id/jumlah_motor_text_view"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="30dp"
+                            android:src="@drawable/ic_baseline_directions_bike_24"
+                            android:textColor="@color/color_text_black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:fontFamily="@font/poppins"
+                            android:id="@+id/motor_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFeatureSettings="18sp"
+                            android:text="Motor"
+                            android:textColor="@color/color_text_black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="end">
+                        <TextView
+                            android:fontFamily="@font/poppins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="20dp"
+                            android:text="Rp.50000"
+                            android:textColor="@color/color_text_black" />
+                        <Button
+                            android:id="@+id/btn_minMotor"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@color/abuabu"
+                            android:text="-"
+                            android:textColor="@color/white"
+                            android:textSize="30sp"
+                            android:translationY="-11dp" />
+                        <ImageButton
+                            android:id="@+id/btn_addMotor"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:background="@color/backgroundAppBar"
+                            android:src="@drawable/ic_baseline_add_24" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--    start paket kamping yang tersedia-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyleview_packages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <!--    end paket kamping yang tersedia-->
+            <!--    start tidak menemukan paket-->
+            <LinearLayout android:paddingHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:gravity="start|center"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+
+                <TextView
+                    android:fontFamily="@font/poppins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="50dp"
+                    android:text="Tidak menemukan \nPaket Yang sesuai...?"
+                    android:textColor="@color/color_text_black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:fontFamily="@font/poppins"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/button_rounded_blue"
+                    android:text="Beli Packet > "
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <!--    end tidak menemukan paket-->
+        </LinearLayout>
+
+</ScrollView>
