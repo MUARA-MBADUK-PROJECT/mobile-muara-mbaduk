@@ -1,73 +1,112 @@
 package com.example.muara_mbaduk.data.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.data.model.PackagesResponse;
+import com.example.muara_mbaduk.view.fragment.TicketAndCampingFragment;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 import java.util.Map;
 
 public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.PackagesViewHolder> {
 
-    private List<Map<String, String>> data;
+    PackagesResponse packagesResponses;
+    private List<Map<String, String>> count;
+    Fragment fragment;
 
-    public PackagesAdapter(List<Map<String, String>> data) {
-        this.data = data;
+
+
+    public PackagesAdapter(List<Map<String, String>> data, PackagesResponse packagesResponses , Fragment fragment) {
+        this.count = data;
+        this.packagesResponses = packagesResponses;
+        this
+                .fragment = fragment;
     }
 
     @NonNull
     @Override
     public PackagesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.packages_layout, parent, false);
-        PackagesViewHolder packagesViewHolder = new PackagesViewHolder(view);
-
-        return packagesViewHolder;
+        return new PackagesViewHolder(view);
     }
 
+    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull PackagesViewHolder holder, int position) {
-        holder.jumlahPesan.setText(data.get(position).get("count"));
-        holder.namaPaket.setText(data.get(position).get("data"));
-        holder.hargaPaket.setText(data.get(position).get("harga"));
+        holder.jumlahPesan.setText(count.get(position).get("count"));
+        holder.namaPaket.setText(packagesResponses.getData().get(position).getTitle());
+        holder.hargaPaket.setText("Rp." + packagesResponses.getData().get(position).getPrice());
+
+        holder.progressBar.setVisibility(View.VISIBLE);
+        Picasso.get().load(packagesResponses.getData().get(position).getImage()).
+                into(holder.packageImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+                });
+        TicketAndCampingFragment ticketAndCampingFragment =(TicketAndCampingFragment) this.fragment;
+
         holder.btnAdd.setOnClickListener(v -> {
-            String count = data.get(position).get("count");
-            int countAsInt = Integer.parseInt(count);
-            countAsInt++;
-            data.get(position).put("count", String.valueOf(countAsInt));
-            notifyDataSetChanged();
-            updateCount(data);
+            String number = count.get(position).get("count");
+            if(number != null){
+                int countAsInt = Integer.parseInt(number);
+                countAsInt++;
+                ticketAndCampingFragment.tambahJumlah(packagesResponses.getData().get(position).getPrice());
+                count.get(position).put("count", String.valueOf(countAsInt));
+                notifyDataSetChanged();
+                updateCount(count);
+            }
         });
         holder.btnMinus.setOnClickListener(v -> {
-            String count = data.get(position).get("count");
-            int countAsInt = Integer.parseInt(count);
-            if (countAsInt != 0) {
-                countAsInt--;
+            String number = count.get(position).get("count");
+            if(number != null){
+                int countAsInt = Integer.parseInt(number);
+                if (countAsInt != 0) {
+                    countAsInt--;
+                    ticketAndCampingFragment.minusJumlah(packagesResponses.getData().get(position).getPrice());
+                }
+                count.get(position).put("count", String.valueOf(countAsInt));
+                notifyDataSetChanged();
+                updateCount(count);
             }
-            data.get(position).put("count", String.valueOf(countAsInt));
-            notifyDataSetChanged();
-            updateCount(data);
         });
     }
-
+    @SuppressLint("NotifyDataSetChanged")
     public void updateCount(List<Map<String, String>> newData) {
-        this.data = newData;
+        this.count = newData;
         notifyDataSetChanged();
     }
-
     @Override
     public int getItemCount() {
-        return data.size();
+        return count.size();
     }
-
     public static class PackagesViewHolder extends RecyclerView.ViewHolder {
         TextView jumlahPesan, namaPaket, hargaPaket;
         ImageButton btnAdd;
         Button btnMinus;
+        ProgressBar progressBar;
+        ImageView packageImageView;
 
         public PackagesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +115,8 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             namaPaket = itemView.findViewById(R.id.nama_paket_textview);
             btnMinus = itemView.findViewById(R.id.btnMinStandard);
             btnAdd = itemView.findViewById(R.id.btnAddStandard);
+            packageImageView = itemView.findViewById(R.id.package_image_Imageview);
+            progressBar = itemView.findViewById(R.id.progressBar);
         }
     }
 }

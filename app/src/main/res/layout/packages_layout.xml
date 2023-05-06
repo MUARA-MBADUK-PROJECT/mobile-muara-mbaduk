@@ -30,9 +30,11 @@
                     android:text="0"
                     />
                 <ImageView
+                    android:id="@+id/package_image_Imageview"
                     android:src="@drawable/standart1"
                     android:layout_width="35dp"
                     android:layout_height="35dp"/>
+                <include layout="@layout/progres_bar"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginRight="50dp"

@@ -16,4 +16,10 @@ public class TestUtilClass {
         String result = kalimat.substring(startIndex , lastIndex);
         Assert.assertEquals(result , keyword);
     }
+
+    @Test
+    public void testIsWeekend(){
+        boolean weekend = UtilMethod.isWeekend();
+        Assert.assertTrue(weekend);
+    }
 }
