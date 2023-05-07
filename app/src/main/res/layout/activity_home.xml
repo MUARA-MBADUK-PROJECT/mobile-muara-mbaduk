@@ -111,6 +111,7 @@
                 android:layout_width="80dp"
                 >
                 <ImageView
+                    android:id="@+id/paketcamp"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/pktcamp_homepg"></ImageView>

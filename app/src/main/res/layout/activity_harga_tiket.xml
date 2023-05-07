@@ -44,49 +44,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="tablayout">
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Kendaraan"
-                android:contentDescription="item"
-                ></com.google.android.material.tabs.TabItem>
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Wisatawan"
-                android:contentDescription="item"
-                ></com.google.android.material.tabs.TabItem>
 
         </com.google.android.material.tabs.TabLayout>
 
-        <FrameLayout
-            android:layout_marginTop="40dp"
-            android:id="@+id/harga_tiket_framely"
+        <androidx.viewpager.widget.ViewPager
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </FrameLayout>
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="30dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:text="Wisatawan"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"></TextView>-->
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="20sp"-->
-<!--        android:layout_marginEnd="30dp"-->
-<!--        android:text="Kendaraan"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"></TextView>-->
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+            android:layout_height="match_parent"
+            android:id="@+id/viewpager"
+            ></androidx.viewpager.widget.ViewPager>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
