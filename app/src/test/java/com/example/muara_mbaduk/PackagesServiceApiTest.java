@@ -1,6 +1,6 @@
 package com.example.muara_mbaduk;
 
-import com.example.muara_mbaduk.data.model.PackagesResponse;
+import com.example.muara_mbaduk.data.model.response.PackagesResponse;
 import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 

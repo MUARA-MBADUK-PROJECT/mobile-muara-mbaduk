@@ -248,6 +248,7 @@
 
             <!--    start paket kamping yang tersedia-->
             <androidx.recyclerview.widget.RecyclerView
+
                 android:id="@+id/recyleview_packages"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -255,6 +256,7 @@
             <!--    start tidak menemukan paket-->
             <LinearLayout android:paddingHorizontal="20dp"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_border"
                 android:gravity="start|center"

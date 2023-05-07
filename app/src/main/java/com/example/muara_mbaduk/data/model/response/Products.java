@@ -1,4 +1,4 @@
-package com.example.muara_mbaduk.data.model;
+package com.example.muara_mbaduk.data.model.response;
 
 public class Products {
 

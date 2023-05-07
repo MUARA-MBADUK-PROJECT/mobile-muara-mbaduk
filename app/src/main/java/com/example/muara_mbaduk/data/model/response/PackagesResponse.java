@@ -1,4 +1,6 @@
-package com.example.muara_mbaduk.data.model;
+package com.example.muara_mbaduk.data.model.response;
+
+import com.example.muara_mbaduk.data.model.response.Packages;
 
 import java.util.List;
 

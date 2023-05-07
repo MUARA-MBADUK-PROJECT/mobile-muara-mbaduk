@@ -1,25 +1,22 @@
 package com.example.muara_mbaduk.data.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TiketResponse {
-
+public class ParrentModel {
     private int code;
     private String status;
-    private ArrayList<Tiket> data;
 
-
-    // Getter methods
     public int getCode() {
         return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public ArrayList<Tiket> getData() {
-        return data;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

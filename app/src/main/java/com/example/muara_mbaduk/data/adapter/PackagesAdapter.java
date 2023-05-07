@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.PackagesResponse;
+import com.example.muara_mbaduk.data.model.response.TicketCheckinResponse;
 import com.example.muara_mbaduk.view.fragment.TicketAndCampingFragment;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -25,15 +25,15 @@ import java.util.Map;
 
 public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.PackagesViewHolder> {
 
-    PackagesResponse packagesResponses;
+    TicketCheckinResponse ticketCheckinResponse;
     private List<Map<String, String>> count;
     Fragment fragment;
 
 
 
-    public PackagesAdapter(List<Map<String, String>> data, PackagesResponse packagesResponses , Fragment fragment) {
+    public PackagesAdapter(List<Map<String, String>> data, TicketCheckinResponse packagesResponses , Fragment fragment) {
         this.count = data;
-        this.packagesResponses = packagesResponses;
+        this.ticketCheckinResponse = packagesResponses;
         this
                 .fragment = fragment;
     }
@@ -49,11 +49,11 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
     @Override
     public void onBindViewHolder(@NonNull PackagesViewHolder holder, int position) {
         holder.jumlahPesan.setText(count.get(position).get("count"));
-        holder.namaPaket.setText(packagesResponses.getData().get(position).getTitle());
-        holder.hargaPaket.setText("Rp." + packagesResponses.getData().get(position).getPrice());
+        holder.namaPaket.setText(ticketCheckinResponse.getData().getPackages().get(position).getTitle());
+        holder.hargaPaket.setText("Rp." + ticketCheckinResponse.getData().getPackages().get(position).getPrice());
 
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.get().load(packagesResponses.getData().get(position).getImage()).
+        Picasso.get().load(ticketCheckinResponse.getData().getPackages().get(position).getImage()).
                 into(holder.packageImageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -72,7 +72,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             if(number != null){
                 int countAsInt = Integer.parseInt(number);
                 countAsInt++;
-                ticketAndCampingFragment.tambahJumlah(packagesResponses.getData().get(position).getPrice());
+                ticketAndCampingFragment.tambahJumlah(ticketCheckinResponse.getData().getPackages().get(position).getPrice());
                 count.get(position).put("count", String.valueOf(countAsInt));
                 notifyDataSetChanged();
                 updateCount(count);
@@ -84,7 +84,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
                 int countAsInt = Integer.parseInt(number);
                 if (countAsInt != 0) {
                     countAsInt--;
-                    ticketAndCampingFragment.minusJumlah(packagesResponses.getData().get(position).getPrice());
+                    ticketAndCampingFragment.minusJumlah(ticketCheckinResponse.getData().getPackages().get(position).getPrice());
                 }
                 count.get(position).put("count", String.valueOf(countAsInt));
                 notifyDataSetChanged();

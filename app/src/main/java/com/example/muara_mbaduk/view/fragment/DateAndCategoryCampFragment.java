@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,19 +25,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.PackagesResponse;
-import com.example.muara_mbaduk.data.model.TiketResponse;
+import com.example.muara_mbaduk.data.model.Errors;
+import com.example.muara_mbaduk.data.model.response.TicketCheckinResponse;
+import com.example.muara_mbaduk.data.model.response.TiketCheckin;
+import com.example.muara_mbaduk.data.model.response.TiketResponse;
 import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
 import com.example.muara_mbaduk.data.remote.TicketServiceApi;
+import com.example.muara_mbaduk.data.model.request.CheckinRequest;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,11 +95,8 @@ public class DateAndCategoryCampFragment extends Fragment implements AdapterView
         super.onCreate(savedInstanceState);
         View view = getActivity().findViewById(R.id.activity_view);
         if (view != null) {
-            System.out.println("view notnull");
             bottomNavigationView = view.findViewById(R.id.bottom_navigation_ticket);
             ppnTextView = view.findViewById(R.id.ppn_textView);
-        } else {
-
         }
     }
 
@@ -156,7 +158,7 @@ public class DateAndCategoryCampFragment extends Fragment implements AdapterView
     }
 
     public void updateLabel() {
-        String myFormat = "MMM/dd/y";
+        String myFormat = "dd/MM/yyyy";
         SimpleDateFormat format = new SimpleDateFormat(myFormat, Locale.getDefault());
         tanggalKemahEditText.setText(format.format(calendar.getTime()));
     }
@@ -177,94 +179,73 @@ public class DateAndCategoryCampFragment extends Fragment implements AdapterView
             } else {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
+                ProgressDialog loading = UtilMethod.getProgresIndicator("Loading", getContext());
                 Retrofit retrofit = RetrofitClient.getInstance();
                 PackagesServiceApi serviceApi = retrofit.create(PackagesServiceApi.class);
-                Call<PackagesResponse> response = serviceApi.getAllPackages(RetrofitClient.getApiKey());
-                ProgressDialog loading = UtilMethod.getProgresIndicator("Loading", getContext());
                 loading.show();
-                fetchDataTiket();
-                response.enqueue(new Callback<PackagesResponse>() {
+                // get api
+                TicketServiceApi ticketServiceApi = RetrofitClient.getInstance().create(TicketServiceApi.class);
+                CheckinRequest checkinRequest = new CheckinRequest();
+                boolean isCamping = false;
+                if(optionEditText.getText().toString().equalsIgnoreCase("Tidak")){
+                }else{
+                    isCamping = true;
+                }
+                checkinRequest.setCamping(isCamping);
+                checkinRequest.setDate(tanggalKemahEditText.getText().toString());
+                Call<TicketCheckinResponse> responseCall = ticketServiceApi.checkin(RetrofitClient.getApiKey(), checkinRequest);
+                responseCall.enqueue(new Callback<TicketCheckinResponse>() {
                     @Override
-                    public void onResponse(Call<PackagesResponse> call, Response<PackagesResponse> response) {
-                        loading.dismiss();
-                        TransitionInflater inflater = TransitionInflater.from(requireContext());
-                        Transition transition = inflater.inflateTransition(R.transition.fade_in);
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager()
-                                .beginTransaction();
-                        fragment = new TicketAndCampingFragment(response.body(),hargaTiket,hargaKendaraanRoda2,hargaKendaraanRoda4);
-                        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                        transaction.replace(R.id.frame_fragment_ticket_purchase, fragment);
-                        bottomNavigationView.setVisibility(View.VISIBLE);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+                    public void onResponse(Call<TicketCheckinResponse> call, Response<TicketCheckinResponse> response) {
+                        if (response.isSuccessful()) {
+                            TicketCheckinResponse body = response.body();
+                            List<TiketCheckin> tickets = body.getData().getTickets();
+                            tickets.forEach(tiketCheckin -> {
+                                if (tiketCheckin.getCategory().equalsIgnoreCase("tourist")) {
+                                    hargaTiket = tiketCheckin.getPrice();
+                                } else if (tiketCheckin.getCategory().equalsIgnoreCase("transport")
+                                        && tiketCheckin.getTitle().equalsIgnoreCase("Kendaraan roda 4")) {
+                                    hargaKendaraanRoda4 = tiketCheckin.getPrice();
+                                } else if (tiketCheckin.getCategory().equalsIgnoreCase("transport")
+                                        && tiketCheckin.getTitle().equalsIgnoreCase("Kendaraan roda 2")) {
+                                    hargaKendaraanRoda2 = tiketCheckin.getPrice();
+                                }
+                            });
+                            loading.dismiss();
+                            TransitionInflater inflater = TransitionInflater.from(requireContext());
+                            Transition transition = inflater.inflateTransition(R.transition.fade_in);
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager()
+                                    .beginTransaction();
+                            fragment = new TicketAndCampingFragment(body, hargaTiket, hargaKendaraanRoda2, hargaKendaraanRoda4);
+                            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                            transaction.replace(R.id.frame_fragment_ticket_purchase, fragment);
+                            bottomNavigationView.setVisibility(View.VISIBLE);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        } else {
+                            loading.dismiss();
+                            ResponseBody responseBody = response.errorBody();
+                            Errors errors = null;
+                            try {
+                                errors = UtilMethod.generateErrors(responseBody.string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Snackbar snackbar = Snackbar.make(view, errors.getErrors().getMessage(), Snackbar.LENGTH_SHORT);
+                            snackbar.getView().setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red));
+                            snackbar.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+                            snackbar.show();
+                        }
                     }
+
                     @Override
-                    public void onFailure(Call<PackagesResponse> call, Throwable t) {
-                        // error get api
-                        loading.dismiss();
-                        Snackbar.make(view ,"Failed to get data packages" , Snackbar.LENGTH_SHORT).show();
+                    public void onFailure(Call<TicketCheckinResponse> call, Throwable t) {
+                        Snackbar snackbar = Snackbar.make(view, t.getMessage(), Snackbar.LENGTH_SHORT);
+                        snackbar.getView().setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red));
+                        snackbar.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+                        snackbar.show();
                     }
                 });
-            }
-        });
-    }
-
-    public void fetchDataTiket(){
-        TicketServiceApi serviceApi = RetrofitClient.getInstance().create(TicketServiceApi.class);
-        Call<TiketResponse> responseCall = serviceApi.findAll(RetrofitClient.getApiKey());
-        responseCall.enqueue(new Callback<TiketResponse>() {
-            @Override
-            public void onResponse(Call<TiketResponse> call, Response<TiketResponse> response) {
-                tiketResponse = response.body();
-                if(optionEditText.getText().toString().equalsIgnoreCase("Tidak")){
-                    tiketResponse.getData().forEach(tiket -> {
-                        if(tiket.getTitle().equalsIgnoreCase("Tanpa Berkemah")){
-                            if(UtilMethod.isWeekend()){
-                                hargaTiket = tiket.getWeekend_day();
-                            }else{
-                                hargaTiket = tiket.getNormal_day();
-                            }
-                        }else if(tiket.getTitle().equalsIgnoreCase("Kendaraan roda 2")){
-                            if(UtilMethod.isWeekend()){
-                                hargaKendaraanRoda2 = tiket.getWeekend_day();
-                            }else{
-                                hargaKendaraanRoda2 = tiket.getNormal_day();
-                            }
-                        } else if (tiket.getTitle().equalsIgnoreCase("Kendaraan roda 4")) {
-                            if(UtilMethod.isWeekend()){
-                                hargaKendaraanRoda4 = tiket.getWeekend_day();
-                            }else{
-                                hargaKendaraanRoda4 = tiket.getNormal_day();
-                            }
-                        }
-                    });
-                }else{
-                    tiketResponse.getData().forEach(tiket -> {
-                        if(tiket.getTitle().equalsIgnoreCase("Berkemah")){
-                            if(UtilMethod.isWeekend()){
-                                hargaTiket = tiket.getWeekend_day();
-                            }else{
-                                hargaTiket = tiket.getNormal_day();
-                            }
-                        }else if(tiket.getTitle().equalsIgnoreCase("Kendaraan roda 2")){
-                            if(UtilMethod.isWeekend()){
-                                hargaKendaraanRoda2 = tiket.getWeekend_day();
-                            }else{
-                                hargaKendaraanRoda2 = tiket.getNormal_day();
-                            }
-                        } else if (tiket.getTitle().equalsIgnoreCase("Kendaraan roda 4")) {
-                            if(UtilMethod.isWeekend()){
-                                hargaKendaraanRoda4 = tiket.getWeekend_day();
-                            }else{
-                                hargaKendaraanRoda4 = tiket.getNormal_day();
-                            }
-                        }
-                    });
-                }
-            }
-            @Override
-            public void onFailure(Call<TiketResponse> call, Throwable t) {
-                Log.e("api" , t.getMessage());
             }
         });
     }

@@ -5,6 +5,10 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
+import com.example.muara_mbaduk.data.model.Errors;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -34,4 +38,10 @@ public class UtilMethod {
         DayOfWeek dayOfWeek = today.getDayOfWeek();
         return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
     }
+
+    public static Errors generateErrors(String json){
+        Gson gson = new GsonBuilder().create();
+        return gson.fromJson(json, Errors.class);
+    }
+    
 }

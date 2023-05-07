@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,9 +34,11 @@ public class DetailPembeliActivity extends AppCompatActivity {
     private LinearLayout bankLinearLayout , bayarDitempatLinearLayout;
     private Dialog bankPaymentDialog;
     private ImageView bniImage , briImage , bcaImage;
+    private TextView totalBayarTextView;
 
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +47,14 @@ public class DetailPembeliActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true); // menampilkan tombol kembali di toolbar
         toolbar.setOnClickListener(v -> {
-            System.out.println("clicked back");
             onBackPressed();
         });
         recyclerView = findViewById(R.id.detail_wisatawan_recycleview);
         kendaraanRecycleView = findViewById(R.id.detail_kendaraan_recycleview);
+        totalBayarTextView = findViewById(R.id.jumlah_bayar_textView);
         Bundle bundle = getIntent().getExtras();
+        int total_bayar = bundle.getInt("total_bayar");
+        totalBayarTextView.setText("Rp."+ total_bayar);
         DataOrder myObject = (DataOrder) bundle.getSerializable("data");
         DetailWisatawanAdapter detailWisatawanAdapter = new DetailWisatawanAdapter(myObject.getDataList());
         recyclerView.setAdapter(detailWisatawanAdapter);
