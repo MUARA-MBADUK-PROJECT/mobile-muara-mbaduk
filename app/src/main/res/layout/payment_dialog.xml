@@ -13,6 +13,7 @@
         <RelativeLayout
             android:layout_marginBottom="10dp"
             android:id="@+id/bni_linearLayout"
+            android:clickable="true"
             android:layout_width="fill_parent"
             android:orientation="horizontal"
             android:layout_gravity="center_vertical"
@@ -37,6 +38,7 @@
                 />
         </RelativeLayout>
         <RelativeLayout
+            android:clickable="true"
             android:layout_marginBottom="10dp"
             android:id="@+id/bca_linearLayout"
             android:layout_width="fill_parent"
@@ -63,6 +65,7 @@
                 />
         </RelativeLayout>
         <RelativeLayout
+            android:clickable="true"
             android:layout_marginBottom="10dp"
             android:id="@+id/bri_linearLayout"
             android:layout_width="fill_parent"
