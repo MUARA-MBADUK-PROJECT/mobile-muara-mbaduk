@@ -21,11 +21,23 @@
     <string name="tab_2">tab2</string>
     <string name="tab_3">tab3</string>
     <string name="title_activity_paket_camping">PaketCampingActivity</string>
-    
-    <string-array name="nama_paket_camp">
-        <item>Paket Premium 4</item>
-        <item>Paket Premium 3</item>
+
+    <string-array name="nama_paket_camp_txt">
+    <item>Paket Premium 1</item>
         <item>Paket Premium 2</item>
-        <item>Paket Premium 1</item>
+        <item>Paket Premium 3</item>
+        <item>Paket Premium 4</item>
+    </string-array>
+    <string-array name="paket_harga_txt">
+        <item>25k</item>
+        <item>25k</item>
+        <item>25k</item>
+        <item>25k</item>
+    </string-array>
+    <string-array name="paket_desk_txt">
+        <item>ini adalah paket 1</item>
+        <item>ini adalah paket 2</item>
+        <item>ini adalah paket 3</item>
+        <item>ini adalah paket 4</item>
     </string-array>
 </resources>
