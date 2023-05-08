@@ -71,6 +71,7 @@
                         android:gravity="end">
 
                         <TextView
+                            android:id="@+id/harga_tiket_wisatawan"
                             android:fontFamily="@font/poppins"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -145,6 +146,7 @@
                         android:gravity="end">
 
                         <TextView
+                            android:id="@+id/harga_tiket_mobil"
                             android:fontFamily="@font/poppins"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -217,6 +219,7 @@
                         android:layout_gravity="end"
                         android:gravity="end">
                         <TextView
+                            android:id="@+id/harga_tiket_motor"
                             android:fontFamily="@font/poppins"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -245,6 +248,7 @@
 
             <!--    start paket kamping yang tersedia-->
             <androidx.recyclerview.widget.RecyclerView
+
                 android:id="@+id/recyleview_packages"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -252,6 +256,7 @@
             <!--    start tidak menemukan paket-->
             <LinearLayout android:paddingHorizontal="20dp"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_border"
                 android:gravity="start|center"

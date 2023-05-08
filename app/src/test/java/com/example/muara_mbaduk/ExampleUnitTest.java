@@ -15,8 +15,6 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
-
-
     @Test
     public void findIndexInWord(){
         String kata = "dengan melanjutkan tahap ini, anda setuju dengan syarat penggunaan adn kebijakan privasi kami";

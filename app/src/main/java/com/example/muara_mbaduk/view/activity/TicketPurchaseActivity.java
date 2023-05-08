@@ -1,6 +1,7 @@
 package com.example.muara_mbaduk.view.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,7 @@ public class TicketPurchaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ticket_purchase);
         ppnTextView = findViewById(R.id.ppn_textView);
         ppnTextView.setVisibility(View.GONE);
+
         getSupportFragmentManager().beginTransaction().
                 replace(R.id.frame_fragment_ticket_purchase, dateAndCategoryCampFragment, "dateAndCategoryCampFragment").commit();
     }
