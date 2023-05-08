@@ -2,14 +2,51 @@
     <string name="app_name">MUARA-MBADUK</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tabs">tabs</string>
     <string name="logo_for_splashscrenn">logo-for-splashscrenn</string>
     <string name="login_atau_daftar">Login Atau Daftar</string>
     <string name="lanjutkan_dengan_google">Lanjutkan Dengan Google</string>
     <string name="kebijakan">Dengan melanjutkan tahap ini, Anda setuju dengan Syarat Penggunaan dan Kebijakan Privasi kami.</string>
+
+    <string name="title_activity_home">HomeActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="Tab">tablayout</string>
+    <string name="tab_1">tab1</string>
+    <string name="tab_2">tab2</string>
+    <string name="tab_3">tab3</string>
+    <string name="title_activity_paket_camping">PaketCampingActivity</string>
+
+    <string-array name="nama_paket_camp_txt">
+    <item>Paket Premium 1</item>
+        <item>Paket Premium 2</item>
+        <item>Paket Premium 3</item>
+        <item>Paket Premium 4</item>
+    </string-array>
+    <string-array name="paket_harga_txt">
+        <item>25k</item>
+        <item>25k</item>
+        <item>25k</item>
+        <item>25k</item>
+    </string-array>
+    <string-array name="paket_desk_txt">
+        <item>ini adalah paket 1</item>
+        <item>ini adalah paket 2</item>
+        <item>ini adalah paket 3</item>
+        <item>ini adalah paket 4</item>
+    </string-array>
+=======
     <string name="logoblack">logoblack</string>
     <string name="masukan_tanggal_kunjungan_anda">Masukan tanggal kunjungan anda</string>
     <string name="tanggal">Tanggal</string>
     <string name="berikutnya">Berikutnya</string>
     <string name="_0">0</string>
     <string name="lihat_selengkapnya">Lihat Selengkapnya</string>
+>>>>>>> origin/main_test
 </resources>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_bg"
+    tools:context=".view.activity.HomeActivity"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:layout_width="133dp"
+        android:layout_height="59dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/logo_homepg"></ImageView>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/profile_homepg"></ImageView>
+        <TextView
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hi, "
+            android:textSize="15dp"
+            android:layout_gravity="center_vertical"
+            ></TextView>
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roni"
+            android:textSize="15dp"></TextView>
+    </LinearLayout>
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Layanan"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="10dp"
+        ></TextView>
+    <TableLayout
+        android:elevation="25dp"
+        android:layout_marginTop="1dp"
+        android:layout_width="370dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:background="@drawable/rounded_home_shape"
+        android:orientation="horizontal">
+        <TableRow
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            >
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_margin="20dp"
+                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/pembeliantiket"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/cart_homepg"></ImageView>
+                <TextView
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Pemesanan Tiket"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="20dp"
+                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/riwayat_homepg"></ImageView>
+                <TextView
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Riwayat Pemesanan"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_margin="20dp"
+                android:layout_height="100dp"
+                android:layout_width="80dp"
+                >
+                <ImageView
+                    android:id="@+id/paketcamp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/pktcamp_homepg"></ImageView>
+                <TextView
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Paket Camping"></TextView>
+            </LinearLayout>
+
+        </TableRow>
+        <TableRow
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            >
+            <LinearLayout
+
+                android:layout_margin="20dp"
+                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:id="@+id/hargatiket_id"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/hargatiket_homepg"></ImageView>
+                <TextView
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Harga Tiket"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="20dp"
+                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:id="@+id/sk"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/sk_homepg"></ImageView>
+                <TextView
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Syarat Dan Ketentuan"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="20dp"
+                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/faq_homepg"></ImageView>
+                <TextView
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="FAQ"></TextView>
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
+        android:text="Berita Terbaru"
+        android:textColor="@color/color_text_black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        tools:ignore="TextSizeCheck"></TextView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_gravity="left"
+            >
+
+            <LinearLayout
+                android:gravity="top"
+                android:layout_width="186dp"
+                android:layout_height="240dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/cardnews_homepage"
+                android:elevation="10dp"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="116dp"
+                    android:src="@drawable/foto1_cardnews"></ImageView>
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11 april 2023"
+                    android:textSize="10dp"
+                    android:textColor="@color/grey"></TextView>
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Camping dengan Pemandangan Menwawan di Muara Maduk Banyuwangi"
+                    android:textColor="@color/black"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="top"
+                android:layout_width="186dp"
+                android:layout_height="240dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/cardnews_homepage"
+                android:elevation="10dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="116dp"
+                    android:src="@drawable/foto_cardnews"></ImageView>
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11 april 2023"
+                    android:textSize="10dp"
+                    android:textColor="@color/grey"></TextView>
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Muara Baduk, Tempat wisata kekinian di Banyuwangi"
+                    android:textColor="@color/black"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="top"
+                android:layout_width="186dp"
+                android:layout_height="240dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/cardnews_homepage"
+                android:elevation="10dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="116dp"
+                    android:src="@drawable/foto_cardnews"></ImageView>
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11 april 2023"
+                    android:textSize="10dp"
+                    android:textColor="@color/grey"></TextView>
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Muara Baduk, Tempat wisata kekinian di Banyuwangi"
+                    android:textColor="@color/black"></TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+</LinearLayout>
