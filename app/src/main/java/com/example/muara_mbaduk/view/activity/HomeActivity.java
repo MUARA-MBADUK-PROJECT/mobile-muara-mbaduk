@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.example.muara_mbaduk.R;
 public class HomeActivity extends AppCompatActivity {
     ImageView hargatiket;
-    ImageView paketcamp;
+    ImageView paketcamp , pemesananTiket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         hargatiket = findViewById(R.id.hargatiket_id);
         paketcamp = findViewById(R.id.paketcamp);
-
+        pemesananTiket = findViewById(R.id.pembeliantiket);
         hargatiket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +34,10 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
 
             }
+        });
+        pemesananTiket.setOnClickListener(v -> {
+            Intent i = new Intent(HomeActivity.this, TicketPurchaseActivity.class);
+            startActivity(i);
         });
     }
 
