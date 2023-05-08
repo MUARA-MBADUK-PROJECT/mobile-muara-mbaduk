@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,12 +31,15 @@ public class DetailPembeliActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView , kendaraanRecycleView;
     private RadioGroup radioGroup;
-    private RadioButton bankRadioButton , bayarDitempatRadioButton;
+    private RadioButton bankRadioButton , bayarDitempatRadioButton , bniRadioButton, bcaRadioButton,briRadioButton;
     ImageView imageRadioBank , imageRadioBayarDitempat;
     private LinearLayout bankLinearLayout , bayarDitempatLinearLayout;
+    private RelativeLayout bniRelativeLayout, briRelativeLayout, bcaRelativeLayout;
+    private RadioGroup bankRadioGroup;
     private Dialog bankPaymentDialog;
     private ImageView bniImage , briImage , bcaImage;
     private TextView totalBayarTextView;
+    private String paymentMetode;
 
 
 
@@ -75,6 +80,7 @@ public class DetailPembeliActivity extends AppCompatActivity {
         bayarDitempatLinearLayout = findViewById(R.id.radio_layout_2);
 
         initDialog();
+        dialogAction();
 
         bankLinearLayout.setOnClickListener(v -> {
             bankRadioButton.setSelected(true);
@@ -93,10 +99,25 @@ public class DetailPembeliActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutKendaraan  = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         kendaraanRecycleView.setAdapter(detailKendaraanAdapter);
         kendaraanRecycleView.setLayoutManager(linearLayoutKendaraan);
+        bankPaymentDialog.setOnDismissListener(dialog -> {
+            System.out.println("close");
+            int checkedRadioButtonId = bankRadioGroup.getCheckedRadioButtonId();
+            RadioButton radioChecked = bankPaymentDialog.findViewById(checkedRadioButtonId);
+            System.out.println(radioChecked.getText());
+        });
     }
+
     public void initDialog(){
         bankPaymentDialog = new Dialog(this);
         bankPaymentDialog.setContentView(R.layout.payment_dialog);
+        bankRadioGroup = bankPaymentDialog.findViewById(R.id.payment_radioGroup);
+
+        bniRelativeLayout = bankPaymentDialog.findViewById(R.id.bni_linearLayout);
+        bcaRelativeLayout = bankPaymentDialog.findViewById(R.id.bca_linearLayout);
+        briRelativeLayout = bankPaymentDialog.findViewById(R.id.bri_linearLayout);
+        bcaRadioButton = bankPaymentDialog.findViewById(R.id.bca_radioButton);
+        bniRadioButton = bankPaymentDialog.findViewById(R.id.bni_radioButton);
+        briRadioButton = bankPaymentDialog.findViewById(R.id.bri_radioButton);
         briImage = bankPaymentDialog.findViewById(R.id.bri_image);
         bcaImage = bankPaymentDialog.findViewById(R.id.bca_image);
         bniImage = bankPaymentDialog.findViewById(R.id.bni_image);
@@ -104,6 +125,34 @@ public class DetailPembeliActivity extends AppCompatActivity {
         briImage.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
         bcaImage.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
         bankPaymentDialog.setCancelable(true);
+    }
+
+
+    public void dialogAction(){
+        bniRelativeLayout.setOnClickListener(v -> {
+            bniImage.setImageDrawable(getDrawable(R.drawable.checked_drawable));
+            briImage.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
+            bcaImage.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
+            bniRadioButton.setChecked(true);
+            bcaRadioButton.setChecked(false);
+            briRadioButton.setChecked(false);
+        });
+        briRelativeLayout.setOnClickListener(v -> {
+            briImage.setImageDrawable(getDrawable(R.drawable.checked_drawable));
+            bniImage.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
+            bcaImage.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
+            briRadioButton.setChecked(true);
+            bcaRadioButton.setChecked(false);
+            bniRadioButton.setChecked(false);
+        });
+        bcaRelativeLayout.setOnClickListener(v -> {
+            bcaImage.setImageDrawable(getDrawable(R.drawable.checked_drawable));
+            briImage.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
+            bniImage.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
+            bcaRadioButton.setChecked(true);
+            bniRadioButton.setChecked(false);
+            briRadioButton.setChecked(false);
+        });
     }
 
     @Override

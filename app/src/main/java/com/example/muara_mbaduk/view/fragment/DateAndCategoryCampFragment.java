@@ -145,6 +145,7 @@ public class DateAndCategoryCampFragment extends Fragment implements AdapterView
                 "Ya , Saya Akan Berkemah",
                 "Tidak"
         };
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         builder.setSingleChoiceItems(dataSpiner, index, new DialogInterface.OnClickListener() {
             @Override
