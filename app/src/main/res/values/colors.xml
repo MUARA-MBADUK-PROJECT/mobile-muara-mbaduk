@@ -8,7 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="splash_background">#1570BF </color>
-    <color name="color_text_black">#222020</color>
+
+    <color name="color_text_black1">#222020</color>
     <color name="grey">#808080</color>
 
+    <color name="color_text_black">#1E1E1E</color>
+    <color name="backgroundAppBar" >#1570BF</color>
+    <color name="hintText">#939393</color>
+    <color name="abuabu">#939393</color>
+    <color name="red"> #F34F4F </color>
 </resources>

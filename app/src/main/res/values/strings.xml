@@ -7,6 +7,7 @@
     <string name="login_atau_daftar">Login Atau Daftar</string>
     <string name="lanjutkan_dengan_google">Lanjutkan Dengan Google</string>
     <string name="kebijakan">Dengan melanjutkan tahap ini, Anda setuju dengan Syarat Penggunaan dan Kebijakan Privasi kami.</string>
+
     <string name="title_activity_home">HomeActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -40,4 +41,12 @@
         <item>ini adalah paket 3</item>
         <item>ini adalah paket 4</item>
     </string-array>
+=======
+    <string name="logoblack">logoblack</string>
+    <string name="masukan_tanggal_kunjungan_anda">Masukan tanggal kunjungan anda</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="berikutnya">Berikutnya</string>
+    <string name="_0">0</string>
+    <string name="lihat_selengkapnya">Lihat Selengkapnya</string>
+>>>>>>> origin/main_test
 </resources>

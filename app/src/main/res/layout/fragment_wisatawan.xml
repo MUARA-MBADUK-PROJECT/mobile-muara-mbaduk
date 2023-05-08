@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="15dp"
-    tools:context=".view.activity.fragment.WisatawanFragment">
+    tools:context=".view.fragment.WisatawanFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout

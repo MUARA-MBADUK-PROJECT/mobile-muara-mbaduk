@@ -1,17 +1,11 @@
 package com.example.muara_mbaduk.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.view.activity.fragment.KendaraanFragment;
-import com.example.muara_mbaduk.view.activity.fragment.WisatawanFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class HargaTiketActivity extends AppCompatActivity {

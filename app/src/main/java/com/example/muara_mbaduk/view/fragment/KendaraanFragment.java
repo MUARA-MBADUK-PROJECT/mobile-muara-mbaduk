@@ -1,4 +1,4 @@
-package com.example.muara_mbaduk.view.activity.fragment;
+package com.example.muara_mbaduk.view.fragment;
 
 import android.os.Bundle;
 

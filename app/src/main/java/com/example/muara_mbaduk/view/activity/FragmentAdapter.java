@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.muara_mbaduk.view.activity.fragment.KendaraanFragment;
-import com.example.muara_mbaduk.view.activity.fragment.WisatawanFragment;
+import com.example.muara_mbaduk.view.fragment.KendaraanFragment;
+import com.example.muara_mbaduk.view.fragment.WisatawanFragment;
 
 public class FragmentAdapter extends FragmentStatePagerAdapter {
 
