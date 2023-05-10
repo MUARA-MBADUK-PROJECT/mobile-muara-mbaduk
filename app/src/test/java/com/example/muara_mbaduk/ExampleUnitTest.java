@@ -23,4 +23,10 @@ public class ExampleUnitTest {
         int endIndex = index + word.length();
         assertEquals(word , kata.substring(index , endIndex));
     }
+
+
+    @Test
+    public void testApplicationProperties(){
+        
+    }
 }

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:transformPivotX="2dp"
+    android:layout_marginTop="0dp"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".view.activity.CustomPembelianTiketActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/banner_custom_pembelian_tiket"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/banner_pembelian_tiket" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/back_custom_pembelian_tiket_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="Buat Rencana Campingmu Sendiri"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+            <TextView
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/poppins"
+                android:textStyle="bold"
+                android:textSize="27sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_black"
+                android:text="Lengkapi Kebutuhan Camping Anda" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/poppins"
+                android:textStyle="normal"
+                android:textSize="17sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_black"
+                android:text="Mau Camping Kapan ?" />
+            <EditText
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:focusable="false"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginBottom="20dp"
+                android:drawableStart="@drawable/ic_baseline_calendar_month_24"
+                android:background="@drawable/rounded_edit_text"
+                android:textColorHint="@color/hintText"
+                android:textColor="@color/color_text_black"
+                android:hint="@string/masukan_tanggal_kunjungan_anda"
+                android:autofillHints="" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/poppins"
+                android:textStyle="normal"
+                android:textSize="17sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_black"
+                android:text="Nama Lengkap *" />
+            <EditText
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:focusable="false"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_edit_text"
+                android:textColorHint="@color/hintText"
+                android:textColor="@color/color_text_black"
+                android:hint="Masukan Nama Lengkap"
+                android:autofillHints="" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/poppins"
+                android:textStyle="normal"
+                android:textSize="17sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_black"
+                android:text="Email *" />
+            <EditText
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:focusable="false"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_edit_text"
+                android:textColorHint="@color/hintText"
+                android:textColor="@color/color_text_black"
+                android:hint="@string/masukan_tanggal_kunjungan_anda"
+                android:autofillHints="" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/poppins"
+                android:textStyle="normal"
+                android:textSize="17sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_black"
+                android:text="Kontak Whatsaap *" />
+            <EditText
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:focusable="false"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_marginBottom="20dp"
+                android:textColorHint="@color/hintText"
+                android:textColor="@color/color_text_black"
+                android:hint="@string/masukan_tanggal_kunjungan_anda"
+                android:autofillHints="" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

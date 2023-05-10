@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,8 +24,10 @@ import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.PackagesAdapter;
 import com.example.muara_mbaduk.data.model.response.TicketCheckinResponse;
 import com.example.muara_mbaduk.data.pojo.DataOrder;
+import com.example.muara_mbaduk.view.activity.CustomPembelianTiketActivity;
 import com.example.muara_mbaduk.view.activity.DetailPembeliActivity;
 import com.example.muara_mbaduk.view.activity.TicketPurchaseActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,8 +37,8 @@ import java.util.Map;
 
 public class TicketAndCampingFragment extends Fragment {
 
-    Button btnNext, btnMinWisatawan, btnMinMotor, btnMinMobil , btnMinStandard , btnMinPremium1 , btnMinPremium2;
-    ImageButton btnAddWisatawan, btnAddMotor, btnAddMobil , btnAddStandard , btnaddPremium1 , btnAddPremium2;
+    Button btnNext, btnMinWisatawan, btnMinMotor, btnMinMobil,btnBuatPaket;
+    ImageButton btnAddWisatawan, btnAddMotor, btnAddMobil;
     TextView jumlahWisatawanTextView, jumlahMobilTextView, jumlahMotorTextView ,  textWisatawan , textMobil, textMotor,hargaTikeWisatawanTextView , hargaTiketKendaraanRoda2TextView , hargaTiketKendaraanRoda4TextView,totalBayarTextView;
     private RecyclerView packagesRecycleview;
     private int jumlahWisatawan,jumlahMotor,jumlahMobil,kendaraanSize,totalBayar = 0;
@@ -62,16 +65,14 @@ public class TicketAndCampingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ticket_and_camping, container, false);
 
-        return view;
+        return inflater.inflate(R.layout.fragment_ticket_and_camping, container, false);
     }
     @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initComponents(view);
-        sendDetailOrder();
         initFunction();
         totalBayarTextView.setText("Rp.0");
         TicketPurchaseActivity fragmentActivity = (TicketPurchaseActivity) getActivity();
@@ -90,54 +91,74 @@ public class TicketAndCampingFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+
+        btnBuatPaket.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), CustomPembelianTiketActivity.class);
+            startActivity(intent);
+        });
+
         PackagesAdapter packagesAdapter = new PackagesAdapter(data, tiketResponse , this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false);
+        sendDetailOrder(packagesAdapter, view);
         packagesRecycleview.setAdapter(packagesAdapter);
         packagesRecycleview.setLayoutManager(linearLayoutManager);
+
     }
 
-   // send data to detail activity
-    void sendDetailOrder() {
+    // send data to detail activity
+    void sendDetailOrder(PackagesAdapter packagesAdapter, View view) {
+
         TicketPurchaseActivity fragmentActivity = (TicketPurchaseActivity) getActivity();
         fragmentActivity.getBtnBerikutnya().setOnClickListener(v -> {
-            List<Map<String, String>> dataWisatawan = new ArrayList<>();
-            ArrayList<String> motor = new ArrayList<>();
-            ArrayList<String> mobil = new ArrayList<>();
-            Map<String, String> map = new HashMap<>();
-            for (int i = 0; i < jumlahWisatawan; i++) {
-                map.put("nama", "Belum ada nama");
-                map.put("data", "Belum ada data");
-                dataWisatawan.add(map);
-            }
-            for (int i = 0; i < jumlahMotor ; i++) {
-                motor.add("Belum ada plat nomor");
-            }
-            for (int i = 0; i < jumlahMobil ; i++) {
-                mobil.add("Belum ada plat nomor");
-            }
-            Intent intent = new Intent(getContext(), DetailPembeliActivity.class);
-            DataOrder dataOrder = new DataOrder(dataWisatawan);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("data", dataOrder);
-            intent.putExtras(bundle);
-            intent.putExtra("total_bayar" , totalBayar);
-            if(jumlahMotor == jumlahMobil){
-                kendaraanSize = jumlahMobil;
-            }else{
-                kendaraanSize = Math.max(jumlahMotor, jumlahMobil);
-            }
-            intent.putExtra("size" , kendaraanSize);
-            intent.putStringArrayListExtra("motor" , motor);
-            intent.putStringArrayListExtra("mobil" , mobil);
-            if (jumlahWisatawan != 0) {
-                Log.d("size" , String.valueOf(kendaraanSize));
-                startActivity(intent);
+
+            boolean isNotZero = packagesAdapter.checkIfCountZero();
+            if (isNotZero) {
+                List<Map<String, String>> dataWisatawan = new ArrayList<>();
+                ArrayList<String> motor = new ArrayList<>();
+                ArrayList<String> mobil = new ArrayList<>();
+                Map<String, String> map = new HashMap<>();
+                for (int i = 0; i < jumlahWisatawan; i++) {
+                    map.put("nama", "Belum ada nama");
+                    map.put("data", "Belum ada data");
+                    dataWisatawan.add(map);
+                }
+                for (int i = 0; i < jumlahMotor; i++) {
+                    motor.add("Belum ada plat nomor");
+                }
+                for (int i = 0; i < jumlahMobil; i++) {
+                    mobil.add("Belum ada plat nomor");
+                }
+                Intent intent = new Intent(getContext(), DetailPembeliActivity.class);
+                DataOrder dataOrder = new DataOrder(dataWisatawan);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("data", dataOrder);
+                intent.putExtras(bundle);
+                intent.putExtra("total_bayar", totalBayar);
+                if (jumlahMotor == jumlahMobil) {
+                    kendaraanSize = jumlahMobil;
+                } else {
+                    kendaraanSize = Math.max(jumlahMotor, jumlahMobil);
+                }
+                intent.putExtra("size", kendaraanSize);
+                intent.putStringArrayListExtra("motor", motor);
+                intent.putStringArrayListExtra("mobil", mobil);
+                if (jumlahWisatawan != 0) {
+                    Log.d("size", String.valueOf(kendaraanSize));
+                    startActivity(intent);
+                } else {
+                    Snackbar snackbar = Snackbar.make(view, "Harap masukan jumlah wisatawan", Snackbar.LENGTH_SHORT);
+                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red));
+                    snackbar.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+                    snackbar.show();
+                }
             } else {
-                Toast.makeText(getContext(), "Harap pilih jumlah wisatawan", Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar.make(view, "Harap pilih salah satu paket wisata", Snackbar.LENGTH_SHORT);
+                snackbar.getView().setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red));
+                snackbar.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+                snackbar.show();
             }
         });
     }
-
     // init all components
     @SuppressLint("SetTextI18n")
     void initComponents(View view){
@@ -165,6 +186,7 @@ public class TicketAndCampingFragment extends Fragment {
         hargaTiketKendaraanRoda2TextView.setText("Rp."+ hargaKendaraanRoda2);
         FragmentActivity activity = getActivity();
         totalBayarTextView = activity.findViewById(R.id.jumlah_bayar_textView);
+        btnBuatPaket = view.findViewById(R.id.btn_buatpaket);
     }
 
     //method manipulasi jumlah kendaraan dan total harga
@@ -234,5 +256,6 @@ public class TicketAndCampingFragment extends Fragment {
         totalBayar-=jumlahTemp;
         totalBayarTextView.setText("Rp."+String.valueOf(totalBayar));
     }
+
 
 }

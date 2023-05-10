@@ -8,7 +8,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "https://muarambaduk.aristocaesar.my.id/api/v1/";
+    private static final String BASE_URL = "https://api.muarambaduk.biz.id/v1/";
 
     private static Retrofit retrofit;
 

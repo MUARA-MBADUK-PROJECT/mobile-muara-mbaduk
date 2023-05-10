@@ -97,14 +97,27 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         this.count = newData;
         notifyDataSetChanged();
     }
+
+    public boolean checkIfCountZero(){
+        if(this.count.size() == 0){
+            return true;
+        }else{
+            boolean isReturn = false;
+            for (int i = 0; i < this.count.size(); i++) {
+                if(!this.count.get(i).get("count").equalsIgnoreCase("0")){
+                    isReturn = true;
+                }
+            }
+            return isReturn;
+        }
+    }
     @Override
     public int getItemCount() {
         return count.size();
     }
     public static class PackagesViewHolder extends RecyclerView.ViewHolder {
         TextView jumlahPesan, namaPaket, hargaPaket;
-        ImageButton btnAdd;
-        Button btnMinus;
+        ImageButton btnAdd,btnMinus;
         ProgressBar progressBar;
         ImageView packageImageView;
 

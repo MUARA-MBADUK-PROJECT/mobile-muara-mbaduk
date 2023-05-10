@@ -32,7 +32,7 @@
         android:layout_marginTop="0dp"
         android:id="@+id/frame_fragment_ticket_purchase"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
         />
