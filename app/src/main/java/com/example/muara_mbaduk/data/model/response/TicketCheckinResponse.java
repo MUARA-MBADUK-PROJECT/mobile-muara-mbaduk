@@ -1,11 +1,9 @@
 package com.example.muara_mbaduk.data.model.response;
 
-import com.example.muara_mbaduk.data.model.response.CheckinData;
-
 public class TicketCheckinResponse {
     private int code;
     private String status;
-    private CheckinData data;
+    private CheckinResponse data;
 
 //    private List<ErrorsResponse> errors;
 //
@@ -34,11 +32,11 @@ public class TicketCheckinResponse {
         this.status = status;
     }
 
-    public CheckinData getData() {
+    public CheckinResponse getData() {
         return data;
     }
 
-    public void setData(CheckinData data) {
+    public void setData(CheckinResponse data) {
         this.data = data;
     }
 }

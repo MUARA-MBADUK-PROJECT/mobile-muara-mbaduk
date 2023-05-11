@@ -1,8 +1,11 @@
 package com.example.muara_mbaduk.data.model.response;
 
+import com.example.muara_mbaduk.data.model.entity.Packages;
+import com.example.muara_mbaduk.data.model.entity.TiketCheckin;
+
 import java.util.List;
 
-public class CheckinData {
+public class CheckinResponse {
     private String date;
     private String date_types;
     private boolean camping;

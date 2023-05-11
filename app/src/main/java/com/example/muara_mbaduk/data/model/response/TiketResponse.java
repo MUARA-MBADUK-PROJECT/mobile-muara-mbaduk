@@ -1,6 +1,6 @@
 package com.example.muara_mbaduk.data.model.response;
 
-import com.example.muara_mbaduk.data.model.response.Tiket;
+import com.example.muara_mbaduk.data.model.entity.Tiket;
 
 import java.util.ArrayList;
 
