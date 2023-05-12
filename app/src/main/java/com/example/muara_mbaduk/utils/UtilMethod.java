@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.widget.TextView;
 
 import com.example.muara_mbaduk.data.model.Errors;
+import com.example.muara_mbaduk.view.fragment.KendaraanFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -43,5 +44,6 @@ public class UtilMethod {
         Gson gson = new GsonBuilder().create();
         return gson.fromJson(json, Errors.class);
     }
+
     
 }

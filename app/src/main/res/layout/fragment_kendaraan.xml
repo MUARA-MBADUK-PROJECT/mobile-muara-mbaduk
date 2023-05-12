@@ -31,12 +31,13 @@
                 android:textSize="14sp"
                 android:textColor="@color/black"></TextView>
             <TextView
+                android:id="@+id/hargaRoda2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Rp.5.000"></TextView>
+                android:text="3.000"></TextView>
         </LinearLayout>
         <TextView
             android:layout_marginTop="20dp"

@@ -1,69 +1,79 @@
 package com.example.muara_mbaduk.data.model.response;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class Tiket {
-    private String id;
-    private String title;
-    private String category;
-    private int normal_day;
-    private int weekend_day;
-    private String created_at;
-    private String updated_at;
+    @SerializedName("code")
+    private int code;
 
-    public String getId() {
-        return id;
+    @SerializedName("status")
+    private String status;
+
+    @SerializedName("data")
+    private Data data;
+
+    public int getCode() {
+        return code;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getStatus() {
+        return status;
     }
 
-    public String getTitle() {
-        return title;
+    public Data getData() {
+        return data;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public class Data {
+        @SerializedName("id")
+        private String id;
 
-    public String getCategory() {
-        return category;
-    }
+        @SerializedName("title")
+        private String title;
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+        @SerializedName("category")
+        private String category;
 
-    public int getNormal_day() {
-        return normal_day;
-    }
+        @SerializedName("normal_day")
+        private int normalDay;
 
-    public void setNormal_day(int normal_day) {
-        this.normal_day = normal_day;
-    }
+        @SerializedName("weekend_day")
+        private int weekendDay;
 
-    public int getWeekend_day() {
-        return weekend_day;
-    }
+        @SerializedName("created_at")
+        private String createdAt;
 
-    public void setWeekend_day(int weekend_day) {
-        this.weekend_day = weekend_day;
-    }
+        @SerializedName("updated_at")
+        private String updatedAt;
 
-    public String getCreated_at() {
-        return created_at;
-    }
+        public String getId() {
+            return id;
+        }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public String getUpdated_at() {
-        return updated_at;
-    }
+        public String getCategory() {
+            return category;
+        }
 
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
+        public int getNormalDay() {
+            return normalDay;
+        }
+
+        public int getWeekendDay() {
+            return weekendDay;
+        }
+
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        public String getUpdatedAt() {
+            return updatedAt;
+        }
     }
 }

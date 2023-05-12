@@ -30,6 +30,13 @@ android {
         viewBinding true
     }
 }
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
 
 dependencies {
     implementation "androidx.recyclerview:recyclerview:1.2.1"
@@ -43,14 +50,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
 
-    implementation 'com.squareup.retrofit2:retrofit:2.8.0'
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-jackson
     implementation group: 'com.squareup.retrofit2', name: 'converter-jackson', version: '2.9.0'
 // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.26'
-    annotationProcessor 'org.projectlombok:lombok:1.18.26'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.code.gson:gson:2.8.7'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.8.0'
 
 
 }
