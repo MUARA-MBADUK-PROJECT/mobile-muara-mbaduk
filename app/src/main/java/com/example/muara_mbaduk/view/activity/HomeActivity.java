@@ -3,9 +3,11 @@ package com.example.muara_mbaduk.view.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,13 +24,32 @@ import io.realm.RealmConfiguration;
 public class HomeActivity extends AppCompatActivity {
     ImageView hargatiket;
     TextView displayNameTextView;
-    ImageView paketcamp, pemesananTiket, avatarImageView;
+    ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView;
     String photo_image, email, displayName;
     RealmHelper realmHelper;
     Realm realm;
 
+    private boolean doubleBackToExitPressedOnce = false;
+
+
     @Override
     public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Tekan tombol kembali sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+
+
+
     }
 
     @SuppressLint("MissingInflatedId")
@@ -43,9 +64,11 @@ public class HomeActivity extends AppCompatActivity {
             email = extras.getString("email");
         }
 
+
         realm = Realm.getDefaultInstance();
         realmHelper = new RealmHelper(realm);
 
+        riwayatPemesananImageView = findViewById(R.id.riwayat_pemesan_btn);
         avatarImageView = findViewById(R.id.avatar_imageView);
         displayNameTextView = findViewById(R.id.displayName_textview);
         Picasso.get().load(photo_image).into(avatarImageView);
@@ -78,6 +101,11 @@ public class HomeActivity extends AppCompatActivity {
             Intent i = new Intent(HomeActivity.this, TicketPurchaseActivity.class);
             startActivity(i);
         });
+        riwayatPemesananImageView.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PurchaseHistoryActivity.class);
+            startActivity(intent);
+        });
+
     }
 
 }

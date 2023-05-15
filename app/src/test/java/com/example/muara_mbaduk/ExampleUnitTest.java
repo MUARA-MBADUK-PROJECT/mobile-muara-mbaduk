@@ -4,6 +4,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.muara_mbaduk.data.model.entity.ProductsModel;
+import com.example.muara_mbaduk.utils.UtilMethod;
+
+import java.util.List;
+
+import okhttp3.internal.Util;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -27,6 +34,13 @@ public class ExampleUnitTest {
 
     @Test
     public void testApplicationProperties(){
-        
+        ProductsModel productsModel = new ProductsModel();
+    }
+
+    @Test
+    public void testGenerateMessageWhatshap(){
+
+        //String generateMessage = UtilMethod.generateMessage(List.of("tenda \n" , "kompor \n" , "jajan \n"),"12 februari 2023","zam","may 14 2023","mohammad@gmail.com","Rp.12000","oke");
+       // System.out.println(generateMessage);
     }
 }

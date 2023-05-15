@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/history_purchase"
+                android:layout_width="70dp"
+                android:layout_height="70dp"/>
+            <LinearLayout
+                android:layout_marginHorizontal="15dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/id_order_purchase_history_textview"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/backgroundAppBar"
+                    android:text="MQWEQ12312"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/date_purchase_textview"
+                    android:textStyle="normal"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/abuabu"
+                    android:text="26 February 2023"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/status_textview"
+                    android:paddingHorizontal="10dp"
+                    android:background="@drawable/background_yellow_status"
+                    android:textColor="@color/white"
+                    android:text="Menunggu Pembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/detail_history_purchase_btn"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/arrow_right"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    <View
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/abuabu" />
+
+</LinearLayout>
