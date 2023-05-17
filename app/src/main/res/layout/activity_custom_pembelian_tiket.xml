@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/root_view_custom_pembelian_tiket"
     android:fillViewport="true"
     android:transformPivotX="2dp"
     android:layout_marginTop="0dp"
@@ -86,6 +87,8 @@
                 android:textColor="@color/color_text_black"
                 android:text="Mau Camping Kapan ?" />
             <EditText
+                android:clickable="true"
+                android:id="@+id/tanggal_kunjungan_edittext"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins"
                 android:focusable="false"
@@ -110,9 +113,9 @@
                 android:textColor="@color/color_text_black"
                 android:text="Nama Lengkap *" />
             <EditText
+                android:id="@+id/nama_lengkap_pengunjung_edittext"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins"
-                android:focusable="false"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,9 +136,9 @@
                 android:textColor="@color/color_text_black"
                 android:text="Email *" />
             <EditText
+                android:id="@+id/email_pengunjung_edittext"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins"
-                android:focusable="false"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,7 +147,7 @@
                 android:background="@drawable/rounded_edit_text"
                 android:textColorHint="@color/hintText"
                 android:textColor="@color/color_text_black"
-                android:hint="@string/masukan_tanggal_kunjungan_anda"
+                android:hint="Masukan Email Kamu"
                 android:autofillHints="" />
             <TextView
                 android:layout_marginBottom="10dp"
@@ -156,9 +159,9 @@
                 android:textColor="@color/color_text_black"
                 android:text="Kontak Whatsaap *" />
             <EditText
+                android:id="@+id/whatsappno_edittext"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins"
-                android:focusable="false"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,7 +172,78 @@
                 android:textColor="@color/color_text_black"
                 android:hint="@string/masukan_tanggal_kunjungan_anda"
                 android:autofillHints="" />
+
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/poppins"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/color_text_black"
+                android:text="Perlenkapan Camping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginBottom="20dp"
+                android:id="@+id/list_product_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins"
+                android:text="Estimasi Total Biaya + ppn (Rp.5000)"
+                android:textColor="@color/color_text_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/total_custom_pembelian"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/backgroundAppBar"
+                    android:fontFamily="@font/poppins"
+                    android:text="Rp.0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <TextView
+                android:textColor="@color/color_text_black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins"
+                android:text="Catatan Untuk Kami"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/catatan_edittext"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:padding="10dp"
+                android:textColorHint="@color/abuabu"
+                android:hint="Ketikan Catatan Untuk Kami"
+                android:textColor="@color/abuabu"
+                android:background="@drawable/rounded_edittext_abuabu"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"/>
+            <LinearLayout
+                android:layout_marginBottom="50dp"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/kirim_rencana_button"
+                    android:paddingHorizontal="10dp"
+                    android:background="@drawable/button_rounded_blue"
+                    android:text="Kirim Rencana"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"/>
+            </LinearLayout>
         </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

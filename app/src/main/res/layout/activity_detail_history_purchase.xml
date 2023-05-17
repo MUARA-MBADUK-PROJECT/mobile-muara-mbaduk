@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".view.activity.DetailPurchaseHistoryActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detail_ticket_activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/backgroundAppBar"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:popupTheme="@style/Theme.Design.Light"
+        app:title="Detail pesanan" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--start kode qr-->
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/kode_order_in_detailOrder"
+                android:visibility="visible"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/color_text_black"
+                    android:text="Kode Order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/color_text_black"
+                    android:text="MK212312312"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/check_status_pembayaran_btn_indetail"
+                    android:layout_width="170dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/button_rounded_blue"
+                    android:text="Cek Status Pembayaran"
+                    android:textSize="10sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/barcode_imageview"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/sample_barcode" />
+            </LinearLayout>
+            <!--    end kode qr-->
+            <!--    start button navigation-->
+            <LinearLayout
+                android:id="@+id/layout_btn_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/detail_pesanan_button"
+                    android:layout_width="170dp"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/button_rounded_blue"
+                    android:text="Detail Pemesanan"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/check_status_pembayaran_button"
+                    android:layout_width="170dp"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/button_rounded_blue"
+                    android:text="Cek Status Pembayaran"
+                    android:textSize="10sp" />
+            </LinearLayout>
+            <!--end button navigation-->
+            <!--start kode order-->
+        <FrameLayout
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/frame_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
+

@@ -95,6 +95,7 @@
                 android:gravity="center"
                 >
                 <ImageView
+                    android:id="@+id/riwayat_pemesan_btn"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/riwayat_homepg"></ImageView>

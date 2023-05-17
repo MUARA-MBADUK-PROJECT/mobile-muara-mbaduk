@@ -7,6 +7,7 @@ public class Products {
     private int quantity;
     private String image;
 
+
     public String getId() {
         return id;
     }
