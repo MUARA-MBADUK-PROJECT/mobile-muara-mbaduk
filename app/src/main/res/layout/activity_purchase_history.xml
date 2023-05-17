@@ -9,6 +9,7 @@
     tools:context=".view.activity.PurchaseHistoryActivity">
 
     <androidx.appcompat.widget.Toolbar
+
         android:id="@+id/detail_ticket_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"

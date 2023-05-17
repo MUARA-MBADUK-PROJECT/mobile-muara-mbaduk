@@ -196,7 +196,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/poppins"
-                android:text="Estimasi Total Biaya"
+                android:text="Estimasi Total Biaya + ppn (Rp.5000)"
                 android:textColor="@color/color_text_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -205,7 +205,7 @@
                     android:textAlignment="textEnd"
                     android:textColor="@color/backgroundAppBar"
                     android:fontFamily="@font/poppins"
-                    android:text="Rp.200000"
+                    android:text="Rp.0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

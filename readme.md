@@ -1,3 +1,57 @@
+
+# APLIKASI PEMESANAN TIKET WISATA MUARA MBADUK
+
+Aplikasi ini dibuat menggunakan beberapa teknologi antara lain
+- java 17
+- graddle
+- mysql
+- realm database lokal
+- junit
+- Android
+
+
+
+
+## Bagaimana Menggunakan realm
+
+### buat file konfigurasi default untuk realm database
+
+```java
+import android.app.Application;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
+
+public class MuaraMbadukConfiguration extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Realm.init(this);
+        RealmConfiguration configuration = new RealmConfiguration.Builder().
+                name("user.db")
+                        .allowQueriesOnUiThread(true)
+                                .allowWritesOnUiThread(true)
+                                        .
+                build();
+        Realm.setDefaultConfiguration(configuration);
+    }
+}
+
+```
+
+### ubah nama application pada android manifest
+``` java
+
+android:name=".data.local.configuration.MuaraMbadukConfiguration"
+
+```
+
+### buat realm helper agar lebih mudah dalam mengoprasikan operasi database lokal
+
+``` java
+
 package com.example.muara_mbaduk.data.local.configuration;
 
 import android.util.Log;
@@ -29,7 +83,7 @@ public class RealmHelper {
                     }
                 });
             }
-
+            
             public UserModel findByJwt(String jwt){
                 UserModel userModel = realm.where(UserModel.class).equalTo("jwt" , jwt).findFirst();
                 if(userModel!=null){
@@ -46,3 +100,11 @@ public class RealmHelper {
         return results;
     }
 }
+
+```
+
+
+## Authors
+
+- [@Mohammad Tajut ZamZami](https://www.github.com/tajutzam)
+

@@ -1,7 +1,6 @@
 package com.example.muara_mbaduk.view.activity;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +18,7 @@ public class TicketPurchaseActivity extends AppCompatActivity {
     DateAndCategoryCampFragment dateAndCategoryCampFragment
             = new DateAndCategoryCampFragment();
     BottomNavigationView bottomNavigationView;
+    Toolbar toolbar;
     TextView ppnTextView;
     Button berikutnyaBtn;
 
@@ -29,7 +29,10 @@ public class TicketPurchaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ticket_purchase);
         ppnTextView = findViewById(R.id.ppn_textView);
         ppnTextView.setVisibility(View.GONE);
-
+        toolbar = findViewById(R.id.app_ticket_purchase_toolbar);
+        toolbar.setOnClickListener(v -> {
+            onBackPressed();
+        });
         getSupportFragmentManager().beginTransaction().
                 replace(R.id.frame_fragment_ticket_purchase, dateAndCategoryCampFragment, "dateAndCategoryCampFragment").commit();
     }

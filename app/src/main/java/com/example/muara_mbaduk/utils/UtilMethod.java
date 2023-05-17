@@ -1,7 +1,10 @@
 package com.example.muara_mbaduk.utils;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.view.View;
@@ -64,7 +67,7 @@ public class UtilMethod {
 
     public static String generateMessage(List<Map<String ,String>> products , String tanggalCamping , String namaPemesan , String tanggalPemesanan , String email , String totalHarga, String catatan , String nowhatshap){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Pemesanan Camping di Muarambaduk\nHalo \n Saya ingin memesan paket camping di Muarambaduk pada tanggal "+tanggalCamping+" Berikut adalah informasi pemesan:\n\n"+"Nama Pemesan: "+namaPemesan+"\nTanggal Pemesanan: "+tanggalPemesanan+"\nEmail: "+email+"\n"+"No WhatshApp:"+nowhatshap+"\n"+
+        stringBuilder.append("Pemesanan Camping di Muarambaduk\nHalo \nSaya ingin memesan paket camping di Muarambaduk pada tanggal "+tanggalCamping+" Berikut adalah informasi pemesan:\n\n"+"Nama Pemesan: "+namaPemesan+"\nTanggal Pemesanan: "+tanggalPemesanan+"\nEmail: "+email+"\n"+"No WhatshApp:"+nowhatshap+"\n"+
                 "Daftar Alat yang Dipesan:\n\n");
         products.forEach(stringStringMap -> {
             stringBuilder.append("- " + stringStringMap.get("name")+" (jumlah) "+stringStringMap.get("count") + ", harga satuan : "+stringStringMap.get("price")+"\n");
@@ -82,6 +85,12 @@ public class UtilMethod {
         String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(email).matches();
+    }
+
+    public static String getJwt(Context context){
+        SharedPreferences sh = context.getSharedPreferences("jwt", MODE_PRIVATE);
+        String jwt = sh.getString("jwt", "not-found");
+        return jwt;
     }
     
 }

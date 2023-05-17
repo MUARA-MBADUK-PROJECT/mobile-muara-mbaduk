@@ -93,11 +93,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             });
         });
         holder.minProductImage.setOnClickListener(v -> {
-            totalHarga -= productResponse.getData().get(position).getPrice();
-            activity.setTotalHarga(totalHarga);
+
             int oldCount = count.get(position);
             minQuantity(position);
             if (count.get(position) != 0) {
+                totalHarga -= productResponse.getData().get(position).getPrice();
+                activity.setTotalHarga(totalHarga);
                 System.out.println(oldCount);
                 Map<String , String> tempData = new HashMap<>();
                 tempData.put("name" ,productResponse.getData().get(position).getTitle());

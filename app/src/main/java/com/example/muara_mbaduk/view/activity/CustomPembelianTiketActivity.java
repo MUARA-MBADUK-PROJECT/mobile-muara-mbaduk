@@ -1,26 +1,23 @@
 package com.example.muara_mbaduk.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.ProductAdapter;
@@ -31,21 +28,17 @@ import com.example.muara_mbaduk.utils.UtilMethod;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CustomPembelianTiketActivity extends AppCompatActivity {
-
     Button btnKirimRencana;
+    ImageButton  backCustomPembelianTiketBtn;
     TextView totalHargaTextview;
     final Calendar calendar = Calendar.getInstance();
     RecyclerView recyclerView;
@@ -96,6 +89,11 @@ public class CustomPembelianTiketActivity extends AppCompatActivity {
         tanggalEdittext.setOnClickListener(v -> {
             new DatePickerDialog(this, datePicker, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
         });
+
+        backCustomPembelianTiketBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
         // action ketika kirim custom order
         btnKirimRencana.setOnClickListener(v -> {
             boolean isValid = false;
@@ -139,7 +137,7 @@ public class CustomPembelianTiketActivity extends AppCompatActivity {
                    String generateMessage = null;
                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                        generateMessage = UtilMethod.generateMessage(productAdapter.getOrderData(),
-                               formatedDate,
+                               tanggalEdittext.getText().toString(),
                                nameEditText.getText().toString() ,
                                formatedDate , emailEditText.getText().toString() , totalHargaTextview.getText().toString(),catatanEdittext.getText().toString(),noWhatshappEditText.getText().toString());
                    }
@@ -173,6 +171,7 @@ public class CustomPembelianTiketActivity extends AppCompatActivity {
         nameEditText = findViewById(R.id.nama_lengkap_pengunjung_edittext);
         noWhatshappEditText = findViewById(R.id.whatsappno_edittext);
         emailEditText = findViewById(R.id.email_pengunjung_edittext);
+        backCustomPembelianTiketBtn = findViewById(R.id.back_custom_pembelian_tiket_btn);
     }
 
     public void sendWhatsAppMessage(String phoneNumber, String message) {
