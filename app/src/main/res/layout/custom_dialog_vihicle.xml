@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
+    android:layout_width="360dp"
     android:background="@drawable/rounded_white"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="15dp"
     android:layout_height="wrap_content">
     <TextView
         android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/wisatawan_ke_textView"
+        android:id="@+id/kendaraan_ke_textview"
         android:textColor="@color/color_text_black"
-        android:text="Data Wisatawan"
+        android:text="Kendaraan ke 1"
         android:textSize="17sp"
         android:textStyle="bold"
         />
@@ -23,51 +23,21 @@
             android:fontFamily="@font/poppins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NIK"
+            android:text="Plat Nomor"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="17sp"
             android:layout_marginRight="4dp"
             />
-        <TextView
-            android:fontFamily="@font/poppins"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(Nomor Induk Kependudukan)"
-            android:textColor="@color/black"
-            android:textSize="17sp"
-            />
     </LinearLayout>
     <EditText
         android:fontFamily="@font/poppins"
         android:padding="4dp"
-        android:id="@+id/nik_editText"
+        android:id="@+id/plat_nomor_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_edit_text"
-        android:hint="Isikan Nik"
-        android:textColorHint="@color/hintText"
-        android:layout_marginBottom="10dp"
-        android:textColor="@color/color_text_black"
-        />
-    <TextView
-        android:fontFamily="@font/poppins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nama Lengkap"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="17sp"
-        android:layout_marginRight="4dp"
-        />
-    <EditText
-        android:fontFamily="@font/poppins"
-        android:id="@+id/nama_editText"
-        android:padding="4dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
-        android:hint="Isikan Nama Lengkap"
+        android:hint="Isikan Plat Nomor Kendaraan Anda"
         android:textColorHint="@color/hintText"
         android:layout_marginBottom="10dp"
         android:textColor="@color/color_text_black"
@@ -79,7 +49,7 @@
         android:gravity="center">
         <Button
             android:fontFamily="@font/poppins"
-            android:id="@+id/simpan_identitas_wisatawan_btn"
+            android:id="@+id/simpan_detail_kendaraan"
             android:layout_width="120dp"
             android:background="@drawable/button_rounded_blue"
             android:text="Simpan"

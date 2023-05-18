@@ -1,6 +1,4 @@
-package com.example.muara_mbaduk.data.model;
-
-import java.util.List;
+package com.example.muara_mbaduk.model;
 
 public class Errors extends ParrentModel {
 

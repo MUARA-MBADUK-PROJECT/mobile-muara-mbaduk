@@ -1,4 +1,4 @@
-package com.example.muara_mbaduk.data.model.request;
+package com.example.muara_mbaduk.model.request;
 
 public class UserLoginRequest {
     private String token;

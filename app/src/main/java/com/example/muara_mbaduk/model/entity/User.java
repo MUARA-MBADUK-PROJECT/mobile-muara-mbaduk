@@ -1,6 +1,4 @@
-package com.example.muara_mbaduk.data.model.entity;
-
-import com.example.muara_mbaduk.data.model.ParrentModel;
+package com.example.muara_mbaduk.model.entity;
 
 public class User {
 

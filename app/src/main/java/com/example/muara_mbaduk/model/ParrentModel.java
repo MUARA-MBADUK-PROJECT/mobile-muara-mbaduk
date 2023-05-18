@@ -1,4 +1,4 @@
-package com.example.muara_mbaduk.data.model;
+package com.example.muara_mbaduk.model;
 
 public class ParrentModel {
     private int code;

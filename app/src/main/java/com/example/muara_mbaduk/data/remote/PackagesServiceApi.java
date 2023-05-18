@@ -1,6 +1,6 @@
 package com.example.muara_mbaduk.data.remote;
 
-import com.example.muara_mbaduk.data.model.response.PackagesResponse;
+import com.example.muara_mbaduk.model.response.PackagesResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

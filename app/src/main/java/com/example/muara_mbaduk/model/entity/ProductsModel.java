@@ -1,6 +1,6 @@
-package com.example.muara_mbaduk.data.model.entity;
+package com.example.muara_mbaduk.model.entity;
 
-import com.example.muara_mbaduk.data.model.ParrentModel;
+import com.example.muara_mbaduk.model.ParrentModel;
 
 import lombok.Data;
 

@@ -1,8 +1,7 @@
-package com.example.muara_mbaduk.data.model.response;
+package com.example.muara_mbaduk.model.response;
 
-import com.example.muara_mbaduk.data.model.ParrentModel;
-import com.example.muara_mbaduk.data.model.entity.Products;
-import com.example.muara_mbaduk.data.model.entity.ProductsModel;
+import com.example.muara_mbaduk.model.ParrentModel;
+import com.example.muara_mbaduk.model.entity.ProductsModel;
 
 import java.util.List;
 

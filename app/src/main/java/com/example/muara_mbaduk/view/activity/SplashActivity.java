@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.request.UserValidateRequest;
-import com.example.muara_mbaduk.data.model.response.UserValidateResponse;
+import com.example.muara_mbaduk.model.request.UserValidateRequest;
+import com.example.muara_mbaduk.model.response.UserValidateResponse;
 import com.example.muara_mbaduk.data.remote.UserServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.google.android.material.snackbar.Snackbar;

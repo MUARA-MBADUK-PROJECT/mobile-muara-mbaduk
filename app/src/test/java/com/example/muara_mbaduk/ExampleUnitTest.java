@@ -4,12 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import com.example.muara_mbaduk.data.model.entity.ProductsModel;
-import com.example.muara_mbaduk.utils.UtilMethod;
-
-import java.util.List;
-
-import okhttp3.internal.Util;
+import com.example.muara_mbaduk.model.entity.ProductsModel;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

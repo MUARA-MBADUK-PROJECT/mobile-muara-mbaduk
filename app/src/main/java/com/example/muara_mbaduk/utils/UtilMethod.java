@@ -14,7 +14,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.Errors;
+import com.example.muara_mbaduk.model.Errors;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

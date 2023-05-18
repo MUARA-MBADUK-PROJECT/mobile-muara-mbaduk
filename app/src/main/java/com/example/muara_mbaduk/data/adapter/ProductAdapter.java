@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.response.ProductResponse;
+import com.example.muara_mbaduk.model.response.ProductResponse;
 import com.example.muara_mbaduk.view.activity.CustomPembelianTiketActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 

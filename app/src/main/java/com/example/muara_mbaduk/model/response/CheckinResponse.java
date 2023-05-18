@@ -1,7 +1,7 @@
-package com.example.muara_mbaduk.data.model.response;
+package com.example.muara_mbaduk.model.response;
 
-import com.example.muara_mbaduk.data.model.entity.Packages;
-import com.example.muara_mbaduk.data.model.entity.TiketCheckin;
+import com.example.muara_mbaduk.model.entity.Packages;
+import com.example.muara_mbaduk.model.entity.TiketCheckin;
 
 import java.util.List;
 

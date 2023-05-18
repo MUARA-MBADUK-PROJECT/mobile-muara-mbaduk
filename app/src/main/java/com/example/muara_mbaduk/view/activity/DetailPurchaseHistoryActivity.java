@@ -11,8 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.model.entity.PaymentCheckout;
 import com.example.muara_mbaduk.view.fragment.DetailOrderFragment;
 import com.example.muara_mbaduk.view.fragment.OrderFragment;
+
+import java.io.Serializable;
 
 public class DetailPurchaseHistoryActivity extends AppCompatActivity {
 
@@ -22,6 +25,9 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     LinearLayout kodeOrderLayout, btnOderLayout;
     Button detailPemesananButton,checkStatusPembayaranInDetailButton;
+    PaymentCheckout paymentCheckout;
+
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -29,7 +35,7 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_history_purchase);
-        orderFragment = new OrderFragment();
+
         detailOrderFragment = new DetailOrderFragment();
         btnOderLayout = findViewById(R.id.layout_btn_order);
         frameLayout = findViewById(R.id.frame_order);
@@ -37,11 +43,13 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
         detailPemesananButton = findViewById(R.id.detail_pesanan_button);
         kodeOrderLayout = findViewById(R.id.kode_order_in_detailOrder);
 
+        Bundle bundle = getIntent().getExtras();
+        paymentCheckout = (PaymentCheckout) bundle.getSerializable("checkoutData");
+        orderFragment = new OrderFragment(paymentCheckout);
         FragmentTransaction replace
                 = getSupportFragmentManager().beginTransaction().replace(R.id.frame_order, orderFragment);
         kodeOrderLayout.setVisibility(View.GONE);
         replace.commit();
-
 //        go to detail pesanan
         detailPemesananButton.setOnClickListener(v -> {
             kodeOrderLayout.setVisibility(View.VISIBLE);

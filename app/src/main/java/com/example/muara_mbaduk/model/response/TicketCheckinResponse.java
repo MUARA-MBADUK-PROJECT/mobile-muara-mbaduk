@@ -1,4 +1,4 @@
-package com.example.muara_mbaduk.data.model.response;
+package com.example.muara_mbaduk.model.response;
 
 public class TicketCheckinResponse {
     private int code;

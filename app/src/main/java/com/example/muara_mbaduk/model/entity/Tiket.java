@@ -1,4 +1,4 @@
-package com.example.muara_mbaduk.data.model.entity;
+package com.example.muara_mbaduk.model.entity;
 
 import java.time.LocalDateTime;
 

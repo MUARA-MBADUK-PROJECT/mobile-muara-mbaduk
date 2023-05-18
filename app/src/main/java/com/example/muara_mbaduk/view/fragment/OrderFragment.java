@@ -14,10 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.model.entity.PaymentCheckout;
 import com.hadi.emojiratingbar.EmojiRatingBar;
 
 /**
@@ -27,10 +29,12 @@ import com.hadi.emojiratingbar.EmojiRatingBar;
  */
 public class OrderFragment extends Fragment {
 
-    private TextView noRekeningTextView , instructionsPaymentTextView;
+    private TextView noRekeningTextView , instructionsPaymentTextView,paymentMethodTextView,kodedOrderTextview,statusTextView;
     EmojiRatingBar emojiRatingBar;
     private Button copyNoRekeningButton;
     private static final String NO_REKENING = "no_rekening";
+    private PaymentCheckout paymentCheckout;
+    private LinearLayout bankInstructionPayment,cashInstructionPayment,statusCompletePayment;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,27 +45,11 @@ public class OrderFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public OrderFragment() {
+    public OrderFragment(PaymentCheckout paymentCheckout) {
         // Required empty public constructor
+        this.paymentCheckout = paymentCheckout;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OrderFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static OrderFragment newInstance(String param1, String param2) {
-        OrderFragment fragment = new OrderFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -82,8 +70,10 @@ public class OrderFragment extends Fragment {
             clipboard.setPrimaryClip(clip);
             Toast.makeText(getContext(), "Berhasil Mencopy " + clipboard.getText(), Toast.LENGTH_SHORT).show();
         });
+        kodedOrderTextview.setText(paymentCheckout.getOrder_id());
+        paymentMethodTextView.setText(paymentCheckout.getType());
+        statusTextView.setText(paymentCheckout.getStatus());
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +91,26 @@ public class OrderFragment extends Fragment {
         instructionsPaymentTextView = view.findViewById(R.id.instruction_payment_textview);
         emojiRatingBar = view.findViewById(R.id.emoji_rating_bar);
         copyNoRekeningButton = view.findViewById(R.id.copy_button);
+        paymentMethodTextView = view.findViewById(R.id.metode_pembayaran_textview);
+        kodedOrderTextview = view.findViewById(R.id.kode_order_riwayat_pesanan_textview);
+        statusTextView = view.findViewById(R.id.status_textview);
+        bankInstructionPayment = view.findViewById(R.id.bank_instruction_payment);
+        cashInstructionPayment = view.findViewById(R.id.cash_instruction_payment);
+        statusCompletePayment = view.findViewById(R.id.status_complete_payment);
+
+
+        if(paymentCheckout.getType().equalsIgnoreCase("cash")){
+            cashInstructionPayment.setVisibility(View.VISIBLE);
+        }else{
+            bankInstructionPayment.setVisibility(View.VISIBLE);
+        }
+
+        if(!paymentCheckout.getStatus().equalsIgnoreCase("pending")){
+            statusCompletePayment.setVisibility(View.VISIBLE);
+            cashInstructionPayment.setVisibility(View.GONE);
+            bankInstructionPayment.setVisibility(View.GONE);
+        }
+
         return view;
     }
 }

@@ -1,7 +1,7 @@
-package com.example.muara_mbaduk.data.model.response;
+package com.example.muara_mbaduk.model.response;
 
-import com.example.muara_mbaduk.data.model.ParrentModel;
-import com.example.muara_mbaduk.data.model.entity.User;
+import com.example.muara_mbaduk.model.ParrentModel;
+import com.example.muara_mbaduk.model.entity.User;
 
 public class UserValidateResponse extends ParrentModel {
     private User data;
