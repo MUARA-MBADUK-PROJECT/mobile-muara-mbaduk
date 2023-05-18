@@ -8,16 +8,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.data.adapter.News_RecyclerViewAdapter;
 import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
 import com.example.muara_mbaduk.data.local.model.UserModel;
+import com.example.muara_mbaduk.data.model.response.NewsResponse;
+import com.example.muara_mbaduk.data.remote.NewsServiceApi;
+import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class HomeActivity extends AppCompatActivity {
     ImageView hargatiket;
@@ -87,6 +97,26 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        RecyclerView recyclerView = findViewById(R.id.berita_rv);
+
+        Retrofit retrofit = RetrofitClient.getInstance();
+        NewsServiceApi newsServiceApi = retrofit.create(NewsServiceApi.class);
+        Call<NewsResponse> allNews = newsServiceApi.getAllNews(RetrofitClient.getApiKey());
+        allNews.enqueue(new Callback<NewsResponse>() {
+            @Override
+            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                NewsResponse body = response.body();
+                News_RecyclerViewAdapter adapter = new News_RecyclerViewAdapter(getApplicationContext(), body);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
+
+            @Override
+            public void onFailure(Call<NewsResponse> call, Throwable t) {
+                t.getMessage();
+            }
+        });
+
     }
 
 }
