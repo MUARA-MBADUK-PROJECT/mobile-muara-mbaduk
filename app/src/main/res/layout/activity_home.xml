@@ -24,6 +24,7 @@
         android:orientation="horizontal"
         >
         <ImageView
+            android:id="@+id/avatar_imageView"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/profile_homepg"></ImageView>
@@ -36,11 +37,12 @@
             android:layout_gravity="center_vertical"
             ></TextView>
         <TextView
+            android:id="@+id/displayName_textview"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Roni"
-            android:textSize="15dp"></TextView>
+            android:textSize="15dp"/>
     </LinearLayout>
     <TextView
         android:textStyle="bold"
@@ -50,13 +52,12 @@
         android:textColor="@color/white"
         android:textSize="15dp"
         android:layout_marginStart="25dp"
-        android:layout_marginBottom="10dp"
         ></TextView>
     <TableLayout
+        android:layout_margin="10dp"
         android:elevation="25dp"
-        android:layout_marginTop="1dp"
-        android:layout_width="370dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:background="@drawable/rounded_home_shape"
@@ -176,6 +177,7 @@
                 android:orientation="vertical"
                 >
                 <ImageView
+                    android:id="@+id/faq_iv"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/faq_homepg"></ImageView>
@@ -194,113 +196,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="10dp"
         android:text="Berita Terbaru"
         android:textColor="@color/color_text_black"
         android:textSize="15dp"
         android:textStyle="bold"
         tools:ignore="TextSizeCheck"></TextView>
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/berita_rv"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:scrollbars="horizontal"
         >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_gravity="left"
-            >
-
-            <LinearLayout
-                android:gravity="top"
-                android:layout_width="186dp"
-                android:layout_height="240dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/cardnews_homepage"
-                android:elevation="10dp"
-                android:orientation="vertical"
-                >
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="116dp"
-                    android:src="@drawable/foto1_cardnews"></ImageView>
-                <TextView
-                    android:layout_margin="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11 april 2023"
-                    android:textSize="10dp"
-                    android:textColor="@color/grey"></TextView>
-                <TextView
-                    android:layout_margin="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Camping dengan Pemandangan Menwawan di Muara Maduk Banyuwangi"
-                    android:textColor="@color/black"></TextView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="top"
-                android:layout_width="186dp"
-                android:layout_height="240dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/cardnews_homepage"
-                android:elevation="10dp">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="116dp"
-                    android:src="@drawable/foto_cardnews"></ImageView>
-                <TextView
-                    android:layout_margin="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11 april 2023"
-                    android:textSize="10dp"
-                    android:textColor="@color/grey"></TextView>
-                <TextView
-                    android:layout_margin="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Muara Baduk, Tempat wisata kekinian di Banyuwangi"
-                    android:textColor="@color/black"></TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="top"
-                android:layout_width="186dp"
-                android:layout_height="240dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/cardnews_homepage"
-                android:elevation="10dp">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="116dp"
-                    android:src="@drawable/foto_cardnews"></ImageView>
-                <TextView
-                    android:layout_margin="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11 april 2023"
-                    android:textSize="10dp"
-                    android:textColor="@color/grey"></TextView>
-                <TextView
-                    android:layout_margin="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Muara Baduk, Tempat wisata kekinian di Banyuwangi"
-                    android:textColor="@color/black"></TextView>
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </LinearLayout>

@@ -28,7 +28,7 @@ public class TiketServiceApiTest {
         Call<TiketResponse> responseCall = serviceApi.findAll(RetrofitClient.getApiKey());
         TiketResponse tiketResponse = responseCall.execute().body();
         tiketResponse.getData().forEach(tiket -> {
-            System.out.println(tiket.getData().getTitle());
+            System.out.println(tiket.getTitle());
         });
     }
 

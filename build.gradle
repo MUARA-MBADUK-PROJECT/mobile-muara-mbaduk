@@ -1,5 +1,32 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'com.android.application' version '7.4.1' apply false
-    id 'com.android.library' version '7.4.1' apply false
+
+//plugins {
+//    id 'com.android.application' version '7.4.1' apply false
+//    id 'com.android.library' version '7.4.1' apply false
+//}
+
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'io.realm:realm-gradle-plugin:10.11.1' // Update to the desired version
+    }
 }
+
+
+allprojects {
+    repositories {
+
+    }
+    dependencies {
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+

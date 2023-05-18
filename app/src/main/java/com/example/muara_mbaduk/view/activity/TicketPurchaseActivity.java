@@ -2,6 +2,7 @@ package com.example.muara_mbaduk.view.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,4 +40,11 @@ public class TicketPurchaseActivity extends AppCompatActivity {
         return findViewById(R.id.app_ticket_purchase_toolbar);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
+        startActivity(intent);
+    }
 }

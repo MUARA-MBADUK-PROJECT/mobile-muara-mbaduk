@@ -24,7 +24,7 @@
     <string name="title_activity_paket_camping">PaketCampingActivity</string>
 
     <string-array name="nama_paket_camp_txt">
-    <item>Paket Premium 1</item>
+        <item>Paket Premium 1</item>
         <item>Paket Premium 2</item>
         <item>Paket Premium 3</item>
         <item>Paket Premium 4</item>
@@ -41,12 +41,14 @@
         <item>ini adalah paket 3</item>
         <item>ini adalah paket 4</item>
     </string-array>
-=======
+
     <string name="logoblack">logoblack</string>
     <string name="masukan_tanggal_kunjungan_anda">Masukan tanggal kunjungan anda</string>
     <string name="tanggal">Tanggal</string>
     <string name="berikutnya">Berikutnya</string>
     <string name="_0">0</string>
     <string name="lihat_selengkapnya">Lihat Selengkapnya</string>
->>>>>>> origin/main_test
+    <string name="google_api_key">135504900706-ahclqd1f3dlhjpikqijh7n7s1vliiant.apps.googleusercontent.com</string>
+    <string name="google_zam_key">1035412092804-ldt2k9r5k71av4vi1ip9aj5aqti9d68c.apps.googleusercontent.com</string>
+
 </resources>

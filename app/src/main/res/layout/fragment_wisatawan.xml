@@ -27,13 +27,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Hari kerja - "></TextView>
+                android:text="Hari normal = Rp."></TextView>
             <TextView
+                android:id="@+id/tidakkemahnormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Rp.5000"></TextView>
+                android:text="0"></TextView>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -44,13 +45,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Hari libur/akhir pekan - "></TextView>
+                android:text="Weekend = Rp."></TextView>
             <TextView
+                android:id="@+id/tidakkemahweekend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Rp.10.000"></TextView>
+                android:text="0"></TextView>
         </LinearLayout>
         <TextView
             android:layout_marginTop="20dp"
@@ -69,13 +71,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Hari kerja - "></TextView>
+                android:text="Hari normal = Rp."></TextView>
             <TextView
+                android:id="@+id/kemahnormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Rp.5000"></TextView>
+                android:text="0"></TextView>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -86,13 +89,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Hari libur/akhir pekan - "></TextView>
+                android:text="Weekend = Rp."></TextView>
             <TextView
+                android:id="@+id/kemahweekend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Rp.10.000"></TextView>
+                android:text="0"></TextView>
         </LinearLayout>
     </LinearLayout>
 

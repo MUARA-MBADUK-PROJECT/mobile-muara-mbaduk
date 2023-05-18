@@ -12,13 +12,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.data.model.entity.Tiket;
 import com.example.muara_mbaduk.data.model.response.PackagesResponse;
-import com.example.muara_mbaduk.data.model.response.Tiket;
+import com.example.muara_mbaduk.data.model.response.TiketResponse;
 import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
 import com.example.muara_mbaduk.data.remote.TicketServiceApi;
 import com.example.muara_mbaduk.databinding.ProgresBarBinding;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,10 +45,9 @@ public class KendaraanFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     TextView txt;
-    private int hargatiket2;
-    Context context;
-    Tiket tiket;
-
+    TextView txt2;
+    TextView txt3;
+    TextView txt4;
     public KendaraanFragment() {
         // Required empty public constructor
     }
@@ -102,24 +105,35 @@ public class KendaraanFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_kendaraan, container, false);
         Retrofit retrofit = RetrofitClient.getInstance();
         TicketServiceApi ticketServiceApi = retrofit.create(TicketServiceApi.class);
-        Call<Tiket> getticket = ticketServiceApi.getHargaTiketWisatawan(RetrofitClient.getApiKey());
-        getticket.enqueue(new Callback<Tiket>() {
+        Call<TiketResponse> getticket = ticketServiceApi.findAll(RetrofitClient.getApiKey());
+        getticket.enqueue(new Callback<TiketResponse>() {
             @Override
-            public void onResponse(Call<Tiket> call, Response<Tiket> response) {
-                String json = "";
-                json = response.body().getData().getTitle();
-                System.out.println(json);
-                System.out.println("test");
-                txt = view.findViewById(R.id.hargaRoda2);
-                txt.setText(json);
+            public void onResponse(Call<TiketResponse> call, Response<TiketResponse> response) {
+                if (response.code() == 200 ){
+                    TiketResponse body = response.body();
+                    ArrayList<Tiket> data = body.getData();
+                    data.forEach(tiket -> {
+                        if(tiket.getTitle().equalsIgnoreCase("kendaraan roda 2")){
+                            txt = view.findViewById(R.id.hargaRoda2normal);
+                            txt2 = view.findViewById(R.id.hargaRoda2weekend);
+                            txt.setText(String.valueOf(tiket.getNormal_day()));
+                            txt2.setText(String.valueOf(tiket.getWeekend_day()));
+                        } else if (tiket.getTitle().equalsIgnoreCase("kendaraan roda 4")) {
+                            txt3 = view.findViewById(R.id.hargaroda4normal);
+                            txt4 = view.findViewById(R.id.hargaroda4weekend);
+                            txt3.setText(String.valueOf(tiket.getNormal_day()));
+                            txt4.setText(String.valueOf(tiket.getWeekend_day()));
+                        }
+                    });
+                }
+
             }
 
             @Override
-            public void onFailure(Call<Tiket> call, Throwable t) {
+            public void onFailure(Call<TiketResponse> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
-
 
         return view;
 

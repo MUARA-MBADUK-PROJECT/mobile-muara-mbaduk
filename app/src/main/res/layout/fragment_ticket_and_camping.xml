@@ -278,11 +278,12 @@
                     android:textStyle="bold" />
 
                 <Button
+                    android:id="@+id/btn_buatpaket"
                     android:fontFamily="@font/poppins"
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:background="@drawable/button_rounded_blue"
-                    android:text="Beli Packet > "
+                    android:text="Buat Paket > "
                     android:textSize="12sp" />
             </LinearLayout>
             <!--    end tidak menemukan paket-->

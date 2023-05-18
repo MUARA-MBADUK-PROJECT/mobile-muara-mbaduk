@@ -94,16 +94,22 @@ public class DetailPembeliActivity extends AppCompatActivity {
             bayarDitempatRadioButton.setSelected(true);
             imageRadioBank.setImageDrawable(getDrawable(R.drawable.unchecked_drawable));
             imageRadioBayarDitempat.setImageDrawable(getDrawable(R.drawable.checked_drawable));
+            paymentMetode = bayarDitempatRadioButton.getText().toString();
+            System.out.println(paymentMetode);
         });
         DetailKendaraanAdapter detailKendaraanAdapter = new DetailKendaraanAdapter(size ,detailKendaraan);
         LinearLayoutManager linearLayoutKendaraan  = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         kendaraanRecycleView.setAdapter(detailKendaraanAdapter);
         kendaraanRecycleView.setLayoutManager(linearLayoutKendaraan);
         bankPaymentDialog.setOnDismissListener(dialog -> {
-            System.out.println("close");
-            int checkedRadioButtonId = bankRadioGroup.getCheckedRadioButtonId();
-            RadioButton radioChecked = bankPaymentDialog.findViewById(checkedRadioButtonId);
-            System.out.println(radioChecked.getText());
+           if(briRadioButton.isChecked()){
+               paymentMetode = briRadioButton.getText().toString();
+           }else if(bniRadioButton.isChecked()){
+               paymentMetode = bniRadioButton.getText().toString();
+           }else if(bcaRadioButton.isChecked()){
+               paymentMetode = bcaRadioButton.getText().toString();
+           }
+            System.out.println(paymentMetode);
         });
     }
 

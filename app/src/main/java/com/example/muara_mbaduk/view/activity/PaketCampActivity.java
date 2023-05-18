@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.muara_mbaduk.R;
@@ -14,19 +15,14 @@ import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
 
-import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class PaketCampActivity extends AppCompatActivity {
-ArrayList<PaketCampModel> paketCampModels = new ArrayList<>();
-int[] paketGambar = {R.drawable.baseline_image_24_green, R.drawable.baseline_image_24_yellow, R.drawable.baseline_image_24_red, R.drawable.baseline_image_24};
+public class PaketCampActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.print("berhasil");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paket_camp);
         RecyclerView recyclerView = findViewById(R.id.paketCampRecyclerView);
@@ -41,7 +37,7 @@ int[] paketGambar = {R.drawable.baseline_image_24_green, R.drawable.baseline_ima
             public void onResponse(Call<PackagesResponse> call, Response<PackagesResponse> response) {
                 progresIndicator.dismiss();
                 PackagesResponse body = response.body();
-                PaketCamp_RecyclerViewAdapter adapter = new PaketCamp_RecyclerViewAdapter(getApplicationContext(), body );
+                PaketCamp_RecyclerViewAdapter adapter = new PaketCamp_RecyclerViewAdapter(getApplicationContext(), body);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             }
@@ -53,5 +49,4 @@ int[] paketGambar = {R.drawable.baseline_image_24_green, R.drawable.baseline_ima
         });
 
     }
-
 }
