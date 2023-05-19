@@ -2,9 +2,7 @@ package com.example.muara_mbaduk.data.model.entity;
 
 import com.example.muara_mbaduk.data.model.ParrentModel;
 
-import lombok.Data;
 
-@Data
 public class ProductsModel extends ParrentModel {
 
     private String id;
