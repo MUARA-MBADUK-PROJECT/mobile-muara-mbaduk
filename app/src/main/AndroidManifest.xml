@@ -42,6 +42,23 @@
                 android:value="" />
         </activity>
 
+        <activity
+            android:name=".view.activity.DetailPurchaseHistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+
+        <activity
+            android:name=".view.activity.DetailPembeliActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
 
         <meta-data
             android:name="com.google.android.gms.signin.client_id"
@@ -63,13 +80,7 @@
         <activity
             android:name=".view.activity.HomeActivity"
             android:exported="false" />
-        <activity
-            android:name=".view.activity.DetailPembeliActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".view.activity.TicketPurchaseActivity"
             android:exported="true">

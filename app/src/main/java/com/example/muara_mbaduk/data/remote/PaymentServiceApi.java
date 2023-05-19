@@ -1,6 +1,7 @@
 package com.example.muara_mbaduk.data.remote;
 
 import com.example.muara_mbaduk.model.request.CheckoutTicketRequest;
+import com.example.muara_mbaduk.model.response.HistoryResponse;
 import com.example.muara_mbaduk.model.response.PaymentCheckoutResponse;
 import com.example.muara_mbaduk.model.response.PaymentHistoryResponse;
 
@@ -18,6 +19,6 @@ public interface PaymentServiceApi {
     Call<PaymentCheckoutResponse> checkoutBank(@Header("Authorization") String authHeader, @Body CheckoutTicketRequest checkoutTicketRequest);
     @GET("payments/user/{id}")
     Call<PaymentHistoryResponse> findAllPayment(@Header("Authorization") String authHeader, @Path("id") String id);
-
-
+    @GET("payments/{id}")
+    Call<HistoryResponse> findDetailPayment(@Header("Authorization") String authHeader, @Path("id") String id);
 }

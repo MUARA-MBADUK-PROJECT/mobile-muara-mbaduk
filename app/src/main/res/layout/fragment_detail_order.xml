@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/detail_email_pemesan_textview"
             android:textColor="@color/color_text_black"
             android:layout_marginBottom="20dp"
             android:textSize="15sp"
@@ -44,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/detail_kunjungan_textview"
             android:layout_marginBottom="20dp"
             android:textColor="@color/color_text_black"
             android:fontFamily="@font/poppins"
@@ -79,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/jumlah_pesan_tiket_textview"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/color_text_black"
                 android:text="5"
@@ -98,11 +101,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/price_ticket_textview"
                 android:textAlignment="textEnd"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/color_text_black"
-                android:text="Rp.25.000"
+                android:text="Rp.0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -113,6 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/jumlah_pesan_tiket_mobil_textview"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/color_text_black"
                 android:text="5"
@@ -128,15 +133,16 @@
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/color_text_black"
-                android:text="Kendaraan Roda 2"
+                android:text="Kendaraan Roda 4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/price_tiket_mobil_textview"
                 android:textAlignment="textEnd"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/color_text_black"
-                android:text="Rp.25.000"
+                android:text="Rp.0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -147,6 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/jumlah_pesan_tiket_motor_textview"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/color_text_black"
                 android:text="5"
@@ -162,15 +169,16 @@
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/color_text_black"
-                android:text="Kendaraan Roda 4"
+                android:text="Kendaraan Roda 2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/price_tiket_motor_textview"
                 android:textAlignment="textEnd"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/color_text_black"
-                android:text="Rp.25.000"
+                android:text="Rp.0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -235,6 +243,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/total_pembayaran_textview"
                 android:textAlignment="textEnd"
                 android:fontFamily="@font/poppins"
                 android:text="Rp.150.000"
