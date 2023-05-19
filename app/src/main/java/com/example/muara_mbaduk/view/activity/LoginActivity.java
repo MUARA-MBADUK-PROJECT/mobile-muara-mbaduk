@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
-import com.example.muara_mbaduk.data.model.request.UserLoginRequest;
+import com.example.muara_mbaduk.model.request.UserLoginRequest;
 import com.example.muara_mbaduk.data.remote.UserServiceApi;
 import com.example.muara_mbaduk.data.services.UserLoginService;
 import com.example.muara_mbaduk.utils.RetrofitClient;

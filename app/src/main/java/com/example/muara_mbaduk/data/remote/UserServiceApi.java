@@ -1,15 +1,14 @@
 package com.example.muara_mbaduk.data.remote;
 
-import com.example.muara_mbaduk.data.model.request.UserLoginRequest;
-import com.example.muara_mbaduk.data.model.request.UserValidateRequest;
-import com.example.muara_mbaduk.data.model.response.UserLoginResponse;
-import com.example.muara_mbaduk.data.model.response.UserValidateResponse;
+import com.example.muara_mbaduk.model.request.UserLoginRequest;
+import com.example.muara_mbaduk.model.request.UserValidateRequest;
+import com.example.muara_mbaduk.model.response.UserLoginResponse;
+import com.example.muara_mbaduk.model.response.UserValidateResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface UserServiceApi {
 

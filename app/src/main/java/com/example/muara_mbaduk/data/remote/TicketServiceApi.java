@@ -1,8 +1,8 @@
 package com.example.muara_mbaduk.data.remote;
 
-import com.example.muara_mbaduk.data.model.response.TicketCheckinResponse;
-import com.example.muara_mbaduk.data.model.response.TiketResponse;
-import com.example.muara_mbaduk.data.model.request.CheckinRequest;
+import com.example.muara_mbaduk.model.response.TicketCheckinResponse;
+import com.example.muara_mbaduk.model.response.TiketResponse;
+import com.example.muara_mbaduk.model.request.CheckinRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

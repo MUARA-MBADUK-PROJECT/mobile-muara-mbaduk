@@ -25,13 +25,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.Errors;
-import com.example.muara_mbaduk.data.model.response.TicketCheckinResponse;
-import com.example.muara_mbaduk.data.model.entity.TiketCheckin;
-import com.example.muara_mbaduk.data.model.response.TiketResponse;
+import com.example.muara_mbaduk.model.Errors;
+import com.example.muara_mbaduk.model.response.TicketCheckinResponse;
+import com.example.muara_mbaduk.model.entity.TiketCheckin;
+import com.example.muara_mbaduk.model.response.TiketResponse;
 import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
 import com.example.muara_mbaduk.data.remote.TicketServiceApi;
-import com.example.muara_mbaduk.data.model.request.CheckinRequest;
+import com.example.muara_mbaduk.model.request.CheckinRequest;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -66,6 +66,7 @@ public class DateAndCategoryCampFragment extends Fragment implements AdapterView
     private int hargaTiket, hargaKendaraanRoda2 , hargaKendaraanRoda4;
     private TiketResponse tiketResponse;
     TicketAndCampingFragment fragment;
+    boolean isCamping = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -187,7 +188,7 @@ public class DateAndCategoryCampFragment extends Fragment implements AdapterView
                 // get api
                 TicketServiceApi ticketServiceApi = RetrofitClient.getInstance().create(TicketServiceApi.class);
                 CheckinRequest checkinRequest = new CheckinRequest();
-                boolean isCamping = false;
+                 isCamping = false;
                 if(optionEditText.getText().toString().equalsIgnoreCase("Tidak")){
                 }else{
                     isCamping = true;
@@ -217,7 +218,7 @@ public class DateAndCategoryCampFragment extends Fragment implements AdapterView
                             Transition transition = inflater.inflateTransition(R.transition.fade_in);
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager()
                                     .beginTransaction();
-                            fragment = new TicketAndCampingFragment(body, hargaTiket, hargaKendaraanRoda2, hargaKendaraanRoda4);
+                            fragment = new TicketAndCampingFragment(body, hargaTiket, hargaKendaraanRoda2, hargaKendaraanRoda4,isCamping,tanggalKemahEditText.getText().toString());
                             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                             transaction.replace(R.id.frame_fragment_ticket_purchase, fragment);
                             bottomNavigationView.setVisibility(View.VISIBLE);

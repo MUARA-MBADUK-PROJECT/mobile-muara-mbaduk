@@ -1,10 +1,10 @@
 package com.example.muara_mbaduk;
 
-import com.example.muara_mbaduk.data.model.Errors;
-import com.example.muara_mbaduk.data.model.response.TicketCheckinResponse;
-import com.example.muara_mbaduk.data.model.response.TiketResponse;
+import com.example.muara_mbaduk.model.Errors;
+import com.example.muara_mbaduk.model.response.TicketCheckinResponse;
+import com.example.muara_mbaduk.model.response.TiketResponse;
 import com.example.muara_mbaduk.data.remote.TicketServiceApi;
-import com.example.muara_mbaduk.data.model.request.CheckinRequest;
+import com.example.muara_mbaduk.model.request.CheckinRequest;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="360dp"
+    android:background="@drawable/rounded_white"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:fontFamily="@font/poppins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/kendaraan_ke_textview"
+        android:textColor="@color/color_text_black"
+        android:text="Kendaraan ke 1"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:fontFamily="@font/poppins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plat Nomor"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:layout_marginRight="4dp"
+            />
+    </LinearLayout>
+    <EditText
+        android:fontFamily="@font/poppins"
+        android:padding="4dp"
+        android:id="@+id/plat_nomor_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edit_text"
+        android:hint="Isikan Plat Nomor Kendaraan Anda"
+        android:textColorHint="@color/hintText"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/color_text_black"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:fontFamily="@font/poppins"
+            android:id="@+id/simpan_detail_kendaraan"
+            android:layout_width="120dp"
+            android:background="@drawable/button_rounded_blue"
+            android:text="Simpan"
+            android:layout_height="25dp"/>
+    </LinearLayout>
+</LinearLayout>

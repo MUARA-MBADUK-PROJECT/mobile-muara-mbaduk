@@ -242,6 +242,7 @@
         <!--    end bank pembayaran option-->
         <!--            cash on delivery option-->
         <LinearLayout
+            android:id="@+id/cash_instruction_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -268,6 +269,8 @@
         <!--            end cod option-->
         <!--            start layout if status completed-->
         <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/status_complete_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
