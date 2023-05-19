@@ -1,5 +1,5 @@
-package com.example.muara_mbaduk.data.model.response;
-import com.example.muara_mbaduk.data.model.entity.Testimonies;
+package com.example.muara_mbaduk.model.response;
+import com.example.muara_mbaduk.model.entity.Testimonies;
 
 import java.util.List;
 

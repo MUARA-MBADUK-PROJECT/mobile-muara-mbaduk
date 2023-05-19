@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.response.TestimoniesResponse;
+import com.example.muara_mbaduk.model.response.TestimoniesResponse;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 

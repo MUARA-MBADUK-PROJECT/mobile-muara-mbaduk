@@ -10,8 +10,8 @@ import android.os.Bundle;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.PaketCamp_RecyclerViewAdapter;
-import com.example.muara_mbaduk.data.model.response.PackagesResponse;
 import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
+import com.example.muara_mbaduk.model.response.PackagesResponse;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
 

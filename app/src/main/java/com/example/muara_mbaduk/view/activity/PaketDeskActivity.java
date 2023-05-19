@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.UlasanCamp_RecyclerViewAdapter;
-import com.example.muara_mbaduk.data.model.response.TestimoniesResponse;
+import com.example.muara_mbaduk.model.response.TestimoniesResponse;
 import com.example.muara_mbaduk.data.remote.TestimoniesServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.squareup.picasso.Picasso;

@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.entity.Faq;
-import com.example.muara_mbaduk.data.model.response.FaqResponse;
+import com.example.muara_mbaduk.model.entity.Faq;
+import com.example.muara_mbaduk.model.response.FaqResponse;
 
 public class Faq_RecyclerViewAdapter extends RecyclerView.Adapter<Faq_RecyclerViewAdapter.MyViewHolder> {
     Context context;

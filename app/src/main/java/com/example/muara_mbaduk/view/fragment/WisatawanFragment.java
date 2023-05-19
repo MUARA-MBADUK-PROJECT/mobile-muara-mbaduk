@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.entity.Tiket;
-import com.example.muara_mbaduk.data.model.response.TiketResponse;
+import com.example.muara_mbaduk.model.entity.Tiket;
+import com.example.muara_mbaduk.model.response.TiketResponse;
 import com.example.muara_mbaduk.data.remote.TicketServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 
