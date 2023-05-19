@@ -1,6 +1,6 @@
-package com.example.muara_mbaduk.data.model.response;
+package com.example.muara_mbaduk.model.response;
 
-import com.example.muara_mbaduk.data.model.entity.News;
+import com.example.muara_mbaduk.model.entity.News;
 
 import java.util.List;
 

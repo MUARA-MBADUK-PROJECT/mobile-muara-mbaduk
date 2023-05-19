@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.Faq_RecyclerViewAdapter;
-import com.example.muara_mbaduk.data.model.response.FaqResponse;
+import com.example.muara_mbaduk.model.response.FaqResponse;
 import com.example.muara_mbaduk.data.remote.FaqServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 

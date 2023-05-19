@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.response.NewsResponse;
+import com.example.muara_mbaduk.model.response.NewsResponse;
 import com.squareup.picasso.Picasso;
 
 public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_RecyclerViewAdapter.MyViewHolder> {

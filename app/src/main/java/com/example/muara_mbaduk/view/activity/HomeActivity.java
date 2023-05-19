@@ -18,7 +18,7 @@ import com.example.muara_mbaduk.data.adapter.News_RecyclerViewAdapter;
 import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
 import com.example.muara_mbaduk.data.local.model.UserModel;
 
-import com.example.muara_mbaduk.data.model.response.NewsResponse;
+import com.example.muara_mbaduk.model.response.NewsResponse;
 import com.example.muara_mbaduk.data.remote.NewsServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 
