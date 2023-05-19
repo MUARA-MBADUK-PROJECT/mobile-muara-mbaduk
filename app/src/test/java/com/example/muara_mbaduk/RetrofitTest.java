@@ -1,6 +1,5 @@
 package com.example.muara_mbaduk;
 
-import com.example.muara_mbaduk.data.model.response.UserValidateResponse;
 import com.example.muara_mbaduk.data.remote.UserServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 
@@ -8,9 +7,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class RetrofitTest {

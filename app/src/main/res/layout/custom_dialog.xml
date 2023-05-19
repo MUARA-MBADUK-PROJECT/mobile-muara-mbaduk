@@ -6,6 +6,7 @@
     android:padding="20dp"
     android:layout_height="wrap_content">
     <TextView
+        android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wisatawan_ke_textView"
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:fontFamily="@font/poppins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NIK"
@@ -28,6 +30,7 @@
             android:layout_marginRight="4dp"
             />
         <TextView
+            android:fontFamily="@font/poppins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="(Nomor Induk Kependudukan)"
@@ -36,6 +39,7 @@
             />
     </LinearLayout>
     <EditText
+        android:fontFamily="@font/poppins"
         android:padding="4dp"
         android:id="@+id/nik_editText"
         android:layout_width="match_parent"
@@ -47,6 +51,7 @@
         android:textColor="@color/color_text_black"
         />
     <TextView
+        android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama Lengkap"
@@ -56,6 +61,7 @@
         android:layout_marginRight="4dp"
         />
     <EditText
+        android:fontFamily="@font/poppins"
         android:id="@+id/nama_editText"
         android:padding="4dp"
         android:layout_width="match_parent"
@@ -72,6 +78,8 @@
         android:layout_height="wrap_content"
         android:gravity="center">
         <Button
+            android:fontFamily="@font/poppins"
+            android:id="@+id/simpan_identitas_wisatawan_btn"
             android:layout_width="120dp"
             android:background="@drawable/button_rounded_blue"
             android:text="Simpan"

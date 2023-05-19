@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,8 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.PackagesAdapter;
-import com.example.muara_mbaduk.data.model.response.TicketCheckinResponse;
-import com.example.muara_mbaduk.data.pojo.DataOrder;
+import com.example.muara_mbaduk.model.entity.PackagePurchaseRequest;
+import com.example.muara_mbaduk.model.entity.TiketCheckin;
+import com.example.muara_mbaduk.model.entity.TiketPurchaseRequest;
+import com.example.muara_mbaduk.model.response.TicketCheckinResponse;
+import com.example.muara_mbaduk.data.dto.DataOrder;
+import com.example.muara_mbaduk.data.dto.PackageOrder;
 import com.example.muara_mbaduk.view.activity.CustomPembelianTiketActivity;
 import com.example.muara_mbaduk.view.activity.DetailPembeliActivity;
 import com.example.muara_mbaduk.view.activity.TicketPurchaseActivity;
@@ -45,14 +48,27 @@ public class TicketAndCampingFragment extends Fragment {
 
     private final int hargaTiket,hargaKendaraanRoda4,hargaKendaraanRoda2;
     TicketCheckinResponse tiketResponse;
+    private List<TiketPurchaseRequest> orderWisatawan;
+    private List<TiketPurchaseRequest> orderVehicle4;
+    private List<TiketPurchaseRequest> orderVehicle2;
+    private boolean isCamping;
+    private String date;
 
-    public TicketAndCampingFragment(TicketCheckinResponse tiketResponse , int hargaTiket , int hargaKendaraanRoda2, int hargaKendaraanRoda4) {
+
+
+    public boolean isCamping() {
+        return isCamping;
+    }
+
+    public TicketAndCampingFragment(TicketCheckinResponse tiketResponse , int hargaTiket , int hargaKendaraanRoda2, int hargaKendaraanRoda4, boolean isCamping,String date) {
         // Required empty public constructor
         this.tiketResponse = tiketResponse;
         this.totalBayar = 0;
         this.hargaTiket = hargaTiket;
+        this.isCamping = isCamping;
         this.hargaKendaraanRoda2 = hargaKendaraanRoda2;
         this.hargaKendaraanRoda4 = hargaKendaraanRoda4;
+        this.date = date;
     }
 
     @Override
@@ -99,29 +115,25 @@ public class TicketAndCampingFragment extends Fragment {
 
         PackagesAdapter packagesAdapter = new PackagesAdapter(data, tiketResponse , this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false);
-        sendDetailOrder(packagesAdapter, view);
+        sendDetailOrder(packagesAdapter, view,packagesAdapter.getPackagePurchaseRequests());
         packagesRecycleview.setAdapter(packagesAdapter);
         packagesRecycleview.setLayoutManager(linearLayoutManager);
 
     }
 
     // send data to detail activity
-    void sendDetailOrder(PackagesAdapter packagesAdapter, View view) {
-
+    void sendDetailOrder(PackagesAdapter packagesAdapter, View view, List<PackagePurchaseRequest> packagePurchaseRequests) {
         TicketPurchaseActivity fragmentActivity = (TicketPurchaseActivity) getActivity();
         fragmentActivity.getBtnBerikutnya().setOnClickListener(v -> {
-
+            Log.i("TAG", "sendDetailOrder: ");
+            orderWisatawan.forEach(tiketPurchaseRequest -> {
+                System.out.println(tiketPurchaseRequest.getId());
+            });
             boolean isNotZero = packagesAdapter.checkIfCountZero();
             if (isNotZero) {
                 List<Map<String, String>> dataWisatawan = new ArrayList<>();
                 ArrayList<String> motor = new ArrayList<>();
                 ArrayList<String> mobil = new ArrayList<>();
-                Map<String, String> map = new HashMap<>();
-                for (int i = 0; i < jumlahWisatawan; i++) {
-                    map.put("nama", "Belum ada nama");
-                    map.put("data", "Belum ada data");
-                    dataWisatawan.add(map);
-                }
                 for (int i = 0; i < jumlahMotor; i++) {
                     motor.add("Belum ada plat nomor");
                 }
@@ -129,10 +141,18 @@ public class TicketAndCampingFragment extends Fragment {
                     mobil.add("Belum ada plat nomor");
                 }
                 Intent intent = new Intent(getContext(), DetailPembeliActivity.class);
-                DataOrder dataOrder = new DataOrder(dataWisatawan);
+                DataOrder dataOrder = new DataOrder();
+                dataOrder.setDeque(orderWisatawan);
+                dataOrder.setDataMobil(orderVehicle4);
+                dataOrder.setDataMotor(orderVehicle2);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("data", dataOrder);
+                bundle.putSerializable("wisatawan", dataOrder);
+                PackageOrder packageOrder = new PackageOrder();
+                packageOrder.setPackagePurchaseRequests(packagePurchaseRequests);
+                bundle.putSerializable("package",packageOrder);
                 intent.putExtras(bundle);
+                intent.putExtra("date" , date);
+                intent.putExtra("iscamping",isCamping);
                 intent.putExtra("total_bayar", totalBayar);
                 if (jumlahMotor == jumlahMobil) {
                     kendaraanSize = jumlahMobil;
@@ -187,6 +207,9 @@ public class TicketAndCampingFragment extends Fragment {
         FragmentActivity activity = getActivity();
         totalBayarTextView = activity.findViewById(R.id.jumlah_bayar_textView);
         btnBuatPaket = view.findViewById(R.id.btn_buatpaket);
+        orderWisatawan = new ArrayList<>();
+        orderVehicle4 = new ArrayList<>();
+        orderVehicle2 = new ArrayList<>();
     }
 
     //method manipulasi jumlah kendaraan dan total harga
@@ -202,6 +225,7 @@ public class TicketAndCampingFragment extends Fragment {
         btnMinMobil.setOnClickListener(v -> {
             if (jumlahMobil != 0) {
                 jumlahMobil--;
+                orderVehicle4.remove(orderVehicle4.size() -1);
                 minusJumlah(hargaKendaraanRoda4);
                 jumlahMobilTextView.setText(String.valueOf(jumlahMobil));
             }
@@ -211,6 +235,20 @@ public class TicketAndCampingFragment extends Fragment {
         btnAddMobil.setOnClickListener(v -> {
             jumlahMobil++;
             tambahJumlah(hargaKendaraanRoda4);
+            List<TiketCheckin> tickets = tiketResponse.getData().getTickets();
+            String id = "";
+            for (int i = 0; i < tickets.size(); i++) {
+                if(tickets.get(i).getCategory().equalsIgnoreCase("transport")){
+                    if(tickets.get(i).getTitle().equalsIgnoreCase("kendaraan roda 4")){
+                        id = tickets.get(i).getId();
+                    }
+                }
+            }
+            TiketPurchaseRequest  tiketPurchaseRequest = new TiketPurchaseRequest();
+            tiketPurchaseRequest.setName(null);
+            tiketPurchaseRequest.setId(id);
+            tiketPurchaseRequest.setIdentity("Belum ada plat nomor");
+            orderVehicle4.add(tiketPurchaseRequest);
             jumlahMobilTextView.setText(String.valueOf(jumlahMobil));
         });
     }
@@ -218,6 +256,7 @@ public class TicketAndCampingFragment extends Fragment {
         btnMinMotor.setOnClickListener(v -> {
             if (jumlahMotor != 0) {
                 jumlahMotor--;
+                orderVehicle2.remove(orderVehicle2.size() -1);
                 minusJumlah(hargaKendaraanRoda2);
                 jumlahMotorTextView.setText(String.valueOf(jumlahMotor));
             }
@@ -226,14 +265,39 @@ public class TicketAndCampingFragment extends Fragment {
     private void addJumlahMotor() {
         btnAddMotor.setOnClickListener(v -> {
             jumlahMotor++;
+            List<TiketCheckin> tickets = tiketResponse.getData().getTickets();
+            String id = "";
+            for (int i = 0; i < tickets.size(); i++) {
+                if(tickets.get(i).getCategory().equalsIgnoreCase("transport")){
+                    if(tickets.get(i).getTitle().equalsIgnoreCase("kendaraan roda 2")){
+                        id = tickets.get(i).getId();
+                    }
+                }
+            }
+            TiketPurchaseRequest tiketPurchaseRequest = new TiketPurchaseRequest();
+            tiketPurchaseRequest.setId(id);
+            tiketPurchaseRequest.setName(null);
+            tiketPurchaseRequest.setIdentity("Belum ada plat nomor");
+            orderVehicle2.add(tiketPurchaseRequest);
             tambahJumlah(hargaKendaraanRoda2);
             jumlahMotorTextView.setText(String.valueOf(jumlahMotor));
         });
     }
-
     void addJumlahWisatawan() {
         btnAddWisatawan.setOnClickListener(v -> {
             jumlahWisatawan++;
+            TiketPurchaseRequest tiketPurchaseRequest = new TiketPurchaseRequest();
+            List<TiketCheckin> tickets = tiketResponse.getData().getTickets();
+            String id = "";
+            for (int i = 0; i < tickets.size(); i++) {
+                if(tickets.get(i).getCategory().equalsIgnoreCase("tourist")){
+                    id = tickets.get(i).getId();
+                }
+            }
+            tiketPurchaseRequest.setId(id);
+            tiketPurchaseRequest.setIdentity("Belum ada identitas");
+            tiketPurchaseRequest.setName("Belum ada nama");
+            orderWisatawan.add(tiketPurchaseRequest);
             tambahJumlah(hargaTiket);
             jumlahWisatawanTextView.setText(String.valueOf(jumlahWisatawan));
         });
@@ -242,6 +306,7 @@ public class TicketAndCampingFragment extends Fragment {
         btnMinWisatawan.setOnClickListener(v -> {
             if (jumlahWisatawan != 0) {
                 jumlahWisatawan--;
+                orderWisatawan.remove(orderWisatawan.size() -1);
                 minusJumlah(hargaTiket);
                 jumlahWisatawanTextView.setText(String.valueOf(jumlahWisatawan));
             }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -15,11 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
-import com.example.muara_mbaduk.data.model.response.TicketCheckinResponse;
+import com.example.muara_mbaduk.model.entity.PackagePurchaseRequest;
+import com.example.muara_mbaduk.model.response.TicketCheckinResponse;
 import com.example.muara_mbaduk.view.fragment.TicketAndCampingFragment;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +30,11 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
     private List<Map<String, String>> count;
     Fragment fragment;
 
+    List<PackagePurchaseRequest> packagePurchaseRequests = new ArrayList<>();
 
+    public List<PackagePurchaseRequest> getPackagePurchaseRequests() {
+        return packagePurchaseRequests;
+    }
 
     public PackagesAdapter(List<Map<String, String>> data, TicketCheckinResponse packagesResponses , Fragment fragment) {
         this.count = data;
@@ -73,6 +78,23 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
                 countAsInt++;
                 ticketAndCampingFragment.tambahJumlah(ticketCheckinResponse.getData().getPackages().get(position).getPrice());
                 count.get(position).put("count", String.valueOf(countAsInt));
+                PackagePurchaseRequest model = new PackagePurchaseRequest();
+                model.setId(ticketCheckinResponse.getData().getPackages().get(position).getId());
+                model.setQuantity(countAsInt);
+                if(packagePurchaseRequests.size() != 0){
+                    if(packagePurchaseRequests.size() > position){
+                        if(packagePurchaseRequests.get(position).getId().equalsIgnoreCase(model.getId())){
+                            int index = packagePurchaseRequests.indexOf(packagePurchaseRequests.get(position));
+                            packagePurchaseRequests.set(index,model);
+                        }else{
+                            packagePurchaseRequests.add(model);
+                        }
+                    }else{
+                        packagePurchaseRequests.add(model);
+                    }
+                }else{
+                    packagePurchaseRequests.add(model);
+                }
                 notifyDataSetChanged();
                 updateCount(count);
             }
@@ -81,8 +103,31 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             String number = count.get(position).get("count");
             if(number != null){
                 int countAsInt = Integer.parseInt(number);
+                PackagePurchaseRequest model = new PackagePurchaseRequest();
+                model.setId(ticketCheckinResponse.getData().getPackages().get(position).getId());
                 if (countAsInt != 0) {
                     countAsInt--;
+                    model.setQuantity(countAsInt);
+                    if(countAsInt != 0){
+                        if(packagePurchaseRequests.size() != 0){
+                            if(packagePurchaseRequests.size() > position){
+                                if(packagePurchaseRequests.get(position).getId().equalsIgnoreCase(model.getId())){
+                                    int index = packagePurchaseRequests.indexOf(packagePurchaseRequests.get(position));
+                                    packagePurchaseRequests.set(index,model);
+                                }else{
+                                    packagePurchaseRequests.add(model);
+                                }
+                            }else{
+                                packagePurchaseRequests.add(model);
+                            }
+                        }else{
+                            packagePurchaseRequests.add(model);
+                        }
+                    }else{
+                        if(packagePurchaseRequests.get(position).getId().equalsIgnoreCase(model.getId())){
+                            packagePurchaseRequests.remove(packagePurchaseRequests.get(position));
+                        }
+                    }
                     ticketAndCampingFragment.minusJumlah(ticketCheckinResponse.getData().getPackages().get(position).getPrice());
                 }
                 count.get(position).put("count", String.valueOf(countAsInt));
@@ -96,7 +141,6 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         this.count = newData;
         notifyDataSetChanged();
     }
-
     public boolean checkIfCountZero(){
         if(this.count.size() == 0){
             return true;

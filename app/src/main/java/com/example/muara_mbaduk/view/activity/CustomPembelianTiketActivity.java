@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.ProductAdapter;
-import com.example.muara_mbaduk.data.model.response.ProductResponse;
+import com.example.muara_mbaduk.model.response.ProductResponse;
 import com.example.muara_mbaduk.data.remote.ProductServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;

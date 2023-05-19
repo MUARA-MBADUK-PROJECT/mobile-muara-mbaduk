@@ -14,10 +14,10 @@ import androidx.core.content.ContextCompat;
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
 import com.example.muara_mbaduk.data.local.model.UserModel;
-import com.example.muara_mbaduk.data.model.request.UserLoginRequest;
-import com.example.muara_mbaduk.data.model.request.UserValidateRequest;
-import com.example.muara_mbaduk.data.model.response.UserLoginResponse;
-import com.example.muara_mbaduk.data.model.response.UserValidateResponse;
+import com.example.muara_mbaduk.model.request.UserLoginRequest;
+import com.example.muara_mbaduk.model.request.UserValidateRequest;
+import com.example.muara_mbaduk.model.response.UserLoginResponse;
+import com.example.muara_mbaduk.model.response.UserValidateResponse;
 import com.example.muara_mbaduk.data.remote.UserServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
@@ -25,19 +25,10 @@ import com.example.muara_mbaduk.view.activity.HomeActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-
 import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class UserLoginService {
 
