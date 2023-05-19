@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="20dp"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/product_imageview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/pktcamp_homepg" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginLeft="20dp"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:maxLines="3"
+                android:textStyle="bold"
+                android:textAlignment="textStart"
+                android:id="@+id/product_title_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Kompor"
+                android:textColor="@color/color_text_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textAlignment="textStart"
+                android:layout_marginBottom="15dp"
+                android:id="@+id/product_price_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Rp.40000"
+                android:textColor="@color/backgroundAppBar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|end"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp">
+
+            <ImageButton
+                android:id="@+id/product_minus_imagebtn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/rounded_black"
+                android:src="@drawable/ic_baseline_remove_24_black" />
+
+            <TextView
+                android:id="@+id/qty_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/poppins"
+                android:text="0"
+                android:textColor="@color/color_text_black"
+                android:textSize="15sp" />
+
+            <ImageButton
+                android:id="@+id/product_add_imagebtn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/rounded_black"
+                android:src="@drawable/ic_baseline_add_24_black" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
