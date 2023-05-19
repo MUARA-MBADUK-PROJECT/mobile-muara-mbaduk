@@ -44,6 +44,7 @@ public class PaketDeskActivity extends AppCompatActivity {
         tvDesk.setText(deskripsi);
 
         RecyclerView recyclerView = findViewById(R.id.rv_ulasan);
+        recyclerView.setNestedScrollingEnabled(false);
         Retrofit retrofit = RetrofitClient.getInstance();
         TestimoniesServiceApi testimoniesServiceApi = retrofit.create(TestimoniesServiceApi.class);
         Call<TestimoniesResponse> allTestimonies = testimoniesServiceApi.getAllTestimonies(RetrofitClient.getApiKey());
