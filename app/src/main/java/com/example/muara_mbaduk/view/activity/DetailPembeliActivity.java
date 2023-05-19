@@ -3,10 +3,14 @@ package com.example.muara_mbaduk.view.activity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +33,7 @@ import com.example.muara_mbaduk.data.adapter.DetailWisatawanAdapter;
 import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
 import com.example.muara_mbaduk.data.local.model.UserModel;
 import com.example.muara_mbaduk.data.remote.PaymentServiceApi;
+import com.example.muara_mbaduk.model.Errors;
 import com.example.muara_mbaduk.model.entity.TiketPurchaseRequest;
 import com.example.muara_mbaduk.model.request.CheckoutTicketRequest;
 import com.example.muara_mbaduk.data.dto.DataOrder;
@@ -35,7 +41,9 @@ import com.example.muara_mbaduk.data.dto.PackageOrder;
 import com.example.muara_mbaduk.model.response.PaymentCheckoutResponse;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -94,6 +102,7 @@ public class DetailPembeliActivity extends AppCompatActivity {
         isCamping = bundle.getBoolean("iscamping");
         date = bundle.getString("date");
         totalBayarTextView.setText("Rp."+ total_bayar);
+        View view = findViewById(R.id.detail_relative_layout);
         DataOrder myObject = (DataOrder) bundle.getSerializable("wisatawan");
         PackageOrder packageOrder = (PackageOrder) bundle.getSerializable("package");
         DetailWisatawanAdapter detailWisatawanAdapter = new DetailWisatawanAdapter(myObject);
@@ -190,7 +199,7 @@ public class DetailPembeliActivity extends AppCompatActivity {
                     checkoutTicketRequest.setTickets(allTiket);
                     checkoutTicketRequest.setCamping(isCamping);
                     checkoutTicketRequest.setDate(date);
-                    checkoutTicketRequest.setBank(paymentMetode);
+                    checkoutTicketRequest.setBank(paymentMetode.toLowerCase());
                     checkoutTicketRequest.setPackages(packageOrder.getPackagePurchaseRequests());
                     checkoutTicketRequest.setUser_id(userModel.getId());
                     if(paymentMetode.equalsIgnoreCase("Bayar di tempat")){
@@ -202,9 +211,33 @@ public class DetailPembeliActivity extends AppCompatActivity {
                             public void onResponse(Call<PaymentCheckoutResponse> call, Response<PaymentCheckoutResponse> response) {
                                 progresIndicator.dismiss();
                                 if(response.isSuccessful()){
-                                    System.out.println(response.body().getData().getOrder_id());
+                                    Snackbar snackbar = Snackbar.make(view, "Berhasil Membuat Transaksi", Snackbar.LENGTH_SHORT);
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.backgroundAppBar));
+                                    snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                                    snackbar.show();
+                                    final Handler handler = new Handler(Looper.getMainLooper());
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //close all activity after 2 seconds
+                                            Intent intent = new Intent(DetailPembeliActivity
+                                                    .this , HomeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 2000);
                                 }else{
-                                    System.out.println(response.body().getCode());
+                                    String errors = null;
+                                    try {
+                                        errors = response.errorBody().string();
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Errors generateErrors = UtilMethod.generateErrors(errors);
+                                    Snackbar snackbar = Snackbar.make(view, generateErrors.getErrors().getMessage(), Snackbar.LENGTH_SHORT);
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.red));
+                                    snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                                    snackbar.show();
                                 }
                             }
                             @Override
@@ -221,7 +254,18 @@ public class DetailPembeliActivity extends AppCompatActivity {
                                 if(response.isSuccessful()){
                                     System.out.println(response.body().getData().getOrder_id());
                                 }else{
-                                    System.out.println(response.body().getCode());
+                                    String errors = null;
+                                    try {
+                                        errors = response.errorBody().string();
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Errors generateErrors = UtilMethod.generateErrors(errors);
+                                    Snackbar snackbar = Snackbar.make(view, generateErrors.getErrors().getMessage(), Snackbar.LENGTH_SHORT);
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.red));
+                                    snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                                    snackbar.show();
                                 }
                             }
                             @Override
@@ -258,6 +302,13 @@ public class DetailPembeliActivity extends AppCompatActivity {
         bankPaymentDialog.setCancelable(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
+        startActivity(intent);
+    }
 
     public void dialogAction(){
         bniRelativeLayout.setOnClickListener(v -> {
