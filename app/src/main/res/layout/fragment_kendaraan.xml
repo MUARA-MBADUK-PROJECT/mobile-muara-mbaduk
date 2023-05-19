@@ -27,16 +27,37 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tiket Parkir - "
+                android:text="Hari normal = Rp."
                 android:textSize="14sp"
                 android:textColor="@color/black"></TextView>
             <TextView
+                android:id="@+id/hargaRoda2normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Rp.5.000"></TextView>
+                android:text="0"></TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weekend = Rp."
+                android:textSize="14sp"
+                android:textColor="@color/black"></TextView>
+            <TextView
+                android:id="@+id/hargaRoda2weekend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="0"></TextView>
         </LinearLayout>
         <TextView
             android:layout_marginTop="20dp"
@@ -50,21 +71,42 @@
         <LinearLayout
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tiket Parkir - "
+                android:text="Hari normal = Rp."
                 android:textSize="14sp"
                 android:textColor="@color/black"></TextView>
             <TextView
+                android:id="@+id/hargaroda4normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Rp.5.000"></TextView>
+                android:text="0"></TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weekend = Rp."
+                android:textSize="14sp"
+                android:textColor="@color/black"></TextView>
+            <TextView
+                android:id="@+id/hargaroda4weekend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="0"></TextView>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

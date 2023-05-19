@@ -34,8 +34,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
     public PackagesAdapter(List<Map<String, String>> data, TicketCheckinResponse packagesResponses , Fragment fragment) {
         this.count = data;
         this.ticketCheckinResponse = packagesResponses;
-        this
-                .fragment = fragment;
+        this.fragment = fragment;
     }
 
     @NonNull

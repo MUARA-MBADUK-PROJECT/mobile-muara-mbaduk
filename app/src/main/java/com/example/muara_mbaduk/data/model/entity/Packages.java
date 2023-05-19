@@ -16,6 +16,7 @@ public class Packages {
     List<Products> products;
     private String created_at;
     private String updated_at;
+    private String updated_a;
 
     public String getCreated_at() {
         return created_at;
@@ -103,5 +104,13 @@ public class Packages {
 
     public void setProducts(List<Products> products) {
         this.products = products;
+    }
+
+    public String getUpdated_a() {
+        return updated_a;
+    }
+
+    public void setUpdated_a(String updated_a) {
+        this.updated_a = updated_a;
     }
 }

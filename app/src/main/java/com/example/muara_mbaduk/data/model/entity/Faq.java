@@ -1,17 +1,21 @@
 package com.example.muara_mbaduk.data.model.entity;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.time.LocalDateTime;
-
-public class Tiket {
+public class Faq {
     private String id;
     private String title;
-    private String category;
-    private int normal_day;
-    private int weekend_day;
+    private String description;
     private String created_at;
     private String updated_at;
+    private Boolean isVisible = true;
+
+
+    public Boolean getVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(Boolean visible) {
+        isVisible = visible;
+    }
 
     public String getId() {
         return id;
@@ -29,28 +33,12 @@ public class Tiket {
         this.title = title;
     }
 
-    public String getCategory() {
-        return category;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public int getNormal_day() {
-        return normal_day;
-    }
-
-    public void setNormal_day(int normal_day) {
-        this.normal_day = normal_day;
-    }
-
-    public int getWeekend_day() {
-        return weekend_day;
-    }
-
-    public void setWeekend_day(int weekend_day) {
-        this.weekend_day = weekend_day;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreated_at() {
@@ -68,4 +56,5 @@ public class Tiket {
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
+
 }

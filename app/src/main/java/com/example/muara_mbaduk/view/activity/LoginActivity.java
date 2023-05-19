@@ -62,9 +62,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent signnIntent = gsc.getSignInIntent();
-                startActivityForResult(signnIntent , 102);
-//                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-//                startActivity(i);
+//                startActivityForResult(signnIntent , 102);
+                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(i);
             }
         });
         kebijakanTextView = findViewById(R.id.kebijakanTextView);

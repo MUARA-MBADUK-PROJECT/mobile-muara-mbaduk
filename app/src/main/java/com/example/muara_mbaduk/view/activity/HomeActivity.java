@@ -10,19 +10,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.data.adapter.News_RecyclerViewAdapter;
 import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
 import com.example.muara_mbaduk.data.local.model.UserModel;
-import com.example.muara_mbaduk.utils.UtilMethod;
-import com.squareup.picasso.Picasso;
 
+import com.example.muara_mbaduk.data.model.response.NewsResponse;
+import com.example.muara_mbaduk.data.remote.NewsServiceApi;
+import com.example.muara_mbaduk.utils.RetrofitClient;
+
+import com.example.muara_mbaduk.utils.UtilMethod;
+
+import com.squareup.picasso.Picasso;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 
 public class HomeActivity extends AppCompatActivity {
     ImageView hargatiket;
     TextView displayNameTextView;
-    ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView;
+    ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView,Faq;
     RealmHelper realmHelper;
     Realm realm;
     UserModel userModel;
@@ -60,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         hargatiket = findViewById(R.id.hargatiket_id);
         paketcamp = findViewById(R.id.paketcamp);
         pemesananTiket = findViewById(R.id.pembeliantiket);
+        Faq = findViewById(R.id.faq_iv);
         hargatiket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,16 +90,46 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
         pemesananTiket.setOnClickListener(v -> {
             System.out.println(userModel.getId());
             System.out.println(userModel.getEmail());
             Intent i = new Intent(HomeActivity.this, TicketPurchaseActivity.class);
             startActivity(i);
         });
+
+        Faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, FaqActivity.class);
+                startActivity(i);
+            }
+        });
+        RecyclerView recyclerView = findViewById(R.id.berita_rv);
+
+        Retrofit retrofit = RetrofitClient.getInstance();
+        NewsServiceApi newsServiceApi = retrofit.create(NewsServiceApi.class);
+        Call<NewsResponse> allNews = newsServiceApi.getAllNews(RetrofitClient.getApiKey());
+        allNews.enqueue(new Callback<NewsResponse>() {
+            @Override
+            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                NewsResponse body = response.body();
+                News_RecyclerViewAdapter adapter = new News_RecyclerViewAdapter(getApplicationContext(), body);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
+
+            @Override
+            public void onFailure(Call<NewsResponse> call, Throwable t) {
+                t.getMessage();
+            }
+        });
+
         riwayatPemesananImageView.setOnClickListener(v -> {
             Intent intent = new Intent(this, PurchaseHistoryActivity.class);
             startActivity(intent);
         });
+
     }
 
 }

@@ -42,8 +42,16 @@ android {
     }
 
 }
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
 
 dependencies {
+    implementation 'com.mikhaellopez:circularimageview:4.3.1'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
@@ -55,17 +63,20 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
 
-    implementation 'com.squareup.retrofit2:retrofit:2.8.0'
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-jackson
     implementation group: 'com.squareup.retrofit2', name: 'converter-jackson', version: '2.9.0'
 // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.26'
-    annotationProcessor 'org.projectlombok:lombok:1.18.26'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.google.code.gson:gson:2.8.7'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.8.0'
+
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
 //    implementation 'com.google.api-client:google-api-client:1.30.5'
     implementation 'com.github.unaisulhadi:emojiratingbar:1.0.4'
+
 
 
 

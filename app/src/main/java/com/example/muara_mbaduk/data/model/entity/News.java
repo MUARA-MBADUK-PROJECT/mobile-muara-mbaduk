@@ -1,15 +1,12 @@
 package com.example.muara_mbaduk.data.model.entity;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.time.LocalDateTime;
-
-public class Tiket {
+public class News {
     private String id;
     private String title;
-    private String category;
-    private int normal_day;
-    private int weekend_day;
+    private String slug;
+    private String body;
+    private String thumbnail;
+    private String author;
     private String created_at;
     private String updated_at;
 
@@ -29,28 +26,36 @@ public class Tiket {
         this.title = title;
     }
 
-    public String getCategory() {
-        return category;
+    public String getSlug() {
+        return slug;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
-    public int getNormal_day() {
-        return normal_day;
+    public String getBody() {
+        return body;
     }
 
-    public void setNormal_day(int normal_day) {
-        this.normal_day = normal_day;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public int getWeekend_day() {
-        return weekend_day;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setWeekend_day(int weekend_day) {
-        this.weekend_day = weekend_day;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getCreated_at() {
