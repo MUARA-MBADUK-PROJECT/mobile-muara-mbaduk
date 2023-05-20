@@ -132,5 +132,26 @@ public class UtilMethod {
         // Print the formatted date
         return formattedDate;
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String stringFormatedWithTimeStampsFormat(String dateTimeString){
+
+            // Parse the input date string into an Instant
+            Instant instant = Instant.parse(dateTimeString);
+
+            // Convert the Instant to LocalDateTime in the system default time zone
+            LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+            // Create a DateTimeFormatter with the desired output pattern
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm:ss");
+
+            // Format the LocalDateTime into a formatted date string
+            String formattedDate = dateTime.format(formatter);
+
+            // Print the formatted date
+
+        return formattedDate;
+    }
     
 }
