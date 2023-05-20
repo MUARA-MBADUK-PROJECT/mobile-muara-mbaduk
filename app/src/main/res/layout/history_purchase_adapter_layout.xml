@@ -36,7 +36,6 @@
                 <TextView
                     android:id="@+id/status_history_textview"
                     android:paddingHorizontal="10dp"
-                    android:background="@drawable/background_yellow_status"
                     android:textColor="@color/white"
                     android:text="Menunggu Pembayaran"
                     android:layout_width="wrap_content"

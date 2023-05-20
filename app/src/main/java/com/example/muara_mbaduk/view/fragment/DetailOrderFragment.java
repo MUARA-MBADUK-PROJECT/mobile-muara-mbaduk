@@ -40,6 +40,7 @@ public class DetailOrderFragment extends Fragment {
     private TextView namaPemesanTextView,emailPemesanTextView,tanggalKunjunganTextView,jumlahPesanTiketTextView,priceTiketTextView,
             jumlahPesanTiketMobilTextView,
             priceTiketMobilTextView,
+    paymentMetodeTextView,
             jumlahPesanTiketMotorTextView,priceTiketMotorTextView,totalPembayaranTextView;
     private RealmHelper realmHelper;
     private UserModel userModel;
@@ -96,7 +97,8 @@ public class DetailOrderFragment extends Fragment {
         jumlahPesanTiketMotorTextView.setText(String.valueOf(jumlahPesanTiketMotor));
         jumlahPesanTiketMobilTextView.setText(String.valueOf(jumlahPesanTiketMobil));;
         totalPembayaranTextView.setText("Rp."+historyPayment.getGross_amount());
-        
+        paymentMetodeTextView.setText(historyPayment.getType());
+
     }
 
     @Override
@@ -125,6 +127,7 @@ public class DetailOrderFragment extends Fragment {
         priceTiketMotorTextView = view.findViewById(R.id.price_tiket_motor_textview);
         priceTiketMobilTextView = view.findViewById(R.id.price_tiket_mobil_textview);
         totalPembayaranTextView = view.findViewById(R.id.total_pembayaran_textview);
+        paymentMetodeTextView = view.findViewById(R.id.payment_metode_detail_textview);
         return view;
     }
 }

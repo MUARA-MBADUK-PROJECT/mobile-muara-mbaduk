@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,15 +23,18 @@ import android.widget.Toast;
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.model.entity.HistoryPayment;
 import com.example.muara_mbaduk.model.entity.PaymentCheckout;
+import com.example.muara_mbaduk.utils.UtilMethod;
 import com.hadi.emojiratingbar.EmojiRatingBar;
 
 public class OrderFragment extends Fragment {
 
-    private TextView noRekeningTextView , instructionsPaymentTextView,paymentMethodTextView,kodedOrderTextview,statusTextView,jumlahPembayaranBank;
+    private TextView noRekeningTextView , instructionsPaymentTextView,paymentMethodTextView,kodedOrderTextview,statusTextView,jumlahPembayaranBank,
+    bankNameTextView,expiredPaymentTextView;
     EmojiRatingBar emojiRatingBar;
     private Button copyNoRekeningButton;
     private static final String NO_REKENING = "no_rekening";
     private PaymentCheckout paymentCheckout;
+    private ImageView bankImageView;
     private LinearLayout bankInstructionPayment,cashInstructionPayment,statusCompletePayment;
 
     private HistoryPayment historyPayment;
@@ -69,8 +73,13 @@ public class OrderFragment extends Fragment {
         });
         kodedOrderTextview.setText(paymentCheckout.getOrder_id());
         paymentMethodTextView.setText(paymentCheckout.getType());
-        statusTextView.setText(paymentCheckout.getStatus());
-
+        if(paymentCheckout.getStatus().equalsIgnoreCase("pending")){
+            statusTextView.setText("Menunggu Pembayaran");
+            statusTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_yellow_status));
+        }else{
+            statusTextView.setText("Pembayaran Selesai");
+            statusTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_green_status));
+        }
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,7 +107,11 @@ public class OrderFragment extends Fragment {
         statusCompletePayment = view.findViewById(R.id.status_complete_payment);
         noRekeningTextView = view.findViewById(R.id.no_rekening_textview);
         jumlahPembayaranBank = view.findViewById(R.id.jumlah_pembayaran_bank);
-
+        bankImageView = view.findViewById(R.id.bank_imageview);
+        bankNameTextView = view.findViewById(R.id.bank_name_textview);
+        expiredPaymentTextView = view.findViewById(R.id.expired_textview);
+        String dateFormated = UtilMethod.timeStampToDateFormated(historyPayment.getExpire_at());
+        expiredPaymentTextView.setText("Segera lakukan pembayaran sebelum "+dateFormated+" WIB");
         if(paymentCheckout.getType().equalsIgnoreCase("cash")){
             cashInstructionPayment.setVisibility(View.VISIBLE);
         }else{
@@ -106,6 +119,13 @@ public class OrderFragment extends Fragment {
             noRekeningTextView.setText(historyPayment.getVa_numbers().getVa_number());
             jumlahPembayaranBank.setText("Rp."+historyPayment.getGross_amount());
             bankInstructionPayment.setVisibility(View.VISIBLE);
+            if(historyPayment.getVa_numbers().getBank().equalsIgnoreCase("bni")){
+                bankImageView.setImageDrawable(getResources().getDrawable(R.drawable.bni_images));
+                bankNameTextView.setText("BNI (Bank Negara Indonesia)");
+            }else if(historyPayment.getVa_numbers().getBank().equalsIgnoreCase("bri")){
+                bankImageView.setImageDrawable(getResources().getDrawable(R.drawable.bri_image));
+                bankNameTextView.setText("BRI (Bank Republik Indonesia)");
+            }
         }
         if(!paymentCheckout.getStatus().equalsIgnoreCase("pending")){
             statusCompletePayment.setVisibility(View.VISIBLE);

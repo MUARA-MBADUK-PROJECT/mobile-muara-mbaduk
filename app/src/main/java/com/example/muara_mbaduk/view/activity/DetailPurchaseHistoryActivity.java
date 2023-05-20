@@ -9,9 +9,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.muara_mbaduk.R;
@@ -41,7 +43,8 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
     ImageView barcodeImageView;
     Button detailPemesananButton,checkStatusPembayaranInDetailButton;
     PaymentCheckout paymentCheckout;
-
+    Toolbar tolbar;
+    TextView orderIdTextView;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
         progresIndicator.show();
         PaymentServiceApi serviceApi = RetrofitClient.getInstance().create(PaymentServiceApi.class);
         Call<HistoryResponse> responseCall = serviceApi.findDetailPayment(RetrofitClient.getApiKey(), paymentCheckout.getId());
+        orderIdTextView.setText(paymentCheckout.getOrder_id().toUpperCase());
         responseCall.enqueue(new Callback<HistoryResponse>() {
             @Override
             public void onResponse(Call<HistoryResponse> call, Response<HistoryResponse> response) {
@@ -85,6 +89,10 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_order, orderFragment).commit();
             kodeOrderLayout.setVisibility(View.GONE);
         });
+
+        tolbar.setOnClickListener(v -> {
+            onBackPressed();
+        });
     }
 
     public void initComponents(){
@@ -96,5 +104,7 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
         barcodeImageView = findViewById(R.id.barcode_imageview);
         Bundle bundle = getIntent().getExtras();
         paymentCheckout = (PaymentCheckout) bundle.getSerializable("checkoutData");
+        tolbar = findViewById(R.id.detail_ticket_activity_toolbar);
+        orderIdTextView = findViewById(R.id.order_id_textview);
     }
 }

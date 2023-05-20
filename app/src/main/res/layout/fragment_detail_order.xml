@@ -52,6 +52,23 @@
             android:text="20 maret 2022"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/payment_metode"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/color_text_black"
+            android:fontFamily="@font/poppins"
+            android:text="Metode Pembayaran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/payment_metode_detail_textview"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/color_text_black"
+            android:fontFamily="@font/poppins"
+            android:text="-"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <View
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.model.response.PaymentHistoryResponse;
+import com.example.muara_mbaduk.utils.UtilMethod;
 import com.example.muara_mbaduk.view.activity.DetailPurchaseHistoryActivity;
 
 public class PurchaseHistoryAdapter extends RecyclerView.Adapter<PurchaseHistoryAdapter.PurchaseHistoryViewHolder> {
@@ -37,8 +38,15 @@ public class PurchaseHistoryAdapter extends RecyclerView.Adapter<PurchaseHistory
     @Override
     public void onBindViewHolder(@NonNull PurchaseHistoryViewHolder holder, int position) {
         holder.orderidTextView.setText(paymentHistoryResponse.getData().get(position).getOrder_id());
-        holder.dateOrderTextView.setText(paymentHistoryResponse.getData().get(position).getDate());
-        holder.statusTextView.setText(paymentHistoryResponse.getData().get(position).getStatus());
+        String formated = UtilMethod.stringToDateFormated(paymentHistoryResponse.getData().get(position).getDate());
+        holder.dateOrderTextView.setText(formated);
+        if(!paymentHistoryResponse.getData().get(position).getStatus().equalsIgnoreCase("pending")){
+            holder.statusTextView.setText("Pembayaran Selesai");
+            holder.statusTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.background_green_status));
+        }else{
+            holder.statusTextView.setText("Menunggu Pembayaran");
+            holder.statusTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.background_yellow_status));
+        }
         // to detail activity
         holder.detailBtn.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailPurchaseHistoryActivity.class);
