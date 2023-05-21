@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp"
+    android:background="@color/white"
+    >
+    <TextView
+        android:layout_marginBottom="35dp"
+        android:textAlignment="center"
+        android:textColor="@color/color_text_black"
+        android:fontFamily="@font/poppins"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="Syarat Dan Ketentuan Berkemah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/color_text_black"
+        android:textSize="14sp"
+        android:id="@+id/sk1_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/sk1_button"
+            android:fontFamily="@font/poppins"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/button_rounded_blue"
+            android:textSize="12sp"
+            android:text="Setuju Dan Lanjutkan"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+</LinearLayout>

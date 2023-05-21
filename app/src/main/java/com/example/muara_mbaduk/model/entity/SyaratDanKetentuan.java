@@ -5,7 +5,17 @@ public class SyaratDanKetentuan {
     private String slug;
     private String body;
     private String created_at;
+    private String pages;
     private String updated_at;
+
+
+    public String getPages() {
+        return pages;
+    }
+
+    public void setPages(String pages) {
+        this.pages = pages;
+    }
 
     public String getId() {
         return id;

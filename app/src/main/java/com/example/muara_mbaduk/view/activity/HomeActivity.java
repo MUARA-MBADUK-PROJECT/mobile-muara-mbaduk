@@ -1,10 +1,13 @@
 package com.example.muara_mbaduk.view.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,12 +21,16 @@ import com.example.muara_mbaduk.data.adapter.News_RecyclerViewAdapter;
 import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
 import com.example.muara_mbaduk.data.local.model.UserModel;
 
+import com.example.muara_mbaduk.data.remote.SyaratDanKetentuanServiceApi;
 import com.example.muara_mbaduk.model.response.NewsResponse;
 import com.example.muara_mbaduk.data.remote.NewsServiceApi;
+import com.example.muara_mbaduk.model.response.SyaratDanKetentuan2Response;
+import com.example.muara_mbaduk.model.response.SyaratDanKetentuanResponse;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 
 import com.example.muara_mbaduk.utils.UtilMethod;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -35,11 +42,15 @@ import retrofit2.Retrofit;
 
 public class HomeActivity extends AppCompatActivity {
     ImageView hargatiket;
-    TextView displayNameTextView;
+    TextView displayNameTextView,skTextView;
     ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView,Faq, sk;
     RealmHelper realmHelper;
     Realm realm;
     UserModel userModel;
+    Dialog dialog;
+    Button agreeTermsBtn;
+    View view;
+
 
     private boolean doubleBackToExitPressedOnce = false;
     @Override
@@ -63,19 +74,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        realm = Realm.getDefaultInstance();
-        realmHelper = new RealmHelper(realm);
-        userModel = realmHelper.findByJwt(UtilMethod.getJwt(this));
-        riwayatPemesananImageView = findViewById(R.id.riwayat_pemesan_btn);
-        avatarImageView = findViewById(R.id.avatar_imageView);
-        displayNameTextView = findViewById(R.id.displayName_textview);
-        Picasso.get().load(userModel.getImages()).into(avatarImageView);
-        displayNameTextView.setText(userModel.getFullname());
-        hargatiket = findViewById(R.id.hargatiket_id);
-        paketcamp = findViewById(R.id.paketcamp);
-        pemesananTiket = findViewById(R.id.pembeliantiket);
-        Faq = findViewById(R.id.faq_iv);
-        sk = findViewById(R.id.sk);
+        initComponents();
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_sk2);
+        dialog.setCancelable(true);
+        skTextView = dialog.findViewById(R.id.sk1_textview);
+        agreeTermsBtn = dialog.findViewById(R.id.sk1_button);
+        SyaratDanKetentuanServiceApi serviceApi = RetrofitClient.getInstance().create(SyaratDanKetentuanServiceApi.class);
+
         sk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,9 +107,32 @@ public class HomeActivity extends AppCompatActivity {
 
         pemesananTiket.setOnClickListener(v -> {
             Intent i = new Intent(HomeActivity.this, TicketPurchaseActivity.class);
-            startActivity(i);
-        });
+            Call<SyaratDanKetentuan2Response> responseCall = serviceApi.getSk2(RetrofitClient.getApiKey());
+            responseCall.enqueue(new Callback<SyaratDanKetentuan2Response>() {
+                @Override
+                public void onResponse(Call<SyaratDanKetentuan2Response> call, Response<SyaratDanKetentuan2Response> response) {
+                    SyaratDanKetentuan2Response body = response.body();
+                    System.out.println(body.getData().getBody());
+                    if(response.isSuccessful()){
+                        skTextView.setText(Html.fromHtml(response.body().getData().getBody()));
+                        dialog.show();
+                        agreeTermsBtn.setOnClickListener(v1 -> {
+                            dialog.dismiss();
+                            startActivity(i);
+                        });
+                    }else{
+                        Snackbar snackbar = UtilMethod.genereateErrorsSnackbar(view, getApplicationContext(), "Gagal mengambil Syarat Dan ketentuan");
+                        snackbar.show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<SyaratDanKetentuan2Response> call, Throwable t) {
+                    Snackbar snackbar = UtilMethod.genereateErrorsSnackbar(view, getApplicationContext(), t.getMessage());
+                    snackbar.show();
+                }
+            });
 
+        });
         Faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,7 +156,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<NewsResponse> call, Throwable t) {
-                t.getMessage();
+
             }
         });
 
@@ -135,5 +164,23 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PurchaseHistoryActivity.class);
             startActivity(intent);
         });
+    }
+
+    public void initComponents(){
+        realm = Realm.getDefaultInstance();
+        realmHelper = new RealmHelper(realm);
+        userModel = realmHelper.findByJwt(UtilMethod.getJwt(this));
+        riwayatPemesananImageView = findViewById(R.id.riwayat_pemesan_btn);
+        avatarImageView = findViewById(R.id.avatar_imageView);
+        displayNameTextView = findViewById(R.id.displayName_textview);
+        Picasso.get().load(userModel.getImages()).into(avatarImageView);
+        displayNameTextView.setText(userModel.getFullname());
+        hargatiket = findViewById(R.id.hargatiket_id);
+        paketcamp = findViewById(R.id.paketcamp);
+        pemesananTiket = findViewById(R.id.pembeliantiket);
+        Faq = findViewById(R.id.faq_iv);
+        sk = findViewById(R.id.sk);
+
+        view = findViewById(R.id.home_layout);
     }
 }
