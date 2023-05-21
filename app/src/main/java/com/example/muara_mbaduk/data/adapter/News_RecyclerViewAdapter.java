@@ -1,10 +1,13 @@
 package com.example.muara_mbaduk.data.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.model.response.NewsResponse;
+import com.example.muara_mbaduk.utils.UtilMethod;
+import com.example.muara_mbaduk.view.activity.BeritaDeskActivity;
+import com.example.muara_mbaduk.view.activity.HomeActivity;
 import com.squareup.picasso.Picasso;
 
 public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_RecyclerViewAdapter.MyViewHolder> {
@@ -32,10 +38,22 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Picasso.get().load(newsResponse.getData().get(position).getThumbnail()).into(holder.gambar);
-        holder.tanggal.setText(newsResponse.getData().get(position).getUpdated_at());
+        holder.tanggal.setText(newsResponse.getData().get(position).getCreated_at());
         holder.judul.setText(newsResponse.getData().get(position).getTitle());
+        holder.newsRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent desk = new Intent(context, BeritaDeskActivity.class);
+                desk.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                desk.putExtra("JUDUL", newsResponse.getData().get(position).getTitle());
+                desk.putExtra("GAMBAR", newsResponse.getData().get(position).getThumbnail());
+                desk.putExtra("DESKRIPSI", newsResponse.getData().get(position).getBody());
+                context.startActivity(desk);
+            }
+        });
     }
 
     @Override
@@ -44,12 +62,14 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout newsRow;
         ImageView gambar;
         TextView tanggal;
         TextView judul;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            newsRow = itemView.findViewById(R.id.news_row);
             gambar = itemView.findViewById(R.id.berita_iv);
             tanggal = itemView.findViewById(R.id.berita_tanggal_tv);
             judul  = itemView.findViewById(R.id.berita_desk_tv);
