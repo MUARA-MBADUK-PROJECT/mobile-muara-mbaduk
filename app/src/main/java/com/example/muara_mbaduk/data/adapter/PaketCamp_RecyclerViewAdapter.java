@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.model.response.PackagesResponse;
-import com.example.muara_mbaduk.model.response.PackagesResponse;
 import com.example.muara_mbaduk.view.activity.PaketDeskActivity;
 import com.squareup.picasso.Picasso;
 

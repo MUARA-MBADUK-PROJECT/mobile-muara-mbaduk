@@ -18,4 +18,6 @@ public interface PaymentServiceApi {
     Call<PaymentCheckoutResponse> checkoutBank(@Header("Authorization") String authHeader, @Body CheckoutTicketRequest checkoutTicketRequest);
     @GET("payments/user/{id}")
     Call<PaymentHistoryResponse> findAllPayment(@Header("Authorization") String authHeader, @Path("id") String id);
+
+
 }
