@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +40,14 @@ public class PaketDeskActivity extends AppCompatActivity {
         TextView tvNama = findViewById(R.id.nama_paket_camp);
         TextView tvHarga = findViewById(R.id.harga_paket_camp);
         TextView tvDesk = findViewById(R.id.deskripsi);
+        Button pesanSekarang = findViewById(R.id.btn_pesanSekarang);
+        pesanSekarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PaketDeskActivity.this, TicketPurchaseActivity.class);
+                startActivity(i);
+            }
+        });
 
         Picasso.get().load(gambar).into(ivGambar);
         tvNama.setText(nama);

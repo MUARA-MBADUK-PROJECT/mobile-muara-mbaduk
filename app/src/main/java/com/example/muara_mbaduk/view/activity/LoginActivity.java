@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent signnIntent = gsc.getSignInIntent();
                 startActivityForResult(signnIntent , 102);
 //                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
