@@ -36,7 +36,7 @@ import retrofit2.Retrofit;
 public class HomeActivity extends AppCompatActivity {
     ImageView hargatiket;
     TextView displayNameTextView;
-    ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView,Faq;
+    ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView,Faq, sk;
     RealmHelper realmHelper;
     Realm realm;
     UserModel userModel;
@@ -75,6 +75,14 @@ public class HomeActivity extends AppCompatActivity {
         paketcamp = findViewById(R.id.paketcamp);
         pemesananTiket = findViewById(R.id.pembeliantiket);
         Faq = findViewById(R.id.faq_iv);
+        sk = findViewById(R.id.sk);
+        sk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, SyaratDanKetentuanActivity.class);
+                startActivity(i);
+            }
+        });
         hargatiket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
