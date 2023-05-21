@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 public class PaketCamp_RecyclerViewAdapter extends RecyclerView.Adapter<PaketCamp_RecyclerViewAdapter.MyViewHolder> {
     Context context;
-    private static final String TAG = "PaketCamp_RecyclerViewAdapter";
+
 //    ArrayList<PaketCampModel> paketCampModels;
     PackagesResponse packagesResponse;
     public PaketCamp_RecyclerViewAdapter (Context context, PackagesResponse packagesResponse){
@@ -41,7 +41,7 @@ public class PaketCamp_RecyclerViewAdapter extends RecyclerView.Adapter<PaketCam
 
     @Override
     public void onBindViewHolder(@NonNull PaketCamp_RecyclerViewAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
+
         holder.tvnama.setText(packagesResponse.getData().get(position).getTitle());
         holder.tvharga.setText(String.valueOf(packagesResponse.getData().get(position).getPrice()));
         Picasso.get().load(packagesResponse.getData().get(position).getImage()).into(holder.imageView);
@@ -49,7 +49,7 @@ public class PaketCamp_RecyclerViewAdapter extends RecyclerView.Adapter<PaketCam
             @Override
             public void onClick(View v) {
                 int pos = holder.getPosition();
-                Log.d(TAG, "onClickk : click on "+pos);
+
             Context context = v.getContext();
             Intent intent = new Intent(context, PaketDeskActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

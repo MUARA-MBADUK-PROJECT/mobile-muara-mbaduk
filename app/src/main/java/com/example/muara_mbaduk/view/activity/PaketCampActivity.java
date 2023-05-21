@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.PaketCamp_RecyclerViewAdapter;
@@ -22,10 +23,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class PaketCampActivity extends AppCompatActivity{
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paket_camp);
+        toolbar = findViewById(R.id.paketCamp_toolbar);
+        toolbar.setOnClickListener(v -> {
+            onBackPressed();
+        });
         RecyclerView recyclerView = findViewById(R.id.paketCampRecyclerView);
 
         Retrofit retrofit = RetrofitClient.getInstance();
@@ -49,5 +55,10 @@ public class PaketCampActivity extends AppCompatActivity{
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PaketCampActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 }

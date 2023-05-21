@@ -30,7 +30,6 @@ public class PaketDeskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paket_desk);
-        Log.d(TAG, "oncreate: started.");
         String gambar = getIntent().getStringExtra("GAMBAR");
         String nama = getIntent().getStringExtra("NAMA");
         String harga = getIntent().getStringExtra("HARGA");
