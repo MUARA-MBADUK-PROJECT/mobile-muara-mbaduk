@@ -23,13 +23,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import androidx.appcompat.widget.Toolbar;
 
 public class PaketDeskActivity extends AppCompatActivity {
-    private static final String TAG = "PaketDeskActivity";
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paket_desk);
+        toolbar = findViewById(R.id.app_paket_camp_toolbar);
+        toolbar.setOnClickListener(v -> {
+            onBackPressed();
+        });
         String gambar = getIntent().getStringExtra("GAMBAR");
         String nama = getIntent().getStringExtra("NAMA");
         String harga = getIntent().getStringExtra("HARGA");
@@ -74,5 +79,12 @@ public class PaketDeskActivity extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PaketCampActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
+        startActivity(intent);
     }
 }
