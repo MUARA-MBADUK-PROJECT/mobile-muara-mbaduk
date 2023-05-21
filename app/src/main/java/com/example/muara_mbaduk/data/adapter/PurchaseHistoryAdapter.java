@@ -2,6 +2,7 @@ package com.example.muara_mbaduk.data.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
@@ -35,17 +37,21 @@ public class PurchaseHistoryAdapter extends RecyclerView.Adapter<PurchaseHistory
         return new PurchaseHistoryViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull PurchaseHistoryViewHolder holder, int position) {
         holder.orderidTextView.setText(paymentHistoryResponse.getData().get(position).getOrder_id());
         String formated = UtilMethod.stringToDateFormated(paymentHistoryResponse.getData().get(position).getDate());
         holder.dateOrderTextView.setText(formated);
-        if(!paymentHistoryResponse.getData().get(position).getStatus().equalsIgnoreCase("pending")){
-            holder.statusTextView.setText("Pembayaran Selesai");
-            holder.statusTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.background_green_status));
-        }else{
+        if(paymentHistoryResponse.getData().get(position).getStatus().equalsIgnoreCase("pending")){
             holder.statusTextView.setText("Menunggu Pembayaran");
             holder.statusTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.background_yellow_status));
+        }else if(paymentHistoryResponse.getData().get(position).getStatus().equalsIgnoreCase("expire")){
+            holder.statusTextView.setText("Pembayaran Kadaluarsa");
+            holder.statusTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.background_red_status));
+        }else{
+            holder.statusTextView.setText("Pembayaran Telah Selesai");
+            holder.statusTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.background_green_status));
         }
         // to detail activity
         holder.detailBtn.setOnClickListener(v -> {

@@ -1,6 +1,8 @@
 package com.example.muara_mbaduk.model.entity;
 
-public class Bank {
+import java.io.Serializable;
+
+public class Bank implements Serializable {
 
     private String bank;
     private String va_number;

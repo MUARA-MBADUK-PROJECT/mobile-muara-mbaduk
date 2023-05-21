@@ -1,8 +1,9 @@
 package com.example.muara_mbaduk.model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HistoryPayment extends PaymentCheckout {
+public class HistoryPayment extends PaymentCheckout implements Serializable {
 
     private Bank va_numbers;
 

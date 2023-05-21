@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class DetailOrderFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
     private HistoryPayment historyPayment;
+
     private TextView namaPemesanTextView,emailPemesanTextView,tanggalKunjunganTextView,jumlahPesanTiketTextView,priceTiketTextView,
             jumlahPesanTiketMobilTextView,
             priceTiketMobilTextView,
@@ -49,14 +51,8 @@ public class DetailOrderFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DetailOrderFragment(HistoryPayment payment) {
-        // Required empty public constructor
-        this.historyPayment = payment;
+    public DetailOrderFragment() {
         realmHelper = new RealmHelper(Realm.getDefaultInstance());
-    }
-
-    public HistoryPayment getHistoryPayment() {
-        return historyPayment;
     }
 
     // TODO: Rename and change types and number of parameters
@@ -107,6 +103,13 @@ public class DetailOrderFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+                Log.i("bundle", "onCreateView: bundle not null ");
+                historyPayment = (HistoryPayment) getArguments().getSerializable("detail-history");
+                Log.i("bundle", "onCreateView: "+historyPayment.getPackages().size());
+
+                Log.e("bundle", "onCreateView: bundle null");
+
         }
     }
 
@@ -128,6 +131,7 @@ public class DetailOrderFragment extends Fragment {
         priceTiketMobilTextView = view.findViewById(R.id.price_tiket_mobil_textview);
         totalPembayaranTextView = view.findViewById(R.id.total_pembayaran_textview);
         paymentMetodeTextView = view.findViewById(R.id.payment_metode_detail_textview);
+
         return view;
     }
 }
