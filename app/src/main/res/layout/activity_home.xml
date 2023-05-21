@@ -1,216 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/home_layout"
     android:background="@drawable/home_bg"
     tools:context=".view.activity.HomeActivity"
     android:orientation="vertical"
     >
 
-    <ImageView
-        android:layout_width="133dp"
-        android:layout_height="59dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/logo_homepg"></ImageView>
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginBottom="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <ImageView
-            android:id="@+id/avatar_imageView"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/profile_homepg"></ImageView>
-        <TextView
-            android:layout_marginStart="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hi, "
-            android:textSize="15dp"
-            android:layout_gravity="center_vertical"
-            ></TextView>
-        <TextView
-            android:id="@+id/displayName_textview"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Roni"
-            android:textSize="15dp"/>
-    </LinearLayout>
-    <TextView
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Layanan"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:layout_marginStart="25dp"
-        ></TextView>
-    <TableLayout
-        android:layout_margin="10dp"
-        android:elevation="25dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:background="@drawable/rounded_home_shape"
-        android:orientation="horizontal">
-        <TableRow
-            android:layout_height="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="133dp"
+            android:layout_height="59dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logo_homepg"></ImageView>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="25dp"
             android:layout_width="wrap_content"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             >
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_margin="20dp"
-                android:layout_height="100dp"
-                android:layout_width="80dp"
-                android:gravity="center"
-                >
-                <ImageView
-                    android:id="@+id/pembeliantiket"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/cart_homepg"></ImageView>
-                <TextView
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Pemesanan Tiket"></TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_margin="20dp"
-                android:layout_height="100dp"
-                android:layout_width="80dp"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-                <ImageView
-                    android:id="@+id/riwayat_pemesan_btn"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/riwayat_homepg"></ImageView>
-                <TextView
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Riwayat Pemesanan"></TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_margin="20dp"
-                android:layout_height="100dp"
-                android:layout_width="80dp"
-                >
-                <ImageView
-                    android:id="@+id/paketcamp"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/pktcamp_homepg"></ImageView>
-                <TextView
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Paket Camping"></TextView>
-            </LinearLayout>
-
-        </TableRow>
-        <TableRow
-            android:layout_height="match_parent"
+            <ImageView
+                android:id="@+id/avatar_imageView"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/profile_homepg"></ImageView>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hi, "
+                android:textSize="15dp"
+                android:layout_gravity="center_vertical"
+                ></TextView>
+            <TextView
+                android:id="@+id/displayName_textview"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Roni"
+                android:textSize="15dp"/>
+        </LinearLayout>
+        <TextView
+            android:textStyle="bold"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Layanan"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:layout_marginStart="25dp"
+            ></TextView>
+        <TableLayout
+            android:layout_margin="10dp"
+            android:elevation="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:background="@drawable/rounded_home_shape"
+            android:orientation="horizontal">
+            <TableRow
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:id="@+id/pembeliantiket"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/cart_homepg"></ImageView>
+                    <TextView
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Pemesanan Tiket"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_margin="20dp"
+                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:id="@+id/riwayat_pemesan_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/riwayat_homepg"></ImageView>
+                    <TextView
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Riwayat Pemesanan"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    >
+                    <ImageView
+                        android:id="@+id/paketcamp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/pktcamp_homepg"></ImageView>
+                    <TextView
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Paket Camping"></TextView>
+                </LinearLayout>
+
+            </TableRow>
+            <TableRow
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                >
+                <LinearLayout
+
+                    android:layout_margin="20dp"
+                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:id="@+id/hargatiket_id"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/hargatiket_homepg"></ImageView>
+                    <TextView
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Harga Tiket"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_margin="20dp"
+                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:id="@+id/sk"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/sk_homepg"></ImageView>
+                    <TextView
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Syarat Dan Ketentuan"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_margin="20dp"
+                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:id="@+id/faq_iv"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/faq_homepg"></ImageView>
+                    <TextView
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="FAQ"></TextView>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="40dp"
+            android:text="Berita Terbaru"
+            android:textColor="@color/color_text_black"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            tools:ignore="TextSizeCheck"></TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/berita_rv"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
             >
-            <LinearLayout
+        </androidx.recyclerview.widget.RecyclerView>
 
-                android:layout_margin="20dp"
-                android:layout_height="100dp"
-                android:layout_width="80dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                >
-                <ImageView
-                    android:id="@+id/hargatiket_id"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/hargatiket_homepg"></ImageView>
-                <TextView
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Harga Tiket"></TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_margin="20dp"
-                android:layout_height="100dp"
-                android:layout_width="80dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                >
-                <ImageView
-                    android:id="@+id/sk"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/sk_homepg"></ImageView>
-                <TextView
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Syarat Dan Ketentuan"></TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_margin="20dp"
-                android:layout_height="100dp"
-                android:layout_width="80dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                >
-                <ImageView
-                    android:id="@+id/faq_iv"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/faq_homepg"></ImageView>
-                <TextView
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="FAQ"></TextView>
-            </LinearLayout>
-        </TableRow>
-    </TableLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
-        android:text="Berita Terbaru"
-        android:textColor="@color/color_text_black"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        tools:ignore="TextSizeCheck"></TextView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/berita_rv"
-        android:layout_margin="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbars="horizontal"
-        >
-    </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
 
-</LinearLayout>
+</ScrollView>

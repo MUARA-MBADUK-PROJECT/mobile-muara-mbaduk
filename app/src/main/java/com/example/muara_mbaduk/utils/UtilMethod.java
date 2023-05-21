@@ -144,14 +144,14 @@ public class UtilMethod {
             LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
 
             // Create a DateTimeFormatter with the desired output pattern
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm");
 
             // Format the LocalDateTime into a formatted date string
             String formattedDate = dateTime.format(formatter);
 
             // Print the formatted date
 
-        return formattedDate;
+        return formattedDate +" WIB";
     }
     
 }
