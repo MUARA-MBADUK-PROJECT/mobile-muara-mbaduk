@@ -11,6 +11,14 @@ public class CheckoutTicketRequest {
     private boolean camping;
     private String bank;
 
+    public CheckoutTicketRequest(String user_id, String date, boolean camping, String bank, List<PackagePurchaseRequest> packages, List<TiketPurchaseRequest> tickets) {
+        this.user_id = user_id;
+        this.date = date;
+        this.camping = camping;
+        this.bank = bank;
+        this.packages = packages;
+        this.tickets = tickets;
+    }
 
     private List<PackagePurchaseRequest> packages;
     private List<TiketPurchaseRequest> tickets;

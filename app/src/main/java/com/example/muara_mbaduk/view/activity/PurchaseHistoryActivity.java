@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +34,8 @@ import retrofit2.Response;
 public class PurchaseHistoryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Toolbar toolbar;
+    private LinearLayout notFoundLinearLayout;
+    Button btnPesanTiket;
     private PaymentServiceApi paymentServiceApi;
     RealmHelper realmHelper;
     @Override
@@ -44,6 +48,8 @@ public class PurchaseHistoryActivity extends AppCompatActivity {
         View view = findViewById(R.id.layout_history_payment);
         toolbar = findViewById(R.id.detail_ticket_activity_toolbar);
         recyclerView = findViewById(R.id.history_purchase_recycleview);
+        notFoundLinearLayout = findViewById(R.id.layout_not_found_tiket_history_linearlayout);
+        btnPesanTiket = findViewById(R.id.btn_pesan_tiket_in_history_button);
         String jwt = UtilMethod.getJwt(this);
         UserModel userModel = realmHelper.findByJwt(jwt);
         Call<PaymentHistoryResponse> responseCall = paymentServiceApi.findAllPayment(RetrofitClient.getApiKey(), userModel.getId());
@@ -55,6 +61,15 @@ public class PurchaseHistoryActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 PurchaseHistoryAdapter adapter = new PurchaseHistoryAdapter(getApplicationContext(), response.body());
                 recyclerView.setAdapter(adapter);
+                if(response.body().getData().size() == 0){
+                    notFoundLinearLayout.setVisibility(View.VISIBLE);
+                    btnPesanTiket.setOnClickListener(v -> {
+                        Intent intent = new Intent(PurchaseHistoryActivity.this , TicketPurchaseActivity.class);
+                        startActivity(intent);
+                    });
+                }else{
+                    notFoundLinearLayout.setVisibility(View.GONE);
+                }
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 toolbar.setOnClickListener(v -> {

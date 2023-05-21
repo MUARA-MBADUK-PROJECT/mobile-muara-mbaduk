@@ -30,14 +30,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.adapter.DetailKendaraanAdapter;
 import com.example.muara_mbaduk.data.adapter.DetailWisatawanAdapter;
+import com.example.muara_mbaduk.data.dto.DataOrder;
+import com.example.muara_mbaduk.data.dto.PackageOrder;
 import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
 import com.example.muara_mbaduk.data.local.model.UserModel;
 import com.example.muara_mbaduk.data.remote.PaymentServiceApi;
 import com.example.muara_mbaduk.model.Errors;
 import com.example.muara_mbaduk.model.entity.TiketPurchaseRequest;
 import com.example.muara_mbaduk.model.request.CheckoutTicketRequest;
-import com.example.muara_mbaduk.data.dto.DataOrder;
-import com.example.muara_mbaduk.data.dto.PackageOrder;
 import com.example.muara_mbaduk.model.response.PaymentCheckoutResponse;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
@@ -55,29 +55,39 @@ import retrofit2.Response;
 
 public class DetailPembeliActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView , kendaraanRecycleView;
+    private RecyclerView recyclerView, kendaraanRecycleView;
     private RadioGroup radioGroup;
-    private RadioButton bankRadioButton , bayarDitempatRadioButton , bniRadioButton, bcaRadioButton,briRadioButton;
-    ImageView imageRadioBank , imageRadioBayarDitempat;
-    private LinearLayout bankLinearLayout , bayarDitempatLinearLayout;
+    private RadioButton bankRadioButton, bayarDitempatRadioButton, bniRadioButton, bcaRadioButton, briRadioButton;
+    ImageView imageRadioBank, imageRadioBayarDitempat;
+    private LinearLayout bankLinearLayout, bayarDitempatLinearLayout;
     private RelativeLayout bniRelativeLayout, briRelativeLayout, bcaRelativeLayout;
     private RadioGroup bankRadioGroup;
     private Dialog bankPaymentDialog;
-    private ImageView bniImage , briImage , bcaImage;
+    private ImageView bniImage, briImage, bcaImage;
     private TextView totalBayarTextView;
     private String paymentMetode;
     private Button berikutnyaBtn;
-    private  boolean isCamping;
+    private boolean isCamping;
     private String date;
     private UserModel userModel;
     RealmHelper realmHelper;
     private PaymentServiceApi paymentServiceApi;
-
+    Toolbar toolbar;
+    View view;
+    DetailWisatawanAdapter detailWisatawanAdapter;
+    DetailKendaraanAdapter detailKendaraanAdapter;
+    PackageOrder packageOrder;
 
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail_pembeli);
+        initComponents();
+        iniFunction();
+        initDialog();
+        dialogAction();
         paymentServiceApi = RetrofitClient.getInstance().create(PaymentServiceApi.class);
         paymentMetode = "";
         date = "";
@@ -85,44 +95,20 @@ public class DetailPembeliActivity extends AppCompatActivity {
         SharedPreferences sh = getSharedPreferences("jwt", MODE_PRIVATE);
         String jwt = sh.getString("jwt", "not-found");
         userModel = realmHelper.findByJwt(jwt);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_pembeli);
-        Toolbar toolbar = findViewById(R.id.detail_ticket_activity_toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true); // menampilkan tombol kembali di toolbar
-        toolbar.setOnClickListener(v -> {
-            onBackPressed();
-        });
-        recyclerView = findViewById(R.id.detail_wisatawan_recycleview);
-        kendaraanRecycleView = findViewById(R.id.detail_kendaraan_recycleview);
-        totalBayarTextView = findViewById(R.id.jumlah_bayar_textView);
-        berikutnyaBtn = findViewById(R.id.btn_berikutnya);
+
         Bundle bundle = getIntent().getExtras();
         int total_bayar = bundle.getInt("total_bayar");
         isCamping = bundle.getBoolean("iscamping");
         date = bundle.getString("date");
-        totalBayarTextView.setText("Rp."+ total_bayar);
-        View view = findViewById(R.id.detail_relative_layout);
+        totalBayarTextView.setText("Rp." + total_bayar);
+        view = findViewById(R.id.detail_relative_layout);
         DataOrder myObject = (DataOrder) bundle.getSerializable("wisatawan");
-        PackageOrder packageOrder = (PackageOrder) bundle.getSerializable("package");
-        DetailWisatawanAdapter detailWisatawanAdapter = new DetailWisatawanAdapter(myObject);
+        packageOrder = (PackageOrder) bundle.getSerializable("package");
+        detailWisatawanAdapter = new DetailWisatawanAdapter(myObject);
         recyclerView.setAdapter(detailWisatawanAdapter);
-        LinearLayoutManager linearLayoutManager  = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         int size = getIntent().getExtras().getInt("size");
-        List<TiketPurchaseRequest> motor = myObject.getDataMotor();
-        List<TiketPurchaseRequest> mobil = myObject.getDataMobil();
-        radioGroup = findViewById(R.id.radio_group);
-        bankRadioButton = findViewById(R.id.radio_button_bank);
-        imageRadioBank = findViewById(R.id.checked_bank_image);
-        bayarDitempatRadioButton = findViewById(R.id.radio_button_bayar_ditempat);
-        imageRadioBayarDitempat = findViewById(R.id.checked_bayar_ditempat_image);
-        bankLinearLayout = findViewById(R.id.radio_layout_1);
-        bayarDitempatLinearLayout = findViewById(R.id.radio_layout_2);
-
-        initDialog();
-        dialogAction();
-
 
         bankLinearLayout.setOnClickListener(v -> {
             bankRadioButton.setSelected(true);
@@ -139,22 +125,27 @@ public class DetailPembeliActivity extends AppCompatActivity {
             paymentMetode = bayarDitempatRadioButton.getText().toString();
             System.out.println(paymentMetode);
         });
-        DetailKendaraanAdapter detailKendaraanAdapter = new DetailKendaraanAdapter(size ,myObject);
+        detailKendaraanAdapter = new DetailKendaraanAdapter(size, myObject);
         LinearLayoutManager linearLayoutKendaraan  = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         kendaraanRecycleView.setAdapter(detailKendaraanAdapter);
         kendaraanRecycleView.setLayoutManager(linearLayoutKendaraan);
         bankPaymentDialog.setOnDismissListener(dialog -> {
-           if(briRadioButton.isChecked()){
-               paymentMetode = briRadioButton.getText().toString();
-           }else if(bniRadioButton.isChecked()){
-               paymentMetode = bniRadioButton.getText().toString();
-           }else if(bcaRadioButton.isChecked()){
-               paymentMetode = bcaRadioButton.getText().toString();
-           }
+            if(briRadioButton.isChecked()){
+                paymentMetode = briRadioButton.getText().toString();
+            } else if (bniRadioButton.isChecked()) {
+                paymentMetode = bniRadioButton.getText().toString();
+            } else if (bcaRadioButton.isChecked()) {
+                paymentMetode = bcaRadioButton.getText().toString();
+            }
             System.out.println(paymentMetode);
         });
+    }
 
-
+    private void iniFunction() {
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true); // menampilkan tombol kembali di toolbar
+        toolbar.setOnClickListener(v -> {
+            onBackPressed();
+        });
         berikutnyaBtn.setOnClickListener(v -> {
             DataOrder dataOrder = detailWisatawanAdapter.getDataOrder();
             DataOrder dataOrder1 = detailKendaraanAdapter.getDataOrder();
@@ -162,57 +153,52 @@ public class DetailPembeliActivity extends AppCompatActivity {
             List<TiketPurchaseRequest> dataMobil = dataOrder1.getDataMobil();
             List<TiketPurchaseRequest> dataMotor = dataOrder1.getDataMotor();
 
-
             List<TiketPurchaseRequest> allTiket = new ArrayList<>();
             allTiket.addAll(deque);
             allTiket.addAll(dataMobil);
             allTiket.addAll(dataMotor);
             // TODO: 5/18/23 validasi data detail wisatawan
-
             boolean isValid = false;
             for (TiketPurchaseRequest request : deque) {
-                if(!request.getName().equalsIgnoreCase("belum ada nama") && !request.getIdentity().equalsIgnoreCase("belum ada identitas")){
+                if (!request.getName().equalsIgnoreCase("belum ada nama") && !request.getIdentity().equalsIgnoreCase("belum ada identitas")) {
                     isValid = true;
                 }
             }
             for (TiketPurchaseRequest request : dataMobil) {
-                if(! request.getIdentity().equalsIgnoreCase("belum ada plat nomor")){
+                if (!request.getIdentity().equalsIgnoreCase("belum ada plat nomor")) {
                     isValid = true;
-                }else {
+                } else {
                     isValid = false;
                 }
             }
             for (TiketPurchaseRequest request : dataMotor) {
-                if(! request.getIdentity().equalsIgnoreCase("belum ada plat nomor")){
+                if (!request.getIdentity().equalsIgnoreCase("belum ada plat nomor")) {
                     isValid = true;
-                }else{
+                } else {
                     isValid = false;
                 }
             }
-            if(isValid){
+            if (isValid) {
                 ProgressDialog progresIndicator = UtilMethod.getProgresIndicator("Harap tunggu sebentar", this);
                 progresIndicator.show();
-                if(paymentMetode.equalsIgnoreCase("")){
+                if (paymentMetode.equalsIgnoreCase("")) {
                     Toast.makeText(this, "Harap pilih metode pembayaran", Toast.LENGTH_SHORT).show();
-                }else{
-                    CheckoutTicketRequest checkoutTicketRequest = new CheckoutTicketRequest();
-                    checkoutTicketRequest.setTickets(allTiket);
-                    checkoutTicketRequest.setCamping(isCamping);
-                    checkoutTicketRequest.setDate(date);
-                    checkoutTicketRequest.setBank(paymentMetode.toLowerCase());
-                    checkoutTicketRequest.setPackages(packageOrder.getPackagePurchaseRequests());
-                    checkoutTicketRequest.setUser_id(userModel.getId());
-                    if(paymentMetode.equalsIgnoreCase("Bayar di tempat")){
-                        checkoutTicketRequest.setBank(null);
+                } else {
+                    CheckoutTicketRequest checkoutTicketRequest = new CheckoutTicketRequest(userModel.getId(),
+                            date,
+                            isCamping,
+                            paymentMetode.equalsIgnoreCase("Bayar di tempat") ? null : paymentMetode.toLowerCase(),
+                            packageOrder.getPackagePurchaseRequests(),
+                            allTiket);
+                    if (paymentMetode.equalsIgnoreCase("Bayar di tempat")) {
                         Call<PaymentCheckoutResponse> responseCall = paymentServiceApi.checkoutCash(RetrofitClient.getApiKey(), checkoutTicketRequest);
-
                         responseCall.enqueue(new Callback<PaymentCheckoutResponse>() {
                             @Override
                             public void onResponse(Call<PaymentCheckoutResponse> call, Response<PaymentCheckoutResponse> response) {
                                 progresIndicator.dismiss();
-                                if(response.isSuccessful()){
+                                if (response.isSuccessful()) {
                                     Snackbar snackbar = Snackbar.make(view, "Berhasil Membuat Transaksi", Snackbar.LENGTH_SHORT);
-                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.backgroundAppBar));
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.backgroundAppBar));
                                     snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
                                     snackbar.show();
                                     final Handler handler = new Handler(Looper.getMainLooper());
@@ -221,11 +207,11 @@ public class DetailPembeliActivity extends AppCompatActivity {
                                         public void run() {
                                             //close all activity after 2 seconds
                                             Intent intent = new Intent(DetailPembeliActivity
-                                                    .this , HomeActivity.class);
+                                                    .this, HomeActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 2000);
-                                }else{
+                                } else {
                                     String errors = null;
                                     try {
                                         errors = response.errorBody().string();
@@ -235,25 +221,26 @@ public class DetailPembeliActivity extends AppCompatActivity {
                                     }
                                     Errors generateErrors = UtilMethod.generateErrors(errors);
                                     Snackbar snackbar = Snackbar.make(view, generateErrors.getErrors().getMessage(), Snackbar.LENGTH_SHORT);
-                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.red));
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
                                     snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
                                     snackbar.show();
                                 }
                             }
+
                             @Override
                             public void onFailure(Call<PaymentCheckoutResponse> call, Throwable t) {
                                 Log.e("error", "onFailure: " + t.getMessage());
                             }
                         });
-                    }else{
+                    } else {
                         Call<PaymentCheckoutResponse> responseCall = paymentServiceApi.checkoutBank(RetrofitClient.getApiKey(), checkoutTicketRequest);
                         responseCall.enqueue(new Callback<PaymentCheckoutResponse>() {
                             @Override
                             public void onResponse(Call<PaymentCheckoutResponse> call, Response<PaymentCheckoutResponse> response) {
                                 progresIndicator.dismiss();
-                                if(response.isSuccessful()){
+                                if (response.isSuccessful()) {
                                     Snackbar snackbar = Snackbar.make(view, "Berhasil Membuat Transaksi", Snackbar.LENGTH_SHORT);
-                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.backgroundAppBar));
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.backgroundAppBar));
                                     snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
                                     snackbar.show();
                                     final Handler handler = new Handler(Looper.getMainLooper());
@@ -262,21 +249,20 @@ public class DetailPembeliActivity extends AppCompatActivity {
                                         public void run() {
                                             //close all activity after 2 seconds
                                             Intent intent = new Intent(DetailPembeliActivity
-                                                    .this , HomeActivity.class);
+                                                    .this, HomeActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 2000);
-                                }else{
+                                } else {
                                     String errors = null;
                                     try {
                                         errors = response.errorBody().string();
-
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
                                     Errors generateErrors = UtilMethod.generateErrors(errors);
                                     Snackbar snackbar = Snackbar.make(view, generateErrors.getErrors().getMessage(), Snackbar.LENGTH_SHORT);
-                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.red));
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
                                     snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
                                     snackbar.show();
                                 }
@@ -288,18 +274,17 @@ public class DetailPembeliActivity extends AppCompatActivity {
                         });
                     }
                 }
-            }else{
+            } else {
                 System.out.println("not valid request");
                 Toast.makeText(this, "Harap isi semua data", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void initDialog(){
+    public void initDialog() {
         bankPaymentDialog = new Dialog(this);
         bankPaymentDialog.setContentView(R.layout.payment_dialog);
         bankRadioGroup = bankPaymentDialog.findViewById(R.id.payment_radioGroup);
-
         bniRelativeLayout = bankPaymentDialog.findViewById(R.id.bni_linearLayout);
         bcaRelativeLayout = bankPaymentDialog.findViewById(R.id.bca_linearLayout);
         briRelativeLayout = bankPaymentDialog.findViewById(R.id.bri_linearLayout);
@@ -357,5 +342,21 @@ public class DetailPembeliActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void initComponents() {
+        radioGroup = findViewById(R.id.radio_group);
+        bankRadioButton = findViewById(R.id.radio_button_bank);
+        imageRadioBank = findViewById(R.id.checked_bank_image);
+        bayarDitempatRadioButton = findViewById(R.id.radio_button_bayar_ditempat);
+        imageRadioBayarDitempat = findViewById(R.id.checked_bayar_ditempat_image);
+        bankLinearLayout = findViewById(R.id.radio_layout_1);
+        bayarDitempatLinearLayout = findViewById(R.id.radio_layout_2);
+        toolbar = findViewById(R.id.detail_ticket_activity_toolbar);
+        setSupportActionBar(toolbar);
+        recyclerView = findViewById(R.id.detail_wisatawan_recycleview);
+        kendaraanRecycleView = findViewById(R.id.detail_kendaraan_recycleview);
+        totalBayarTextView = findViewById(R.id.jumlah_bayar_textView);
+        berikutnyaBtn = findViewById(R.id.btn_berikutnya);
     }
 }
