@@ -23,7 +23,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -96,6 +100,58 @@ public class UtilMethod {
         SharedPreferences sh = context.getSharedPreferences("jwt", MODE_PRIVATE);
         String jwt = sh.getString("jwt", "not-found");
         return jwt;
+    }
+
+
+    public static String timeStampToDateFormated(long timeStamp){
+
+        Instant instant = Instant.ofEpochSecond(timeStamp);
+
+        // Create LocalDateTime object from Instant
+        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+        // Format the LocalDateTime object
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm:ss");
+        return dateTime.format(formatter);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String stringToDateFormated(String dateString){
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Parse the date string into a LocalDate object
+        LocalDate date = LocalDate.parse(dateString, inputFormatter);
+
+        // Create a DateTimeFormatter with the desired output pattern
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
+
+        // Format the LocalDate object into a formatted date string
+        String formattedDate = date.format(outputFormatter);
+
+        // Print the formatted date
+        return formattedDate;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String stringFormatedWithTimeStampsFormat(String dateTimeString){
+
+            // Parse the input date string into an Instant
+            Instant instant = Instant.parse(dateTimeString);
+
+            // Convert the Instant to LocalDateTime in the system default time zone
+            LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+            // Create a DateTimeFormatter with the desired output pattern
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm:ss");
+
+            // Format the LocalDateTime into a formatted date string
+            String formattedDate = dateTime.format(formatter);
+
+            // Print the formatted date
+
+        return formattedDate;
     }
     
 }

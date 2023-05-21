@@ -1,5 +1,6 @@
 package com.example.muara_mbaduk.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -14,28 +15,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.model.entity.HistoryPayment;
 import com.example.muara_mbaduk.model.entity.PaymentCheckout;
+import com.example.muara_mbaduk.utils.UtilMethod;
 import com.hadi.emojiratingbar.EmojiRatingBar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrderFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OrderFragment extends Fragment {
 
-    private TextView noRekeningTextView , instructionsPaymentTextView,paymentMethodTextView,kodedOrderTextview,statusTextView;
+    private TextView noRekeningTextView , instructionsPaymentTextView,paymentMethodTextView,kodedOrderTextview,statusTextView,jumlahPembayaranBank,
+    bankNameTextView,expiredPaymentTextView;
     EmojiRatingBar emojiRatingBar;
     private Button copyNoRekeningButton;
     private static final String NO_REKENING = "no_rekening";
     private PaymentCheckout paymentCheckout;
+    private ImageView bankImageView;
     private LinearLayout bankInstructionPayment,cashInstructionPayment,statusCompletePayment;
 
+    private HistoryPayment historyPayment;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,12 +47,11 @@ public class OrderFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public OrderFragment(PaymentCheckout paymentCheckout) {
+    public OrderFragment(PaymentCheckout paymentCheckout,HistoryPayment historyPayment) {
         // Required empty public constructor
         this.paymentCheckout = paymentCheckout;
+        this.historyPayment = historyPayment;
     }
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -72,7 +73,13 @@ public class OrderFragment extends Fragment {
         });
         kodedOrderTextview.setText(paymentCheckout.getOrder_id());
         paymentMethodTextView.setText(paymentCheckout.getType());
-        statusTextView.setText(paymentCheckout.getStatus());
+        if(paymentCheckout.getStatus().equalsIgnoreCase("pending")){
+            statusTextView.setText("Menunggu Pembayaran");
+            statusTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_yellow_status));
+        }else{
+            statusTextView.setText("Pembayaran Selesai");
+            statusTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_green_status));
+        }
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +89,7 @@ public class OrderFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -97,20 +105,33 @@ public class OrderFragment extends Fragment {
         bankInstructionPayment = view.findViewById(R.id.bank_instruction_payment);
         cashInstructionPayment = view.findViewById(R.id.cash_instruction_payment);
         statusCompletePayment = view.findViewById(R.id.status_complete_payment);
-
-
+        noRekeningTextView = view.findViewById(R.id.no_rekening_textview);
+        jumlahPembayaranBank = view.findViewById(R.id.jumlah_pembayaran_bank);
+        bankImageView = view.findViewById(R.id.bank_imageview);
+        bankNameTextView = view.findViewById(R.id.bank_name_textview);
+        expiredPaymentTextView = view.findViewById(R.id.expired_textview);
+        String dateFormated = UtilMethod.timeStampToDateFormated(historyPayment.getExpire_at());
+        expiredPaymentTextView.setText("Segera lakukan pembayaran sebelum "+dateFormated+" WIB");
         if(paymentCheckout.getType().equalsIgnoreCase("cash")){
             cashInstructionPayment.setVisibility(View.VISIBLE);
         }else{
+            // TODO: 5/19/23 check payment metode and change the image bank
+            noRekeningTextView.setText(historyPayment.getVa_numbers().getVa_number());
+            jumlahPembayaranBank.setText("Rp."+historyPayment.getGross_amount());
             bankInstructionPayment.setVisibility(View.VISIBLE);
+            if(historyPayment.getVa_numbers().getBank().equalsIgnoreCase("bni")){
+                bankImageView.setImageDrawable(getResources().getDrawable(R.drawable.bni_images));
+                bankNameTextView.setText("BNI (Bank Negara Indonesia)");
+            }else if(historyPayment.getVa_numbers().getBank().equalsIgnoreCase("bri")){
+                bankImageView.setImageDrawable(getResources().getDrawable(R.drawable.bri_image));
+                bankNameTextView.setText("BRI (Bank Republik Indonesia)");
+            }
         }
-
         if(!paymentCheckout.getStatus().equalsIgnoreCase("pending")){
             statusCompletePayment.setVisibility(View.VISIBLE);
             cashInstructionPayment.setVisibility(View.GONE);
             bankInstructionPayment.setVisibility(View.GONE);
         }
-
         return view;
     }
 }

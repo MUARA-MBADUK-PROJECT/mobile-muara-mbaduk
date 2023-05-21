@@ -47,7 +47,7 @@ public class PurchaseHistoryActivity extends AppCompatActivity {
         String jwt = UtilMethod.getJwt(this);
         UserModel userModel = realmHelper.findByJwt(jwt);
         Call<PaymentHistoryResponse> responseCall = paymentServiceApi.findAllPayment(RetrofitClient.getApiKey(), userModel.getId());
-        ProgressDialog progressDialog = UtilMethod.getProgresIndicator("Harao tunggu", this);
+        ProgressDialog progressDialog = UtilMethod.getProgresIndicator("Harap tunggu", this);
         progressDialog.show();
         responseCall.enqueue(new Callback<PaymentHistoryResponse>() {
             @Override

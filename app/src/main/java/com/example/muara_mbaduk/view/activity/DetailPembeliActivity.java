@@ -252,7 +252,20 @@ public class DetailPembeliActivity extends AppCompatActivity {
                             public void onResponse(Call<PaymentCheckoutResponse> call, Response<PaymentCheckoutResponse> response) {
                                 progresIndicator.dismiss();
                                 if(response.isSuccessful()){
-                                    System.out.println(response.body().getData().getOrder_id());
+                                    Snackbar snackbar = Snackbar.make(view, "Berhasil Membuat Transaksi", Snackbar.LENGTH_SHORT);
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.backgroundAppBar));
+                                    snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                                    snackbar.show();
+                                    final Handler handler = new Handler(Looper.getMainLooper());
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //close all activity after 2 seconds
+                                            Intent intent = new Intent(DetailPembeliActivity
+                                                    .this , HomeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 2000);
                                 }else{
                                     String errors = null;
                                     try {
