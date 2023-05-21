@@ -6,6 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.FaqActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/app_faq_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/backgroundAppBar"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:popupTheme="@style/Theme.Design.Light"
+        app:title="FAQ"
+        app:layout_constraintTop_toTopOf="parent"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Faq_rv"
         android:layout_width="match_parent"

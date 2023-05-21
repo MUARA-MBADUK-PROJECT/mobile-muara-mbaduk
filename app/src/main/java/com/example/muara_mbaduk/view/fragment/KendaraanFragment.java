@@ -2,6 +2,7 @@ package com.example.muara_mbaduk.view.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -112,19 +113,21 @@ public class KendaraanFragment extends Fragment {
                 if (response.code() == 200 ){
                     TiketResponse body = response.body();
                     ArrayList<Tiket> data = body.getData();
-                    data.forEach(tiket -> {
-                        if(tiket.getTitle().equalsIgnoreCase("kendaraan roda 2")){
-                            txt = view.findViewById(R.id.hargaRoda2normal);
-                            txt2 = view.findViewById(R.id.hargaRoda2weekend);
-                            txt.setText(String.valueOf(tiket.getNormal_day()));
-                            txt2.setText(String.valueOf(tiket.getWeekend_day()));
-                        } else if (tiket.getTitle().equalsIgnoreCase("kendaraan roda 4")) {
-                            txt3 = view.findViewById(R.id.hargaroda4normal);
-                            txt4 = view.findViewById(R.id.hargaroda4weekend);
-                            txt3.setText(String.valueOf(tiket.getNormal_day()));
-                            txt4.setText(String.valueOf(tiket.getWeekend_day()));
-                        }
-                    });
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        data.forEach(tiket -> {
+                            if(tiket.getTitle().equalsIgnoreCase("kendaraan roda 2")){
+                                txt = view.findViewById(R.id.hargaRoda2normal);
+                                txt2 = view.findViewById(R.id.hargaRoda2weekend);
+                                txt.setText(String.valueOf(tiket.getNormal_day()));
+                                txt2.setText(String.valueOf(tiket.getWeekend_day()));
+                            } else if (tiket.getTitle().equalsIgnoreCase("kendaraan roda 4")) {
+                                txt3 = view.findViewById(R.id.hargaroda4normal);
+                                txt4 = view.findViewById(R.id.hargaroda4weekend);
+                                txt3.setText(String.valueOf(tiket.getNormal_day()));
+                                txt4.setText(String.valueOf(tiket.getWeekend_day()));
+                            }
+                        });
+                    }
                 }
 
             }
