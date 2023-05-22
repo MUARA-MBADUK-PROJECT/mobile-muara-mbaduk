@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ public class PaketCamp_RecyclerViewAdapter extends RecyclerView.Adapter<PaketCam
         holder.tvnama.setText(packagesResponse.getData().get(position).getTitle());
         holder.tvharga.setText(String.valueOf(packagesResponse.getData().get(position).getPrice()));
         Picasso.get().load(packagesResponse.getData().get(position).getImage()).into(holder.imageView);
-        holder.paketRow.setOnClickListener(new View.OnClickListener() {
+        holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = holder.getPosition();
@@ -72,12 +73,15 @@ public class PaketCamp_RecyclerViewAdapter extends RecyclerView.Adapter<PaketCam
         ImageView imageView;
         ConstraintLayout paketRow;
         TextView tvnama, tvharga;
+        Button btn;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             tvnama = itemView.findViewById(R.id.textView);
             tvharga = itemView.findViewById(R.id.textView2);
+            btn = itemView.findViewById(R.id.detail_paketCamp_bton);
             paketRow = itemView.findViewById(R.id.paket_row);
+//
 //            itemView.setOnClickListener(this);
         }
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
 import com.example.muara_mbaduk.R;
@@ -30,11 +31,24 @@ public class SyaratDanKetentuanActivity extends AppCompatActivity {
 
         Retrofit retrofit = RetrofitClient.getInstance();
         SyaratDanKetentuanServiceApi syaratDanKetentuanServiceApi = retrofit.create(SyaratDanKetentuanServiceApi.class);
-        Call<SyaratDanKetentuanResponse> getSK1 = syaratDanKetentuanServiceApi.getSK1(RetrofitClient.getApiKey());
+        Call<SyaratDanKetentuanResponse> getSK1 = syaratDanKetentuanServiceApi.getAllSK(RetrofitClient.getApiKey());
         getSK1.enqueue(new Callback<SyaratDanKetentuanResponse>() {
             @Override
             public void onResponse(Call<SyaratDanKetentuanResponse> call, Response<SyaratDanKetentuanResponse> response) {
-                txt = findViewById(R.id.sk_desk_tv);
+                if (response.code() == 200){
+                    SyaratDanKetentuanResponse body = response.body();
+                    ArrayList<SyaratDanKetentuan> data = (ArrayList<SyaratDanKetentuan>) body.getData();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        data.forEach(sk ->{
+                            if (sk.getSlug().equalsIgnoreCase("terms-of-service")){
+                                txt = findViewById(R.id.sk_desk_tv);
+                                txt.setText(Html.fromHtml(sk.getBody()));
+                            }
+                        });
+                    }
+                }
+
 
             }
 
