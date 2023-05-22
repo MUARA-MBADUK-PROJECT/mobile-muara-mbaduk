@@ -26,5 +26,35 @@
         android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/layout_not_found_tiket_history_linearlayout"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/ops"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+        <TextView
+            android:textColor="@color/color_text_black"
+            android:gravity="center"
+            android:fontFamily="@font/poppins"
+            android:id="@+id/belum_pesan_tiket_textview"
+            android:text="Ops nampaknya kamu\n belum melakukan pemesanan tiket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:textSize="13sp"
+            android:paddingHorizontal="10dp"
+            android:id="@+id/btn_pesan_tiket_in_history_button"
+            android:background="@drawable/button_rounded_blue"
+            android:text="Pesan tiket sekarang"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
+    </LinearLayout>
 
 </LinearLayout>

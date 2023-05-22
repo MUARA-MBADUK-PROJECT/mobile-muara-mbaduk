@@ -1,6 +1,8 @@
 package com.example.muara_mbaduk.model.entity;
 
-public class TicketPayment {
+import java.io.Serializable;
+
+public class TicketPayment implements Serializable {
 
     private String id;
     private String title;

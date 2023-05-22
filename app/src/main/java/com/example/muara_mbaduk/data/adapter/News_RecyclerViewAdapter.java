@@ -3,6 +3,7 @@ package com.example.muara_mbaduk.data.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
@@ -37,10 +39,13 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
         return new News_RecyclerViewAdapter.MyViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Picasso.get().load(newsResponse.getData().get(position).getThumbnail()).into(holder.gambar);
-        holder.tanggal.setText(newsResponse.getData().get(position).getCreated_at());
+        String timeStampsFormat = UtilMethod.stringFormatedWithTimeStampsFormat(newsResponse.getData().get(position).getCreated_at());
+        System.out.println(timeStampsFormat);
+        holder.tanggal.setText(timeStampsFormat);
         holder.judul.setText(newsResponse.getData().get(position).getTitle());
         holder.newsRow.setOnClickListener(new View.OnClickListener() {
             @Override

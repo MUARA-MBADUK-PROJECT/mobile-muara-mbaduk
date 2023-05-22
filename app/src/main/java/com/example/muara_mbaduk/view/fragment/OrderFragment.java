@@ -47,10 +47,9 @@ public class OrderFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public OrderFragment(PaymentCheckout paymentCheckout,HistoryPayment historyPayment) {
+    public OrderFragment(PaymentCheckout paymentCheckout) {
         // Required empty public constructor
         this.paymentCheckout = paymentCheckout;
-        this.historyPayment = historyPayment;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -73,12 +72,15 @@ public class OrderFragment extends Fragment {
         });
         kodedOrderTextview.setText(paymentCheckout.getOrder_id());
         paymentMethodTextView.setText(paymentCheckout.getType());
-        if(paymentCheckout.getStatus().equalsIgnoreCase("pending")){
+        if(historyPayment.getStatus().equalsIgnoreCase("pending")){
             statusTextView.setText("Menunggu Pembayaran");
-            statusTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_yellow_status));
+            statusTextView.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.background_yellow_status));
+        }else if(historyPayment.getStatus().equalsIgnoreCase("expire")){
+            statusTextView.setText("Pembayaran Kadaluarsa");
+            statusTextView.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.background_red_status));
         }else{
-            statusTextView.setText("Pembayaran Selesai");
-            statusTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_green_status));
+            statusTextView.setText("Pembayaran Telah Selesai");
+            statusTextView.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.background_green_status));
         }
     }
     @Override
@@ -95,6 +97,12 @@ public class OrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_order, container, false);
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            historyPayment = (HistoryPayment) bundle.getSerializable("detail-history");
+        }else{
+            System.out.println("nol");
+        }
         noRekeningTextView = view.findViewById(R.id.no_rekening_textview);
         instructionsPaymentTextView = view.findViewById(R.id.instruction_payment_textview);
         emojiRatingBar = view.findViewById(R.id.emoji_rating_bar);
