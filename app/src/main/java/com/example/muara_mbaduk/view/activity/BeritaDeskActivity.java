@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ public class BeritaDeskActivity extends AppCompatActivity {
 
         tvJudul.setText(judul);
         Picasso.get().load(gambar).into(ivGambar);
-        tvDesk.setText(desk);
+        tvDesk.setText(Html.fromHtml(desk));
     }
     @Override
     public void onBackPressed() {
