@@ -4,18 +4,20 @@ import androidx.annotation.NonNull;
 
 import com.example.muara_mbaduk.model.ParrentModel;
 import com.example.muara_mbaduk.model.entity.Review;
+import com.example.muara_mbaduk.model.entity.ReviewPayment;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ReviewStoreResponse extends ParrentModel {
 
-    private Review data;
+    private List<ReviewPayment> data;
 
-    public Review getData() {
+    public List<ReviewPayment> getData() {
         return data;
     }
 
-    public void setData(Review data) {
+    public void setData(List<ReviewPayment> data) {
         this.data = data;
     }
 

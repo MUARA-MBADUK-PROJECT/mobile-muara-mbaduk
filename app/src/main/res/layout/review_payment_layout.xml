@@ -47,14 +47,33 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:layout_marginHorizontal="49dp"
-        android:id="@+id/isi_review_payment_textview"
-        android:textAlignment="textStart"
-        android:fontFamily="@font/poppins"
-        android:textColor="@color/abuabu"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="49dp"
+            android:id="@+id/isi_review_payment_textview"
+            android:textAlignment="textStart"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/abuabu"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:layout_marginRight="35dp"
+            android:layout_height="match_parent">
+            <Button
+                android:gravity="end"
+                android:layout_gravity="end"
+                android:id="@+id/edit_review_btn"
+                android:background="@drawable/baseline_edit_24"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
     <View
         android:layout_margin="20dp"
         android:layout_width="match_parent"

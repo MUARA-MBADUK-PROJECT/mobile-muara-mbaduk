@@ -15,6 +15,7 @@ android:background="@color/white"
         >
     </ImageView>
     <TextView
+        android:fontFamily="@font/poppins"
         android:id="@+id/berita_tanggal_tv"
         android:layout_margin="5dp"
         android:textColor="@color/grey"
@@ -22,6 +23,7 @@ android:background="@color/white"
         android:layout_height="wrap_content"
         android:text="tanggal dibuat "></TextView>
     <TextView
+        android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/berita_desk_tv"
