@@ -46,10 +46,11 @@ public class HomeActivity extends AppCompatActivity {
     ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView,Faq, sk;
     RealmHelper realmHelper;
     Realm realm;
-    UserModel userModel;
+//    UserModel userModel;
     Dialog dialog;
     Button agreeTermsBtn;
     View view;
+    LinearLayoutManager linearLayoutManager;
 
 
     private boolean doubleBackToExitPressedOnce = false;
@@ -150,8 +151,9 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 NewsResponse body = response.body();
                 News_RecyclerViewAdapter adapter = new News_RecyclerViewAdapter(getApplicationContext(), body);
+                linearLayoutManager = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setLayoutManager(linearLayoutManager);
             }
 
             @Override
@@ -169,12 +171,12 @@ public class HomeActivity extends AppCompatActivity {
     public void initComponents(){
         realm = Realm.getDefaultInstance();
         realmHelper = new RealmHelper(realm);
-        userModel = realmHelper.findByJwt(UtilMethod.getJwt(this));
+//        userModel = realmHelper.findByJwt(UtilMethod.getJwt(this));
         riwayatPemesananImageView = findViewById(R.id.riwayat_pemesan_btn);
         avatarImageView = findViewById(R.id.avatar_imageView);
         displayNameTextView = findViewById(R.id.displayName_textview);
-        Picasso.get().load(userModel.getImages()).into(avatarImageView);
-        displayNameTextView.setText(userModel.getFullname());
+//        Picasso.get().load(userModel.getImages()).into(avatarImageView);
+//        displayNameTextView.setText(userModel.getFullname());
         hargatiket = findViewById(R.id.hargatiket_id);
         paketcamp = findViewById(R.id.paketcamp);
         pemesananTiket = findViewById(R.id.pembeliantiket);

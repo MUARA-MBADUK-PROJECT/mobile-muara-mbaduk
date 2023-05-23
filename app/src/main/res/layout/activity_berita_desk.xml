@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     tools:context=".view.activity.BeritaDeskActivity">
     <androidx.appcompat.widget.Toolbar
@@ -53,13 +53,15 @@
                 android:id="@+id/news_deskription_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:text="deskription deskription deskription deskription deskription deskriptiondeskription deskription deskription"
                 android:textColor="@color/black"
-                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="40dp"
                 app:layout_constraintTop_toBottomOf="@id/newsDesk_gambar_iv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 ></TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

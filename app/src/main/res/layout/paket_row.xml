@@ -23,7 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:background="@color/white"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -46,7 +46,7 @@
 
             <TextView
                 android:layout_margin="5dp"
-                android:textColor="@color/black"
+                android:textColor="@color/blue_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -55,16 +55,19 @@
                 android:layout_height="wrap_content"
                 android:text="harga" />
 
-            <TextView
+            <Button
                 android:layout_margin="8dp"
-                android:textColor="@color/black"
+
+                android:fontFamily="@font/poppins"
+                android:background="@drawable/button_rounded_blue"
+                android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:id="@+id/textView3"
+                android:id="@+id/detail_paketCamp_bton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Detail >" />
+                android:layout_height="30dp"
+                android:text="Detail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

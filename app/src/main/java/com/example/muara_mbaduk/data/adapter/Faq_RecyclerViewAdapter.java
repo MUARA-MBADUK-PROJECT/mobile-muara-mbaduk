@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,10 +47,14 @@ public class Faq_RecyclerViewAdapter extends RecyclerView.Adapter<Faq_RecyclerVi
             if (faqResponse.getData().get(position).getVisible()){
                 holder.tvJawaban.setVisibility(View.GONE);
                 holder.expandable_layout.setVisibility(View.GONE);
+                holder.arrowdown.setVisibility(View.GONE);
+                holder.arrowup.setVisibility(View.VISIBLE);
                 faqResponse.getData().get(position).setVisible(false);
             } else {
                 holder.tvJawaban.setVisibility(View.VISIBLE);
                 holder.expandable_layout.setVisibility(View.VISIBLE);
+                holder.arrowdown.setVisibility(View.VISIBLE);
+                holder.arrowup.setVisibility(View.GONE);
                 faqResponse.getData().get(position).setVisible(true);
             }
             }
@@ -65,8 +70,11 @@ public class Faq_RecyclerViewAdapter extends RecyclerView.Adapter<Faq_RecyclerVi
         TextView tvPertanyaan, tvJawaban;
         LinearLayout linearLayout;
         RelativeLayout expandable_layout;
+        ImageView arrowup, arrowdown;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            arrowup = itemView.findViewById(R.id.faq_arrow_up);
+            arrowdown = itemView.findViewById(R.id.faq_arrow_down);
             tvPertanyaan = itemView.findViewById(R.id.faq_pertanyaan_tv);
             tvJawaban = itemView.findViewById(R.id.faq_jawaban);
             linearLayout = itemView.findViewById(R.id.faq_ll);

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.muara_mbaduk.R;
@@ -23,12 +25,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class PaketCampActivity extends AppCompatActivity{
+    Button button;
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paket_camp);
         toolbar = findViewById(R.id.paketCamp_toolbar);
+        button = findViewById(R.id.btn_buatpaket_paketCamp);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(PaketCampActivity.this, CustomPembelianTiketActivity.class);
+            startActivity(intent);
+        });
         toolbar.setOnClickListener(v -> {
             onBackPressed();
         });
