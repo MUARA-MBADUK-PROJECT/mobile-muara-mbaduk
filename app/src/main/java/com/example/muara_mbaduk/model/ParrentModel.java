@@ -1,6 +1,8 @@
 package com.example.muara_mbaduk.model;
 
-public class ParrentModel {
+import java.io.Serializable;
+
+public class ParrentModel{
     private int code;
     private String status;
 
