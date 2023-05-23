@@ -113,7 +113,7 @@ public class TicketAndCampingFragment extends Fragment {
             startActivity(intent);
         });
 
-        PackagesAdapter packagesAdapter = new PackagesAdapter(data, tiketResponse , this);
+        PackagesAdapter packagesAdapter = new PackagesAdapter(data, tiketResponse , this,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false);
         sendDetailOrder(packagesAdapter, view,packagesAdapter.getPackagePurchaseRequests());
         packagesRecycleview.setAdapter(packagesAdapter);

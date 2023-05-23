@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:contentDescription="TODO"
             android:src="@drawable/login_foto"
-            android:translationY="150dp" />
+            android:translationY="130dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
