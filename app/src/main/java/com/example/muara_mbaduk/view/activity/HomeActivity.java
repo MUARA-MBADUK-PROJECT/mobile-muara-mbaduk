@@ -148,8 +148,10 @@ public class HomeActivity extends AppCompatActivity {
         riwayatPemesananImageView = findViewById(R.id.riwayat_pemesan_btn);
         avatarImageView = findViewById(R.id.avatar_imageView);
         displayNameTextView = findViewById(R.id.displayName_textview);
-        Picasso.get().load(userModel.getImages()).into(avatarImageView);
-        displayNameTextView.setText(userModel.getFullname());
+        if(userModel != null){
+            Picasso.get().load(userModel.getImages()).into(avatarImageView);
+            displayNameTextView.setText(userModel.getFullname());
+        }
         hargatiket = findViewById(R.id.hargatiket_id);
         paketcamp = findViewById(R.id.paketcamp);
         pemesananTiket = findViewById(R.id.pembeliantiket);

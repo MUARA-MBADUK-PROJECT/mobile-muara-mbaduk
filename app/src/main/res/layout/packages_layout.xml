@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="horizontal">
 
     <LinearLayout
+
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -18,8 +20,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical">
+            android:gravity="start">
 
             <TextView
                 android:id="@+id/jumlah_tiket_pesan"
@@ -63,29 +67,48 @@
                 android:textSize="18sp" />
 
             <LinearLayout
+                android:id="@+id/linar_layout_lihat_selengkapnya"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/detaik_paket_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/button_rounded_blue"
-                    android:paddingHorizontal="10dp"
-                    android:text="Detail Paket" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="Lihat Selengkapnya"
+                    android:textColor="@color/abuabu"
+                    android:textStyle="italic" />
 
+                <Button
+                    android:id="@+id/lihat_selengkapnya_btn_down"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/baseline_keyboard_arrow_down_24" />
+
+                <Button
+                    android:id="@+id/lihat_selengkapnya_btn_up"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/baseline_keyboard_arrow_up_24"
+                    android:visibility="gone" />
             </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:paddingVertical="10dp"
+                android:visibility="gone"
+                android:nestedScrollingEnabled="false"
+                android:id="@+id/product_list_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
         android:gravity="start"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
