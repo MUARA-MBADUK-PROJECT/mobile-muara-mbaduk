@@ -17,6 +17,7 @@ import com.example.muara_mbaduk.data.adapter.PaketProduct_RecyclerViewAdapter;
 import com.example.muara_mbaduk.data.adapter.UlasanCamp_RecyclerViewAdapter;
 import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
 import com.example.muara_mbaduk.model.entity.Packages;
+import com.example.muara_mbaduk.model.response.PackageBySlugResponse;
 import com.example.muara_mbaduk.model.response.PackagesResponse;
 import com.example.muara_mbaduk.model.response.TestimoniesResponse;
 import com.example.muara_mbaduk.data.remote.TestimoniesServiceApi;
@@ -72,18 +73,18 @@ public class PaketDeskActivity extends AppCompatActivity {
         recyclerView.setNestedScrollingEnabled(false);
         Retrofit retrofit = RetrofitClient.getInstance();
         PackagesServiceApi packagesServiceApi = retrofit.create(PackagesServiceApi.class);
-        Call<PackagesResponse> productDesk = packagesServiceApi.findproductPackage(RetrofitClient.getApiKey(), slug);
-        productDesk.enqueue(new Callback<PackagesResponse>() {
+        Call<PackageBySlugResponse> productDesk = packagesServiceApi.findproductPackage(RetrofitClient.getApiKey(), slug);
+        productDesk.enqueue(new Callback<PackageBySlugResponse>() {
             @Override
-            public void onResponse(Call<PackagesResponse> call, Response<PackagesResponse> response) {
-                PackagesResponse body = response.body();
+            public void onResponse(Call<PackageBySlugResponse> call, Response<PackageBySlugResponse> response) {
+                PackageBySlugResponse body = response.body();
                 PaketProduct_RecyclerViewAdapter adapter= new PaketProduct_RecyclerViewAdapter(getApplicationContext(), body);
                 productRv.setAdapter(adapter);
                 productRv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             }
 
             @Override
-            public void onFailure(Call<PackagesResponse> call, Throwable t) {
+            public void onFailure(Call<PackageBySlugResponse> call, Throwable t) {
                 System.out.println(t.getMessage());
 
             }

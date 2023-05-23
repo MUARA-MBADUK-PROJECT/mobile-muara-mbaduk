@@ -2,6 +2,7 @@ package com.example.muara_mbaduk.data.remote;
 
 import com.example.muara_mbaduk.model.entity.Packages;
 import com.example.muara_mbaduk.model.response.HistoryResponse;
+import com.example.muara_mbaduk.model.response.PackageBySlugResponse;
 import com.example.muara_mbaduk.model.response.PackagesResponse;
 
 import retrofit2.Call;
@@ -14,6 +15,6 @@ public interface PackagesServiceApi {
     @GET("packages/")
     Call<PackagesResponse> getAllPackages(@Header("Authorization") String authHeader);
     @GET("packages/{slug}")
-    Call<PackagesResponse> findproductPackage(@Header("Authorization") String authHeader, @Path("slug") String slug);
+    Call<PackageBySlugResponse> findproductPackage(@Header("Authorization") String authHeader, @Path("slug") String slug);
 
 }

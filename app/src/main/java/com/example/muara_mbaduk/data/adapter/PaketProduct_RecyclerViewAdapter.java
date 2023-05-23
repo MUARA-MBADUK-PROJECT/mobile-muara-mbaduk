@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.model.entity.Packages;
+import com.example.muara_mbaduk.model.response.PackageBySlugResponse;
 import com.example.muara_mbaduk.model.response.PackagesResponse;
 
 public class PaketProduct_RecyclerViewAdapter extends RecyclerView.Adapter<PaketProduct_RecyclerViewAdapter.MyViewHolder> {
     Context context;
-    Packages packages;
+    PackageBySlugResponse packageBySlugResponse;
 
-    PackagesResponse packagesResponse;
 
-    public PaketProduct_RecyclerViewAdapter(Context context, PackagesResponse packagesResponse) {
+    public PaketProduct_RecyclerViewAdapter(Context context, PackageBySlugResponse packageBySlugResponse) {
         this.context = context;
-        this.packagesResponse = packagesResponse;
+        this.packageBySlugResponse = packageBySlugResponse;
     }
 
     @NonNull
@@ -34,14 +34,14 @@ public class PaketProduct_RecyclerViewAdapter extends RecyclerView.Adapter<Paket
 
     @Override
     public void onBindViewHolder(@NonNull PaketProduct_RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.product.setText(packagesResponse.getData().get(position).getProducts().get(position).getTitle());
+        holder.product.setText(packageBySlugResponse.getData().getProducts().get(position).getTitle());
 //        System.out.println(packagesResponse.getData().get(position).getProducts().get(position).getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return packagesResponse.getData().size();
+        return packageBySlugResponse.getData().getProducts().size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
