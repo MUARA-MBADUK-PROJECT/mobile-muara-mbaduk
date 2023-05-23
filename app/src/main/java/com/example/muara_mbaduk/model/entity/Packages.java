@@ -1,6 +1,10 @@
 package com.example.muara_mbaduk.model.entity;
 
 
+import com.example.muara_mbaduk.model.response.PackagesResponse;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Packages {
@@ -13,7 +17,7 @@ public class Packages {
     private String description;
     private int price;
     private String image;
-    List<Products> products;
+    ArrayList<Products> products;
     private String created_at;
     private String updated_at;
     private String updated_a;
@@ -98,11 +102,11 @@ public class Packages {
         this.image = image;
     }
 
-    public List<Products> getProducts() {
+    public ArrayList<Products> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Products> products) {
+    public void setProducts(ArrayList<Products> products) {
         this.products = products;
     }
 
@@ -113,4 +117,6 @@ public class Packages {
     public void setUpdated_a(String updated_a) {
         this.updated_a = updated_a;
     }
+
+
 }

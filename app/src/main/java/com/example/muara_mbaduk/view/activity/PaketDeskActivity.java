@@ -13,7 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.data.adapter.PaketProduct_RecyclerViewAdapter;
 import com.example.muara_mbaduk.data.adapter.UlasanCamp_RecyclerViewAdapter;
+import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
+import com.example.muara_mbaduk.model.entity.Packages;
+import com.example.muara_mbaduk.model.response.PackagesResponse;
 import com.example.muara_mbaduk.model.response.TestimoniesResponse;
 import com.example.muara_mbaduk.data.remote.TestimoniesServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
@@ -39,6 +43,10 @@ public class PaketDeskActivity extends AppCompatActivity {
         String nama = getIntent().getStringExtra("NAMA");
         String harga = getIntent().getStringExtra("HARGA");
         String deskripsi = getIntent().getStringExtra("DESKRIPSI");
+        String slug = getIntent().getStringExtra("SLUG");
+        System.out.println(slug);
+        System.out.println("slug")
+        ;
 
         ImageView ivGambar = findViewById(R.id.imageid);
         TextView tvNama = findViewById(R.id.nama_paket_camp);
@@ -59,8 +67,27 @@ public class PaketDeskActivity extends AppCompatActivity {
         tvDesk.setText(deskripsi);
 
         RecyclerView recyclerView = findViewById(R.id.rv_ulasan);
+        RecyclerView productRv = findViewById(R.id.product_rv);
+        productRv.setNestedScrollingEnabled(false);
         recyclerView.setNestedScrollingEnabled(false);
         Retrofit retrofit = RetrofitClient.getInstance();
+        PackagesServiceApi packagesServiceApi = retrofit.create(PackagesServiceApi.class);
+        Call<PackagesResponse> productDesk = packagesServiceApi.findproductPackage(RetrofitClient.getApiKey(), slug);
+        productDesk.enqueue(new Callback<PackagesResponse>() {
+            @Override
+            public void onResponse(Call<PackagesResponse> call, Response<PackagesResponse> response) {
+                PackagesResponse body = response.body();
+                PaketProduct_RecyclerViewAdapter adapter= new PaketProduct_RecyclerViewAdapter(getApplicationContext(), body);
+                productRv.setAdapter(adapter);
+                productRv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
+
+            @Override
+            public void onFailure(Call<PackagesResponse> call, Throwable t) {
+                System.out.println(t.getMessage());
+
+            }
+        });
         TestimoniesServiceApi testimoniesServiceApi = retrofit.create(TestimoniesServiceApi.class);
         Call<TestimoniesResponse> allTestimonies = testimoniesServiceApi.getAllTestimonies(RetrofitClient.getApiKey());
         allTestimonies.enqueue(new Callback<TestimoniesResponse>() {
