@@ -3,6 +3,7 @@ package com.example.muara_mbaduk.view.fragment;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -76,6 +77,7 @@ public class OrderFragment extends Fragment {
     private EditText descriptionReviewEditText;
     private ReviewsServiceApi reviewsServiceApi;
     private LinearLayout bankInstructionPayment,cashInstructionPayment,statusCompletePayment,layoutReview;
+    private Dialog editReviewDialog;
 
     private HistoryPayment historyPayment;
     // TODO: Rename parameter arguments, choose names that match
@@ -87,6 +89,7 @@ public class OrderFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private UserService userService;
+
     public OrderFragment(PaymentCheckout paymentCheckout) {
         // Required empty public constructor
         this.paymentCheckout = paymentCheckout;
@@ -167,15 +170,12 @@ public class OrderFragment extends Fragment {
             clipboard.setPrimaryClip(clip);
             Toast.makeText(getContext(), "Berhasil Mencopy " + clipboard.getText(), Toast.LENGTH_SHORT).show();
         });
-
-
         kirimReviewButton.setOnClickListener(v -> {
           sendReview();
         });
 
+
     }
-
-
     public void sendReview(){
         SharedPreferences sh = getContext().getSharedPreferences("jwt", MODE_PRIVATE);
         String jwt = sh.getString("jwt", "not-found");
@@ -188,6 +188,7 @@ public class OrderFragment extends Fragment {
         historyPayment.getPackages().forEach(packagePayment -> {
             request.getId_package().add(packagePayment.getId());
         });
+        System.out.println(userModel.toString());
         request.setId_user(userModel.getId());
         Call<ReviewStoreResponse> responseCall = reviewsServiceApi.addaReviewPayment(RetrofitClient.getApiKey(), request);
         ProgressDialog progresIndicator = UtilMethod.getProgresIndicator("Tunggu Sebentar", getContext());
@@ -197,30 +198,29 @@ public class OrderFragment extends Fragment {
             public void onResponse(Call<ReviewStoreResponse> call, Response<ReviewStoreResponse> response) {
                 if(response.isSuccessful()){
                     progresIndicator.dismiss();
-                    System.out.println("oke");
                     Toast.makeText(requireContext(),"Review Berhasil Dikirim", Toast.LENGTH_LONG).show();
                     final Handler handler = new Handler(Looper.getMainLooper());
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             //close all activity after 2 seconds
-                            System.out.println("close");
+                            Intent intent = new Intent(getActivity() , HomeActivity.class);
+                            startActivity(intent);
                         }
                     }, 2000);
                 }else{
-                    System.out.println("fail");
-                    Snackbar snackbar = null;
                     progresIndicator.dismiss();
                     DetailPurchaseHistoryActivity activity = (DetailPurchaseHistoryActivity) getActivity();
                     try {
                         Errors errors = UtilMethod.generateErrors(response.errorBody().string());
-                        Toast.makeText(activity.getApplicationContext(),errors.getErrors().getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),errors.getErrors().getMessage(), Toast.LENGTH_LONG).show();
                         final Handler handler = new Handler(Looper.getMainLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 //close all activity after 2 seconds
-                                activity.onBackPressed();
+                               Intent intent = new Intent(getActivity() , HomeActivity.class);
+                               startActivity(intent);
                             }
                         }, 2000);
 
@@ -229,11 +229,11 @@ public class OrderFragment extends Fragment {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<ReviewStoreResponse> call, Throwable t) {
-                System.out.println("fail");
                 progresIndicator.dismiss();
+                Log.e("review", "onFailure: " + t.getMessage() );
+                Toast.makeText(getContext() , t.getMessage() , Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -249,7 +249,9 @@ public class OrderFragment extends Fragment {
         }
     }
 
-
+    public void editReview(){
+//        editReviewDialog.show();
+    }
 
 
 
@@ -286,9 +288,6 @@ public class OrderFragment extends Fragment {
         descriptionReviewEditText = view.findViewById(R.id.description_editText);
         String dateFormated = UtilMethod.timeStampToDateFormated(historyPayment.getExpire_at());
         expiredPaymentTextView.setText("Segera lakukan pembayaran sebelum "+dateFormated+" WIB");
-
-
-
         return view;
     }
 }

@@ -51,4 +51,16 @@ public class UserModel extends RealmObject {
     public void setImages(String images) {
         this.images = images;
     }
+
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "id='" + id + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", email='" + email + '\'' +
+                ", images='" + images + '\'' +
+                ", jwt='" + jwt + '\'' +
+                '}';
+    }
 }
