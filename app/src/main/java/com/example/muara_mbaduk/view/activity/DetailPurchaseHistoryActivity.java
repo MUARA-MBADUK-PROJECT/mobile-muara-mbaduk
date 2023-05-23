@@ -17,9 +17,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.remote.PaymentServiceApi;
+import com.example.muara_mbaduk.data.remote.ReviewsServiceApi;
 import com.example.muara_mbaduk.model.entity.HistoryPayment;
 import com.example.muara_mbaduk.model.entity.PaymentCheckout;
 import com.example.muara_mbaduk.model.response.HistoryResponse;
+import com.example.muara_mbaduk.model.response.ReviewResponse;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
 import com.example.muara_mbaduk.view.fragment.DetailOrderFragment;
@@ -49,6 +51,10 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_history_purchase);
         initComponents();
         initFunction();
+
+
+
+
     }
     public void initComponents(){
         btnOderLayout = findViewById(R.id.layout_btn_order);
@@ -62,6 +68,8 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
         tolbar = findViewById(R.id.detail_ticket_activity_toolbar);
         orderIdTextView = findViewById(R.id.order_id_textview);
         check_status_pembayaran_button = findViewById(R.id.check_status_pembayaran_button);
+
+
     }
     // all fucntion in here
     public void initFunction() {
@@ -73,24 +81,47 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
         responseCall.enqueue(new Callback<HistoryResponse>() {
             @Override
             public void onResponse(Call<HistoryResponse> call, Response<HistoryResponse> response) {
-                progresIndicator.dismiss();
+
                 HistoryPayment data = response.body().getData();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("detail-history", data);
+                ReviewsServiceApi serviceApi = RetrofitClient.getInstance().create(ReviewsServiceApi.class);
+                Call<ReviewResponse> responseCall = serviceApi.findByPayment(RetrofitClient.getApiKey(), paymentCheckout.getId());
+                // hit api review
                 detailOrderFragment = new DetailOrderFragment();
                 orderFragment = new OrderFragment(paymentCheckout);
-                detailOrderFragment.setArguments(bundle);
-                orderFragment.setArguments(bundle);
-                FragmentTransaction replace
-                        = getSupportFragmentManager().beginTransaction().replace(R.id.frame_order, orderFragment);
-                kodeOrderLayout.setVisibility(View.GONE);
-                replace.commit();
+                responseCall.enqueue(new Callback<ReviewResponse>() {
+                    @Override
+                    public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
+                        progresIndicator.dismiss();
+                        if(response.isSuccessful()){
+                            ReviewResponse body = response.body();
+                            bundle.putSerializable("review" , body);
+                            detailOrderFragment.setArguments(bundle);
+                            orderFragment.setArguments(bundle);
+                            FragmentTransaction replace
+                                    = getSupportFragmentManager().beginTransaction().replace(R.id.frame_order, orderFragment);
+                            kodeOrderLayout.setVisibility(View.GONE);
+                            replace.commit();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ReviewResponse> call, Throwable t) {
+                        progresIndicator.dismiss();
+                        Log.e("review", "onFailure: " + t.getMessage() );
+                        UtilMethod.genereateErrorsSnackbar(getCurrentFocus() , getApplicationContext(), t.getMessage());
+                    }
+                });
+
             }
+
+
+
             @Override
             public void onFailure(Call<HistoryResponse> call, Throwable t) {
                 progresIndicator.dismiss();
                 Log.e("error", "onFailure: " + t.getMessage());
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                UtilMethod.genereateErrorsSnackbar(getCurrentFocus() , getApplicationContext(), t.getMessage());
             }
         });
 

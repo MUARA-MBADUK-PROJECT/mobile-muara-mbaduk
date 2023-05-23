@@ -30,7 +30,6 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
         this.context = context;
         this.newsResponse = newsResponse;
     }
-
     @NonNull
     @Override
     public News_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -46,9 +46,8 @@ public class HomeActivity extends AppCompatActivity {
     ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView,Faq, sk;
     RealmHelper realmHelper;
     Realm realm;
-//    UserModel userModel;
-    Dialog dialog;
-    Button agreeTermsBtn;
+    UserModel userModel;
+
     View view;
     LinearLayoutManager linearLayoutManager;
 
@@ -76,11 +75,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initComponents();
-        dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_sk2);
-        dialog.setCancelable(true);
-        skTextView = dialog.findViewById(R.id.sk1_textview);
-        agreeTermsBtn = dialog.findViewById(R.id.sk1_button);
+
+
         SyaratDanKetentuanServiceApi serviceApi = RetrofitClient.getInstance().create(SyaratDanKetentuanServiceApi.class);
 
         sk.setOnClickListener(new View.OnClickListener() {
@@ -108,30 +104,7 @@ public class HomeActivity extends AppCompatActivity {
 
         pemesananTiket.setOnClickListener(v -> {
             Intent i = new Intent(HomeActivity.this, TicketPurchaseActivity.class);
-            Call<SyaratDanKetentuan2Response> responseCall = serviceApi.getSk2(RetrofitClient.getApiKey());
-            responseCall.enqueue(new Callback<SyaratDanKetentuan2Response>() {
-                @Override
-                public void onResponse(Call<SyaratDanKetentuan2Response> call, Response<SyaratDanKetentuan2Response> response) {
-                    SyaratDanKetentuan2Response body = response.body();
-                    System.out.println(body.getData().getBody());
-                    if(response.isSuccessful()){
-                        skTextView.setText(Html.fromHtml(response.body().getData().getBody()));
-                        dialog.show();
-                        agreeTermsBtn.setOnClickListener(v1 -> {
-                            dialog.dismiss();
-                            startActivity(i);
-                        });
-                    }else{
-                        Snackbar snackbar = UtilMethod.genereateErrorsSnackbar(view, getApplicationContext(), "Gagal mengambil Syarat Dan ketentuan");
-                        snackbar.show();
-                    }
-                }
-                @Override
-                public void onFailure(Call<SyaratDanKetentuan2Response> call, Throwable t) {
-                    Snackbar snackbar = UtilMethod.genereateErrorsSnackbar(view, getApplicationContext(), t.getMessage());
-                    snackbar.show();
-                }
-            });
+            startActivity(i);
 
         });
         Faq.setOnClickListener(new View.OnClickListener() {
@@ -171,12 +144,12 @@ public class HomeActivity extends AppCompatActivity {
     public void initComponents(){
         realm = Realm.getDefaultInstance();
         realmHelper = new RealmHelper(realm);
-//        userModel = realmHelper.findByJwt(UtilMethod.getJwt(this));
+        userModel = realmHelper.findByJwt(UtilMethod.getJwt(this));
         riwayatPemesananImageView = findViewById(R.id.riwayat_pemesan_btn);
         avatarImageView = findViewById(R.id.avatar_imageView);
         displayNameTextView = findViewById(R.id.displayName_textview);
-//        Picasso.get().load(userModel.getImages()).into(avatarImageView);
-//        displayNameTextView.setText(userModel.getFullname());
+        Picasso.get().load(userModel.getImages()).into(avatarImageView);
+        displayNameTextView.setText(userModel.getFullname());
         hargatiket = findViewById(R.id.hargatiket_id);
         paketcamp = findViewById(R.id.paketcamp);
         pemesananTiket = findViewById(R.id.pembeliantiket);

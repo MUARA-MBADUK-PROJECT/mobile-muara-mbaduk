@@ -229,6 +229,9 @@ public class DetailPembeliActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<PaymentCheckoutResponse> call, Throwable t) {
+                                progresIndicator.dismiss();
+                                Snackbar snackbar = UtilMethod.genereateErrorsSnackbar(view, getApplicationContext(), t.getMessage());
+                                snackbar.show();
                                 Log.e("error", "onFailure: " + t.getMessage());
                             }
                         });

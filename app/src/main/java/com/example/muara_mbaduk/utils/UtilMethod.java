@@ -73,6 +73,12 @@ public class UtilMethod {
         return snackbar;
     }
 
+    public static Snackbar genereateSuccessSnackbar(View view , Context context , String message){
+        Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(context, R.color.backgroundAppBar));
+        snackbar.setTextColor(ContextCompat.getColor(context, R.color.white));
+        return snackbar;
+    }
 
     public static String generateMessage(List<Map<String ,String>> products , String tanggalCamping , String namaPemesan , String tanggalPemesanan , String email , String totalHarga, String catatan , String nowhatshap){
         StringBuilder stringBuilder = new StringBuilder();

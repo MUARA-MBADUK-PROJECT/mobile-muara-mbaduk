@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="10dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:text="Edit Review Anda"
+        android:textColor="@color/color_text_black"
+        android:fontFamily="@font/poppins"
+        android:textSize="14sp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.hadi.emojiratingbar.EmojiRatingBar
+        android:layout_marginBottom="20dp"
+        android:id="@+id/rating_bar_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <TextView
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins"
+        android:text="Ulasan Anda"
+        android:textColor="@color/color_text_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edit_review_edittext"
+        android:textSize="13sp"
+        android:gravity="start"
+        android:paddingHorizontal="5dp"
+        android:maxLines="4"
+        android:lines="4"
+        android:hint="Masukan Ulasan anda"
+        android:textColor="@color/abuabu"
+        android:textColorHint="@color/abuabu"
+        android:background="@drawable/rounded_edittext_abuabu"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:text="Simpan"
+        android:fontFamily="@font/poppins"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_rounded_blue"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+</LinearLayout>

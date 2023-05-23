@@ -1,8 +1,10 @@
 package com.example.muara_mbaduk.view.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,21 +13,70 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.data.remote.SyaratDanKetentuanServiceApi;
+import com.example.muara_mbaduk.model.response.SyaratDanKetentuan2Response;
+import com.example.muara_mbaduk.utils.RetrofitClient;
+import com.example.muara_mbaduk.utils.UtilMethod;
 import com.example.muara_mbaduk.view.fragment.DateAndCategoryCampFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TicketPurchaseActivity extends AppCompatActivity {
     DateAndCategoryCampFragment dateAndCategoryCampFragment
             = new DateAndCategoryCampFragment();
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
-    TextView ppnTextView;
+    TextView ppnTextView , skTextView;
     Button berikutnyaBtn;
+    Dialog dialog;
+
+    Button agreeTermsBtn;
+
+
+    SyaratDanKetentuanServiceApi serviceApi;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_sk2);
+        dialog.setCancelable(true);
+        dialog.setOnCancelListener(dialog1 -> {
+            Intent intent = new Intent(TicketPurchaseActivity.this , HomeActivity.class);
+            startActivity(intent);
+        });
+        skTextView = dialog.findViewById(R.id.sk1_textview);
+        agreeTermsBtn = dialog.findViewById(R.id.sk1_button);
+        serviceApi = RetrofitClient.getInstance().create(SyaratDanKetentuanServiceApi.class);
+        Call<SyaratDanKetentuan2Response> responseCall = serviceApi.getSk2(RetrofitClient.getApiKey());
+        responseCall.enqueue(new Callback<SyaratDanKetentuan2Response>() {
+            @Override
+            public void onResponse(Call<SyaratDanKetentuan2Response> call, Response<SyaratDanKetentuan2Response> response) {
+                SyaratDanKetentuan2Response body = response.body();
+                System.out.println(body.getData().getBody());
+                if(response.isSuccessful()){
+                    skTextView.setText(Html.fromHtml(response.body().getData().getBody()));
+                    dialog.show();
+                    agreeTermsBtn.setOnClickListener(v1 -> {
+                        dialog.dismiss();
+                    });
+                }else{
+                    Snackbar snackbar = UtilMethod.genereateErrorsSnackbar(getCurrentFocus(), getApplicationContext(), "Gagal mengambil Syarat Dan ketentuan");
+                    snackbar.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<SyaratDanKetentuan2Response> call, Throwable t) {
+                Snackbar snackbar = UtilMethod.genereateErrorsSnackbar(getCurrentFocus(), getApplicationContext(), t.getMessage());
+                snackbar.show();
+            }
+        });
+
         setContentView(R.layout.activity_ticket_purchase);
         ppnTextView = findViewById(R.id.ppn_textView);
         ppnTextView.setVisibility(View.GONE);
