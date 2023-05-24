@@ -59,6 +59,7 @@ public class PaketCamp_RecyclerViewAdapter extends RecyclerView.Adapter<PaketCam
             intent.putExtra("HARGA", String.valueOf(packagesResponse.getData().get(position).getPrice()));
             intent.putExtra("DESKRIPSI", packagesResponse.getData().get(position).getDescription());
             intent.putExtra("SLUG", packagesResponse.getData().get(position).getSlug());
+            intent.putExtra("ID", packagesResponse.getData().get(position).getId());
             context.startActivity(intent);
             }
         });

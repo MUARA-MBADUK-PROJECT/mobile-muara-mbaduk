@@ -18,6 +18,9 @@ public interface ReviewsServiceApi {
     @GET("reviews/payment/{id}")
     Call<ReviewResponse> findByPayment(@Header("Authorization") String authHeader , @Path("id") String id);
 
+    @GET("reviews/package/{id}")
+    Call<ReviewResponse> findByPackage(@Header("Authorization") String authHeader, @Path("id") String id);
+
     @POST("reviews")
     Call<ReviewStoreResponse> addaReviewPayment(@Header("Authorization") String authHeader , @Body ReviewPaymenetRequest reviewPaymenetRequest);
 
