@@ -1,9 +1,14 @@
 package com.example.muara_mbaduk.data.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -11,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
@@ -27,8 +33,12 @@ import java.util.Map;
 public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.PackagesViewHolder> {
 
     TicketCheckinResponse ticketCheckinResponse;
+
+
+
     private List<Map<String, String>> count;
     Fragment fragment;
+    private Context context;
 
     List<PackagePurchaseRequest> packagePurchaseRequests = new ArrayList<>();
 
@@ -36,10 +46,11 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         return packagePurchaseRequests;
     }
 
-    public PackagesAdapter(List<Map<String, String>> data, TicketCheckinResponse packagesResponses , Fragment fragment) {
+    public PackagesAdapter(List<Map<String, String>> data, TicketCheckinResponse packagesResponses , Fragment fragment,Context context) {
         this.count = data;
         this.ticketCheckinResponse = packagesResponses;
         this.fragment = fragment;
+        this.context = context;
     }
 
     @NonNull
@@ -135,6 +146,49 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
                 updateCount(count);
             }
         });
+        holder.seeAllProductBtn.setOnClickListener(v -> {
+            PackagesProductAdapter packagesProductAdapter
+                    = new PackagesProductAdapter
+                    (ticketCheckinResponse.getData().getPackages().get(position).getProducts());
+            LinearLayoutManager layoutManager  = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
+            holder.productRecycleView.setAdapter(packagesProductAdapter);
+            holder.productRecycleView.setLayoutManager(layoutManager);
+            holder.productRecycleView.setVisibility(View.VISIBLE);
+            Animation slideDown = AnimationUtils.loadAnimation(context,R.anim.swape_down);
+            LayoutAnimationController controller = new LayoutAnimationController(slideDown);
+            holder.productRecycleView.setLayoutAnimation(controller);
+            holder.hideAllProductBtn.setVisibility(View.VISIBLE);
+            holder.seeAllProductBtn.setVisibility(View.GONE);
+
+        });
+
+        holder.hideAllProductBtn.setOnClickListener(v -> {
+            holder.productRecycleView.setVisibility(View.GONE);
+            holder.hideAllProductBtn.setVisibility(View.GONE);
+            holder.seeAllProductBtn.setVisibility(View.VISIBLE);
+            Animation slideUp = AnimationUtils.loadAnimation(v.getContext(),R.anim.swap_up);
+            LayoutAnimationController controller = new LayoutAnimationController(slideUp);
+            holder.productRecycleView.setLayoutAnimation(controller);
+            slideUp.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    holder.productRecycleView.setAnimation(animation);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+
+            });
+            holder.productRecycleView.startAnimation(slideUp);
+        });
+
     }
     @SuppressLint("NotifyDataSetChanged")
     public void updateCount(List<Map<String, String>> newData) {
@@ -163,6 +217,9 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         ImageButton btnAdd,btnMinus;
         ProgressBar progressBar;
         ImageView packageImageView;
+        Button seeAllProductBtn,hideAllProductBtn;
+
+        RecyclerView productRecycleView;
 
         public PackagesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -173,6 +230,9 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             btnAdd = itemView.findViewById(R.id.btnAddStandard);
             packageImageView = itemView.findViewById(R.id.package_image_Imageview);
             progressBar = itemView.findViewById(R.id.progressBar);
+            seeAllProductBtn = itemView.findViewById(R.id.lihat_selengkapnya_btn_down);
+            hideAllProductBtn = itemView.findViewById(R.id.lihat_selengkapnya_btn_up);
+            productRecycleView = itemView.findViewById(R.id.product_list_recycleview);
         }
     }
 }
