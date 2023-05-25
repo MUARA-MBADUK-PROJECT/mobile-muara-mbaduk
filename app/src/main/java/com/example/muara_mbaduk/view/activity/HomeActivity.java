@@ -31,6 +31,7 @@ import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.example.muara_mbaduk.utils.UtilMethod;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -43,10 +44,11 @@ import retrofit2.Retrofit;
 public class HomeActivity extends AppCompatActivity {
     ImageView hargatiket;
     TextView displayNameTextView,skTextView;
-    ImageView paketcamp, pemesananTiket, avatarImageView, riwayatPemesananImageView,Faq, sk;
+    ImageView paketcamp, pemesananTiket, riwayatPemesananImageView,Faq, sk;
     RealmHelper realmHelper;
+    CircularImageView avatarImageView;
     Realm realm;
-//    UserModel userModel;
+    UserModel userModel;
 
     View view;
     LinearLayoutManager linearLayoutManager;
