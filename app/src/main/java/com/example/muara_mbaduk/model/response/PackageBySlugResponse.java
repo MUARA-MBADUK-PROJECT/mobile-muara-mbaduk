@@ -3,12 +3,11 @@ package com.example.muara_mbaduk.model.response;
 import com.example.muara_mbaduk.model.entity.Packages;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class PackagesResponse {
+public class PackageBySlugResponse {
     private int code;
     private String status;
-    ArrayList<Packages> data;
+    Packages data;
 
     public int getCode() {
         return code;
@@ -26,11 +25,11 @@ public class PackagesResponse {
         this.status = status;
     }
 
-    public ArrayList<Packages> getData() {
+    public Packages getData() {
         return data;
     }
 
-    public void setData(ArrayList<Packages> data) {
+    public void setData(Packages data) {
         this.data = data;
     }
 }

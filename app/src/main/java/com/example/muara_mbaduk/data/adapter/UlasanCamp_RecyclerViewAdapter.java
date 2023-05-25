@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.model.response.ReviewResponse;
 import com.example.muara_mbaduk.model.response.TestimoniesResponse;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -18,11 +19,11 @@ import com.squareup.picasso.Picasso;
 
 public class UlasanCamp_RecyclerViewAdapter extends RecyclerView.Adapter<UlasanCamp_RecyclerViewAdapter.MyViewHolder>{
     Context context;
-    TestimoniesResponse testimoniesResponse;
+    ReviewResponse reviewResponse;
 
-    public UlasanCamp_RecyclerViewAdapter (Context context, TestimoniesResponse testimoniesResponse){
+    public UlasanCamp_RecyclerViewAdapter (Context context, ReviewResponse reviewResponse){
         this.context = context;
-        this.testimoniesResponse = testimoniesResponse;
+        this.reviewResponse = reviewResponse;
     }
     @NonNull
     @Override
@@ -34,26 +35,25 @@ public class UlasanCamp_RecyclerViewAdapter extends RecyclerView.Adapter<UlasanC
 
     @Override
     public void onBindViewHolder(@NonNull UlasanCamp_RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.tvnama.setText(testimoniesResponse.getData().get(position).getFullname());
-        holder.tvdesk.setText(testimoniesResponse.getData().get(position).getDescription());
-        Picasso.get().load(testimoniesResponse.getData().get(position).getImages()).into(holder.profilImage);
-        holder.rating.setImageResource(R.drawable.rating_1);
+        holder.tvnama.setText(reviewResponse.getData().get(position).getFullname());
+        holder.tvdesk.setText(reviewResponse.getData().get(position).getDescription());
+        holder.rating.setText(reviewResponse.getData().get(position).getStar());
+        Picasso.get().load(reviewResponse.getData().get(position).getImages()).into(holder.profilImage);
 
     }
 
     @Override
     public int getItemCount() {
-        return testimoniesResponse.getData().size();
+        return reviewResponse.getData().size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         CircularImageView profilImage;
-        ImageView rating;
-        TextView tvnama, tvdesk;
+        TextView tvnama,rating, tvdesk;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             profilImage = itemView.findViewById(R.id.ulasan_profil_iv);
-            rating = itemView.findViewById(R.id.ulasan_rating_iv);
+            rating = itemView.findViewById(R.id.rating_tv);
             tvnama = itemView.findViewById(R.id.ulasan_nama_tv);
             tvdesk = itemView.findViewById(R.id.ulasan_desk_tv);
         }

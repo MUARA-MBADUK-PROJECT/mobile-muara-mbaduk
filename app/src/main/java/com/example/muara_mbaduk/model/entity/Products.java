@@ -39,4 +39,7 @@ public class Products {
     public void setImage(String image) {
         this.image = image;
     }
+
+
+
 }

@@ -13,7 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.data.adapter.PaketProduct_RecyclerViewAdapter;
 import com.example.muara_mbaduk.data.adapter.UlasanCamp_RecyclerViewAdapter;
+import com.example.muara_mbaduk.data.remote.PackagesServiceApi;
+import com.example.muara_mbaduk.data.remote.ReviewsServiceApi;
+import com.example.muara_mbaduk.model.entity.Packages;
+import com.example.muara_mbaduk.model.response.PackageBySlugResponse;
+import com.example.muara_mbaduk.model.response.PackagesResponse;
+import com.example.muara_mbaduk.model.response.ReviewResponse;
 import com.example.muara_mbaduk.model.response.TestimoniesResponse;
 import com.example.muara_mbaduk.data.remote.TestimoniesServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
@@ -39,6 +46,11 @@ public class PaketDeskActivity extends AppCompatActivity {
         String nama = getIntent().getStringExtra("NAMA");
         String harga = getIntent().getStringExtra("HARGA");
         String deskripsi = getIntent().getStringExtra("DESKRIPSI");
+        String slug = getIntent().getStringExtra("SLUG");
+        String id = getIntent().getStringExtra("ID");
+        System.out.println(slug);
+        System.out.println("slug");
+        System.out.println(id);
 
         ImageView ivGambar = findViewById(R.id.imageid);
         TextView tvNama = findViewById(R.id.nama_paket_camp);
@@ -59,21 +71,40 @@ public class PaketDeskActivity extends AppCompatActivity {
         tvDesk.setText(deskripsi);
 
         RecyclerView recyclerView = findViewById(R.id.rv_ulasan);
+        RecyclerView productRv = findViewById(R.id.product_rv);
+        productRv.setNestedScrollingEnabled(false);
         recyclerView.setNestedScrollingEnabled(false);
         Retrofit retrofit = RetrofitClient.getInstance();
-        TestimoniesServiceApi testimoniesServiceApi = retrofit.create(TestimoniesServiceApi.class);
-        Call<TestimoniesResponse> allTestimonies = testimoniesServiceApi.getAllTestimonies(RetrofitClient.getApiKey());
-        allTestimonies.enqueue(new Callback<TestimoniesResponse>() {
+        PackagesServiceApi packagesServiceApi = retrofit.create(PackagesServiceApi.class);
+        Call<PackageBySlugResponse> productDesk = packagesServiceApi.findproductPackage(RetrofitClient.getApiKey(), slug);
+        productDesk.enqueue(new Callback<PackageBySlugResponse>() {
             @Override
-            public void onResponse(Call<TestimoniesResponse> call, Response<TestimoniesResponse> response) {
-                TestimoniesResponse body = response.body();
+            public void onResponse(Call<PackageBySlugResponse> call, Response<PackageBySlugResponse> response) {
+                PackageBySlugResponse body = response.body();
+                PaketProduct_RecyclerViewAdapter adapter= new PaketProduct_RecyclerViewAdapter(getApplicationContext(), body);
+                productRv.setAdapter(adapter);
+                productRv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
+
+            @Override
+            public void onFailure(Call<PackageBySlugResponse> call, Throwable t) {
+                System.out.println(t.getMessage());
+
+            }
+        });
+        ReviewsServiceApi reviewsServiceApi = retrofit.create(ReviewsServiceApi.class);
+        Call<ReviewResponse> reviewsByPackage = reviewsServiceApi.findByPackage(RetrofitClient.getApiKey(), id);
+        reviewsByPackage.enqueue(new Callback<ReviewResponse>() {
+            @Override
+            public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
+                ReviewResponse body = response.body();
                 UlasanCamp_RecyclerViewAdapter adapter = new UlasanCamp_RecyclerViewAdapter(getApplicationContext(), body);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             }
 
             @Override
-            public void onFailure(Call<TestimoniesResponse> call, Throwable t) {
+            public void onFailure(Call<ReviewResponse> call, Throwable t) {
 
             }
         });
