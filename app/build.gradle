@@ -77,6 +77,7 @@ dependencies {
 //    implementation 'com.google.api-client:google-api-client:1.30.5'
     implementation 'com.github.unaisulhadi:emojiratingbar:1.0.4'
     implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
+    implementation'com.github.ome450901:SimpleRatingBar:LATEST_VERSION'
 
 
 

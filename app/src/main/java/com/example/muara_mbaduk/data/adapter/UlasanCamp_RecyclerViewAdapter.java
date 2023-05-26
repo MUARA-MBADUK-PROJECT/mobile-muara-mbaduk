@@ -14,6 +14,7 @@ import com.example.muara_mbaduk.model.response.ReviewResponse;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
+import com.willy.ratingbar.ScaleRatingBar;
 
 public class UlasanCamp_RecyclerViewAdapter extends RecyclerView.Adapter<UlasanCamp_RecyclerViewAdapter.MyViewHolder>{
     Context context;
@@ -36,7 +37,10 @@ public class UlasanCamp_RecyclerViewAdapter extends RecyclerView.Adapter<UlasanC
 
         holder.tvnama.setText(reviewResponse.getData().get(position).getFullname());
         holder.tvdesk.setText(reviewResponse.getData().get(position).getDescription());
-        holder.rating.setText(reviewResponse.getData().get(position).getStar());
+        holder.starReviews.setNumStars(5);
+        holder.starReviews.setClickable(false);
+        holder.starReviews.setScrollable(false);
+        holder.starReviews.setRating(Integer.parseInt(reviewResponse.getData().get(position).getStar()));;
         Picasso.get().load(reviewResponse.getData().get(position).getImages()).into(holder.profilImage);
 
     }
@@ -49,13 +53,12 @@ public class UlasanCamp_RecyclerViewAdapter extends RecyclerView.Adapter<UlasanC
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         CircularImageView profilImage;
-        TextView tvnama,rating, tvdesk;
-        ImageView bintang;
+        TextView tvnama, tvdesk;
+        ScaleRatingBar starReviews;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            bintang = itemView.findViewById(R.id.bintang_iv);
+            starReviews = itemView.findViewById(R.id.star_reviews);
             profilImage = itemView.findViewById(R.id.ulasan_profil_iv);
-            rating = itemView.findViewById(R.id.rating_tv);
             tvnama = itemView.findViewById(R.id.ulasan_nama_tv);
             tvdesk = itemView.findViewById(R.id.ulasan_desk_tv);
         }
