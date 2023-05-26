@@ -17,31 +17,43 @@ public class RealmHelper {
 
     Realm realm;
 
-    public  RealmHelper(Realm realm){
+    public RealmHelper(Realm realm) {
         this.realm = realm;
     }
 
-    public void saveUser(UserModel userModel){
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(@NonNull Realm realm) {
-                        UserModel model = realm.copyToRealm(userModel);
-                    }
-                });
+    public void saveUser(UserModel userModel) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(@NonNull Realm realm) {
+                UserModel model = realm.copyToRealm(userModel);
             }
-
-            public UserModel findByJwt(String jwt){
-                UserModel userModel = realm.where(UserModel.class).equalTo("jwt" , jwt).findFirst();
-                if(userModel!=null){
-                    Log.i("jwt", "findByJwt: " + userModel.getJwt());
-                }else{
-                    Log.e("jwt", "findByJwt: ");
-                }
-                return userModel;
-            }
+        });
+    }
 
 
-    public List<UserModel> findAllUser(){
+    public void delete(){
+      realm
+              .executeTransaction(new Realm.Transaction() {
+                  @Override
+                  public void execute(Realm realm) {
+                      realm.deleteAll();
+                  }
+              });
+    }
+
+
+    public UserModel findByJwt(String jwt) {
+        UserModel userModel = realm.where(UserModel.class).equalTo("jwt", jwt).findFirst();
+        if (userModel != null) {
+            Log.i("jwt", "findByJwt: " + userModel.getJwt());
+        } else {
+            Log.e("jwt", "findByJwt: ");
+        }
+        return userModel;
+    }
+
+
+    public List<UserModel> findAllUser() {
         RealmResults<UserModel> results = realm.where(UserModel.class).findAll();
         return results;
     }

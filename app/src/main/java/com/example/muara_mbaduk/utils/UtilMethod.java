@@ -159,5 +159,8 @@ public class UtilMethod {
 
         return formattedDate +" WIB";
     }
-    
+
+    public static int floatToInt(Float a){
+        return Math.round(a);
+    }
 }

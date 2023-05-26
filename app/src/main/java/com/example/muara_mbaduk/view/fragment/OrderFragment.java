@@ -54,6 +54,7 @@ import com.example.muara_mbaduk.view.activity.DetailPurchaseHistoryActivity;
 import com.example.muara_mbaduk.view.activity.HomeActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.hadi.emojiratingbar.EmojiRatingBar;
+import com.willy.ratingbar.ScaleRatingBar;
 
 import java.io.IOException;
 
@@ -66,7 +67,7 @@ public class OrderFragment extends Fragment {
 
     private TextView noRekeningTextView , instructionsPaymentTextView,paymentMethodTextView,kodedOrderTextview,statusTextView,jumlahPembayaranBank,
     bankNameTextView,expiredPaymentTextView;
-    EmojiRatingBar emojiRatingBar;
+    ScaleRatingBar emojiRatingBar;
     private Button copyNoRekeningButton,kirimReviewButton;
     private RecyclerView recyclerView;
     private static final String NO_REKENING = "no_rekening";
@@ -98,7 +99,7 @@ public class OrderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        emojiRatingBar.setShowAllText(false);
+
         userService = new UserService(new RealmHelper(Realm.getDefaultInstance()));
         reviewsServiceApi = RetrofitClient.getInstance().create(ReviewsServiceApi.class);
         String ulList = "<ul style=\\\"font-size: 15;\\\">" +
@@ -128,7 +129,7 @@ public class OrderFragment extends Fragment {
                 if(reviewResponse.getData().size() == 0){
                     statusCompletePayment.setVisibility(View.VISIBLE);
                 }else{
-                    ReviewPaymentAdapter reviewPaymentAdapter = new ReviewPaymentAdapter(reviewResponse);
+                    ReviewPaymentAdapter reviewPaymentAdapter = new ReviewPaymentAdapter(reviewResponse , getContext()  , paymentCheckout.getId());
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(reviewPaymentAdapter);
@@ -153,7 +154,7 @@ public class OrderFragment extends Fragment {
                 if(reviewResponse.getData().size() == 0){
                     statusCompletePayment.setVisibility(View.VISIBLE);
                 }else{
-                    ReviewPaymentAdapter reviewPaymentAdapter = new ReviewPaymentAdapter(reviewResponse);
+                    ReviewPaymentAdapter reviewPaymentAdapter = new ReviewPaymentAdapter(reviewResponse , getContext() , paymentCheckout.getId());
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(reviewPaymentAdapter);
@@ -190,7 +191,7 @@ public class OrderFragment extends Fragment {
         });
         System.out.println(userModel.toString());
         request.setId_user(userModel.getId());
-        Call<ReviewStoreResponse> responseCall = reviewsServiceApi.addaReviewPayment(RetrofitClient.getApiKey(), request);
+        Call<ReviewStoreResponse> responseCall = reviewsServiceApi.addReviewPayment(RetrofitClient.getApiKey(), request);
         ProgressDialog progresIndicator = UtilMethod.getProgresIndicator("Tunggu Sebentar", getContext());
         progresIndicator.show();
         responseCall.enqueue(new Callback<ReviewStoreResponse>() {
@@ -256,7 +257,7 @@ public class OrderFragment extends Fragment {
 
 
     public int getRating(){
-        return emojiRatingBar.getCurrentRateStatus().ordinal();
+        return UtilMethod.floatToInt(emojiRatingBar.getRating());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
@@ -269,7 +270,7 @@ public class OrderFragment extends Fragment {
 
         noRekeningTextView = view.findViewById(R.id.no_rekening_textview);
         instructionsPaymentTextView = view.findViewById(R.id.instruction_payment_textview);
-        emojiRatingBar = view.findViewById(R.id.emoji_rating_bar);
+        emojiRatingBar = view.findViewById(R.id.star_rating_post);
         copyNoRekeningButton = view.findViewById(R.id.copy_button);
         paymentMethodTextView = view.findViewById(R.id.metode_pembayaran_textview);
         kodedOrderTextview = view.findViewById(R.id.kode_order_riwayat_pesanan_textview);

@@ -61,6 +61,7 @@ public class PurchaseHistoryActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 PurchaseHistoryAdapter adapter = new PurchaseHistoryAdapter(getApplicationContext(), response.body());
                 recyclerView.setAdapter(adapter);
+                System.out.println(response.body().getData().size());
                 if(response.body().getData().size() == 0){
                     notFoundLinearLayout.setVisibility(View.VISIBLE);
                     btnPesanTiket.setOnClickListener(v -> {

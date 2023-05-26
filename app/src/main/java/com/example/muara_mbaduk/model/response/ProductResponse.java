@@ -16,4 +16,6 @@ public class ProductResponse extends ParrentModel {
     public void setData(List<ProductsModel> data) {
         this.data = data;
     }
+
+
 }

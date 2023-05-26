@@ -41,6 +41,7 @@
                 android:value="" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".view.activity.PurchaseHistoryActivity"
             android:exported="false">
             <meta-data
@@ -48,6 +49,7 @@
                 android:value="" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".view.activity.DetailPembeliActivity"
             android:exported="false">
             <meta-data
@@ -60,6 +62,7 @@
             android:value="@string/google_api_key" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".view.activity.CustomPembelianTiketActivity"
             android:exported="false">
             <meta-data
@@ -76,6 +79,7 @@
             android:name=".view.activity.HomeActivity"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".view.activity.TicketPurchaseActivity"
             android:exported="true">
             <meta-data
@@ -83,6 +87,7 @@
                 android:value="" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".view.activity.LoginActivity"
             android:exported="false">
             <meta-data
@@ -99,6 +104,7 @@
                 android:value="@string/google_api_key" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".view.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
