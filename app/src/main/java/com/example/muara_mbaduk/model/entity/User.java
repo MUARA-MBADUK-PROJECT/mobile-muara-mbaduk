@@ -56,4 +56,17 @@ public class User {
     public void setExp(int exp) {
         this.exp = exp;
     }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", images='" + images + '\'' +
+                ", email='" + email + '\'' +
+                ", iat=" + iat +
+                ", exp=" + exp +
+                '}';
+    }
 }

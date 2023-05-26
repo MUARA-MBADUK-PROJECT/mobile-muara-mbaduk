@@ -13,12 +13,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.muara_mbaduk.R;
+import com.example.muara_mbaduk.data.local.configuration.RealmHelper;
+import com.example.muara_mbaduk.data.local.model.UserModel;
 import com.example.muara_mbaduk.model.request.UserValidateRequest;
 import com.example.muara_mbaduk.model.response.UserValidateResponse;
 import com.example.muara_mbaduk.data.remote.UserServiceApi;
 import com.example.muara_mbaduk.utils.RetrofitClient;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.List;
+
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,9 +46,35 @@ public class SplashActivity extends AppCompatActivity {
             responseCall.enqueue(new Callback<UserValidateResponse>() {
                 @Override
                 public void onResponse(Call<UserValidateResponse> call, Response<UserValidateResponse> response) {
+
+
                     if(response.isSuccessful()){
-                        Intent homePageIntent = new Intent(SplashActivity.this , HomeActivity.class);
-                        startActivity(homePageIntent);
+                        UserValidateResponse body = response.body();
+                        RealmHelper realmHelper = new RealmHelper(Realm.getDefaultInstance());
+                        realmHelper.delete();
+
+
+                        UserModel userModel = new UserModel();
+                        userModel.setId(body.getData().getId());
+                        userModel.setEmail(body.getData().getEmail());
+                        userModel.setFullname(body.getData().getFullname());
+                        userModel.setImages(body.getData().getImages());
+                        userModel.setJwt(userValidateRequest.getToken());
+                        realmHelper.saveUser(userModel);
+                        final Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                //close all activity after 2 seconds
+                                List<UserModel> allUser = realmHelper.findAllUser();
+                                Log.i("size", "run: " + allUser.size());
+                                allUser.forEach(userModel1 -> {
+                                    System.out.println(userModel1.getId());
+                                });
+                                Intent intent = new Intent(SplashActivity.this , HomeActivity.class);
+                                startActivity(intent);
+                            }
+                        }, 2000);
                     }else{
                         Intent loginIntent = new Intent(SplashActivity.this , LoginActivity.class);
                         startActivity(loginIntent);

@@ -37,5 +37,11 @@ public class ExampleUnitTest {
 
         //String generateMessage = UtilMethod.generateMessage(List.of("tenda \n" , "kompor \n" , "jajan \n"),"12 februari 2023","zam","may 14 2023","mohammad@gmail.com","Rp.12000","oke");
        // System.out.println(generateMessage);
+
+        Float a = 2.5f;
+
+        int round = Math.round(a);
+        System.out.println(round);
+
     }
 }
