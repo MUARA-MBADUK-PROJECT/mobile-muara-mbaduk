@@ -6,7 +6,7 @@
     android:paddingHorizontal="10dp"
     android:layout_height="wrap_content">
     <TextView
-        android:text="Edit Review Anda"
+        android:text="Edit Ulasan Anda"
         android:textColor="@color/color_text_black"
         android:fontFamily="@font/poppins"
         android:textSize="14sp"
@@ -14,12 +14,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.hadi.emojiratingbar.EmojiRatingBar
-        android:layout_marginBottom="20dp"
-        android:id="@+id/rating_bar_dialog"
+    <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
-
+        android:layout_height="wrap_content">
+        <com.willy.ratingbar.ScaleRatingBar
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/star_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srb_numStars="5"
+            app:srb_rating="2"
+            app:srb_starWidth="30dp"
+            app:srb_starHeight="30dp"
+            app:srb_starPadding="15dp"
+            app:srb_stepSize="0.5"
+            app:srb_isIndicator="false"
+            app:srb_clickable="true"
+            app:srb_scrollable="true"
+            app:srb_clearRatingEnabled="true"
+            app:srb_drawableEmpty="@drawable/baseline_star_outline_24"
+            app:srb_drawableFilled="@drawable/baseline_star_rate_24_yellow">
+        </com.willy.ratingbar.ScaleRatingBar>
+    </LinearLayout>
     <TextView
         android:textSize="14sp"
         android:fontFamily="@font/poppins"
@@ -42,6 +59,7 @@
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"/>
     <Button
+        android:id="@+id/simpan_update_review_btn"
         android:text="Simpan"
         android:fontFamily="@font/poppins"
         android:layout_marginBottom="10dp"

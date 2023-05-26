@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/yellow" android:state_selected="true" /> <!-- Warna kuning untuk bintang yang dipilih -->
+    <item android:color="@color/grey" /> <!-- Warna abu-abu untuk bintang yang tidak dipilih -->
+</selector>

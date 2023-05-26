@@ -272,6 +272,8 @@
         <!--            end cod option-->
         <!--            start layout if status completed-->
         <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
             android:visibility="gone"
             android:id="@+id/status_complete_payment"
             android:layout_width="match_parent"
@@ -288,17 +290,24 @@
                 android:textAlignment="center"
                 android:textColor="@color/color_text_black" />
 
-            <com.hadi.emojiratingbar.EmojiRatingBar
-                android:id="@+id/emoji_rating_bar"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins"
-                app:defaultValue="AWFUL"
-                app:showAllText="false"
-                app:showText="false"
-                app:titleColor="#844848" />
+            <com.willy.ratingbar.ScaleRatingBar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/star_rating_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srb_numStars="5"
+                app:srb_rating="2"
+                app:srb_starWidth="30dp"
+                app:srb_starHeight="30dp"
+                app:srb_starPadding="15dp"
+                app:srb_stepSize="0.5"
+                app:srb_isIndicator="false"
+                app:srb_clickable="true"
+                app:srb_scrollable="true"
+                app:srb_clearRatingEnabled="true"
+                app:srb_drawableEmpty="@drawable/baseline_star_outline_24"
+                app:srb_drawableFilled="@drawable/baseline_star_rate_24_yellow">
+            </com.willy.ratingbar.ScaleRatingBar>
 
             <EditText
                 android:id="@+id/description_editText"

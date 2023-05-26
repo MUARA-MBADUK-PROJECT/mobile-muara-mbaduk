@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Star Outline -->
+    <item
+        android:id="@android:id/background"
+        android:drawable="@drawable/baseline_star_outline_24"
+        />
+
+    <!-- Colored Stars -->
+    <item
+        android:id="@android:id/secondaryProgress"
+        android:drawable="@drawable/baseline_star_rate_24_abu"
+        />
+
+    <!-- Selected Stars -->
+    <item
+        android:id="@android:id/progress"
+        android:drawable="@drawable/baseline_star_rate_24_yellow"
+        />
+</layer-list>

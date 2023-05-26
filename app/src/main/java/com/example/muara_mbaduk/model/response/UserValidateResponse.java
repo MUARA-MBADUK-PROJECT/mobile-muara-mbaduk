@@ -13,4 +13,12 @@ public class UserValidateResponse extends ParrentModel {
     public void setData(User data) {
         this.data = data;
     }
+
+
+    @Override
+    public String toString() {
+        return "UserValidateResponse{" +
+                "data=" + data +
+                '}';
+    }
 }
