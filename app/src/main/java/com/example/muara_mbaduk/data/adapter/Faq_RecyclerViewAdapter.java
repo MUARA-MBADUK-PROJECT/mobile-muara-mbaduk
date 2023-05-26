@@ -45,17 +45,19 @@ public class Faq_RecyclerViewAdapter extends RecyclerView.Adapter<Faq_RecyclerVi
             @Override
             public void onClick(View v) {
             if (faqResponse.getData().get(position).getVisible()){
-                holder.tvJawaban.setVisibility(View.GONE);
-                holder.expandable_layout.setVisibility(View.GONE);
-                holder.arrowdown.setVisibility(View.GONE);
-                holder.arrowup.setVisibility(View.VISIBLE);
-                faqResponse.getData().get(position).setVisible(false);
-            } else {
                 holder.tvJawaban.setVisibility(View.VISIBLE);
                 holder.expandable_layout.setVisibility(View.VISIBLE);
                 holder.arrowdown.setVisibility(View.VISIBLE);
                 holder.arrowup.setVisibility(View.GONE);
+                faqResponse.getData().get(position).setVisible(false);
+            } else {
+                holder.tvJawaban.setVisibility(View.GONE);
+                holder.expandable_layout.setVisibility(View.GONE);
+                holder.arrowdown.setVisibility(View.GONE);
+                holder.arrowup.setVisibility(View.VISIBLE);
                 faqResponse.getData().get(position).setVisible(true);
+
+
             }
             }
         });

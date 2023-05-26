@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
+            android:fontFamily="@font/poppins"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -24,11 +25,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:fontFamily="@font/poppins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Hari normal = Rp."></TextView>
             <TextView
+                android:fontFamily="@font/poppins"
                 android:id="@+id/tidakkemahnormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,11 +45,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:fontFamily="@font/poppins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Weekend = Rp."></TextView>
             <TextView
+                android:fontFamily="@font/poppins"
                 android:id="@+id/tidakkemahweekend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +60,7 @@
                 android:text="0"></TextView>
         </LinearLayout>
         <TextView
+            android:fontFamily="@font/poppins"
             android:layout_marginTop="20dp"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -68,11 +74,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:fontFamily="@font/poppins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Hari normal = Rp."></TextView>
             <TextView
+                android:fontFamily="@font/poppins"
                 android:id="@+id/kemahnormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,11 +94,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:fontFamily="@font/poppins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Weekend = Rp."></TextView>
             <TextView
+                android:fontFamily="@font/poppins"
                 android:id="@+id/kemahweekend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
