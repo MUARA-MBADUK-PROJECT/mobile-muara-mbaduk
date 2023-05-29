@@ -36,6 +36,7 @@
                 android:layout_height="35dp"
                 android:src="@drawable/profile_homepg"/>
             <TextView
+                android:fontFamily="@font/poppins"
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,6 +45,7 @@
                 android:layout_gravity="center_vertical"
                 ></TextView>
             <TextView
+                android:fontFamily="@font/poppins"
                 android:id="@+id/displayName_textview"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
@@ -52,6 +54,7 @@
                 android:textSize="15dp"/>
         </LinearLayout>
         <TextView
+            android:fontFamily="@font/poppins"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +81,7 @@
                     android:orientation="vertical"
                     android:layout_margin="20dp"
                     android:layout_height="100dp"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
                     >
                     <ImageView
@@ -88,16 +91,17 @@
                         android:layout_height="60dp"
                         android:src="@drawable/cart_homepg"></ImageView>
                     <TextView
+                        android:fontFamily="@font/poppins"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Pemesanan Tiket"></TextView>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pemesanan \nTiket"></TextView>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_margin="20dp"
                     android:layout_height="100dp"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
                     >
@@ -107,11 +111,12 @@
                         android:layout_height="60dp"
                         android:src="@drawable/riwayat_homepg"></ImageView>
                     <TextView
+                        android:fontFamily="@font/poppins"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Riwayat Pemesanan"></TextView>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Riwayat \nPemesanan"></TextView>
                 </LinearLayout>
                 <LinearLayout
                     android:gravity="center"
@@ -126,6 +131,7 @@
                         android:layout_height="60dp"
                         android:src="@drawable/pktcamp_homepg"></ImageView>
                     <TextView
+                        android:fontFamily="@font/poppins"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
@@ -153,6 +159,7 @@
                         android:layout_height="60dp"
                         android:src="@drawable/hargatiket_homepg"></ImageView>
                     <TextView
+                        android:fontFamily="@font/poppins"
 
                         android:textAlignment="center"
                         android:textColor="@color/black"
@@ -173,6 +180,7 @@
                         android:layout_height="60dp"
                         android:src="@drawable/sk_homepg"></ImageView>
                     <TextView
+                        android:fontFamily="@font/poppins"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
@@ -192,6 +200,7 @@
                         android:layout_height="60dp"
                         android:src="@drawable/faq_homepg"></ImageView>
                     <TextView
+                        android:fontFamily="@font/poppins"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
@@ -202,6 +211,7 @@
         </TableLayout>
 
         <TextView
+            android:fontFamily="@font/poppins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"

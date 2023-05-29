@@ -6,16 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.model.response.ReviewResponse;
-import com.example.muara_mbaduk.model.response.TestimoniesResponse;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
+import com.willy.ratingbar.ScaleRatingBar;
 
 public class UlasanCamp_RecyclerViewAdapter extends RecyclerView.Adapter<UlasanCamp_RecyclerViewAdapter.MyViewHolder>{
     Context context;
@@ -35,9 +34,13 @@ public class UlasanCamp_RecyclerViewAdapter extends RecyclerView.Adapter<UlasanC
 
     @Override
     public void onBindViewHolder(@NonNull UlasanCamp_RecyclerViewAdapter.MyViewHolder holder, int position) {
+
         holder.tvnama.setText(reviewResponse.getData().get(position).getFullname());
         holder.tvdesk.setText(reviewResponse.getData().get(position).getDescription());
-        holder.rating.setText(reviewResponse.getData().get(position).getStar());
+        holder.starReviews.setNumStars(5);
+        holder.starReviews.setClickable(false);
+        holder.starReviews.setScrollable(false);
+        holder.starReviews.setRating(Integer.parseInt(reviewResponse.getData().get(position).getStar()));;
         Picasso.get().load(reviewResponse.getData().get(position).getImages()).into(holder.profilImage);
 
     }
@@ -47,15 +50,18 @@ public class UlasanCamp_RecyclerViewAdapter extends RecyclerView.Adapter<UlasanC
         return reviewResponse.getData().size();
     }
 
+
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         CircularImageView profilImage;
-        TextView tvnama,rating, tvdesk;
+        TextView tvnama, tvdesk;
+        ScaleRatingBar starReviews;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            starReviews = itemView.findViewById(R.id.star_reviews);
             profilImage = itemView.findViewById(R.id.ulasan_profil_iv);
-            rating = itemView.findViewById(R.id.rating_tv);
             tvnama = itemView.findViewById(R.id.ulasan_nama_tv);
             tvdesk = itemView.findViewById(R.id.ulasan_desk_tv);
         }
     }
+
 }
