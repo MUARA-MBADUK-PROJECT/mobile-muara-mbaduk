@@ -2,10 +2,12 @@ package com.example.muara_mbaduk.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.muara_mbaduk.R;
 import com.example.muara_mbaduk.data.remote.SyaratDanKetentuanServiceApi;
@@ -22,12 +24,17 @@ import retrofit2.Retrofit;
 
 public class SyaratDanKetentuanActivity extends AppCompatActivity {
     TextView txt;
+    Toolbar toolbar;
     SyaratDanKetentuanResponse syaratDanKetentuanResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syarat_dan_ketentuan);
+        toolbar = findViewById(R.id.syaratDanKetentuan_toolbar);
+        toolbar.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
         Retrofit retrofit = RetrofitClient.getInstance();
         SyaratDanKetentuanServiceApi syaratDanKetentuanServiceApi = retrofit.create(SyaratDanKetentuanServiceApi.class);
@@ -58,5 +65,12 @@ public class SyaratDanKetentuanActivity extends AppCompatActivity {
             }
 
         });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
+        startActivity(intent);
     }
 }
