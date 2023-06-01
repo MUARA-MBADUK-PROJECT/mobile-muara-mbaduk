@@ -72,8 +72,7 @@ public class TicketPurchaseActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<SyaratDanKetentuan2Response> call, Throwable t) {
-                Snackbar snackbar = UtilMethod.genereateErrorsSnackbar(getCurrentFocus(), getApplicationContext(), t.getMessage());
-                snackbar.show();
+                System.out.println(t.getMessage());
             }
         });
 
