@@ -9,9 +9,8 @@ import retrofit2.http.Header;
 public interface SyaratDanKetentuanServiceApi {
     @GET("pages/")
     Call<SyaratDanKetentuanResponse> getAllSK (@Header("Authorization")String authHeader);
-    @GET("pages/1f274310-ec90-4d06-a5d7-a9561001f52d")
+    @GET("pages/738b3222-8a67-4347-91d5-2fdd72b4c0e3")
     Call<SyaratDanKetentuanResponse> getSK1 (@Header("Authorization")String authHeader);
-    @GET("pages/b6e07109-8884-4954-ae48-3c629d39ed06")
+    @GET("pages/ba7319f1-8107-4c43-b375-435f3ba3d478")
     Call<SyaratDanKetentuan2Response> getSk2(@Header("Authorization") String authHeader);
-
 }

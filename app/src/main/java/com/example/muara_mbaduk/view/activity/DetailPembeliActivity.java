@@ -215,7 +215,7 @@ public class DetailPembeliActivity extends AppCompatActivity {
                                     String errors = null;
                                     try {
                                         errors = response.errorBody().string();
-
+                                        System.out.println(errors.toString());
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
