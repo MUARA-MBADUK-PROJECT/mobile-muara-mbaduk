@@ -114,9 +114,6 @@ public class DetailPurchaseHistoryActivity extends AppCompatActivity {
                 });
 
             }
-
-
-
             @Override
             public void onFailure(Call<HistoryResponse> call, Throwable t) {
                 progresIndicator.dismiss();

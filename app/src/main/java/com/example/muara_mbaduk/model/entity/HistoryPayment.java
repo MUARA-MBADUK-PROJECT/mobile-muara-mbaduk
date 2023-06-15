@@ -7,6 +7,21 @@ public class HistoryPayment extends PaymentCheckout implements Serializable {
 
     private Bank va_numbers;
 
+    private UserHistory user;
+
+
+    public UserHistory getUser() {
+        return user;
+    }
+
+    public void setUser(UserHistory user) {
+        this.user = user;
+    }
+
+    private String barcode;
+    private boolean camping;
+
+
     private List<PackagePayment> packages;
     private List<TicketPayment> tickets;
 
